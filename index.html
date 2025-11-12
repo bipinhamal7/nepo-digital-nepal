@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepo Super App</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb; /* Blue 600 */
+            --secondary-color: #f59e0b; /* Amber 500 */
+            --background-color: #f8fafc; /* Slate 50 */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+        }
+
+        .service-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Custom scrollbar for mobile feel */
+        .scrollable-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+        }
+
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+
+        .modal.hidden .modal-content {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+
+    <!-- Firebase SDK Imports -->
+    <script type="module">
+        // IMPORTANT: These imports are required for Firebase/Firestore functionality
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, serverTimestamp, setLogLevel, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- FIREBASE CONFIGURATION FIX ---
+        // Global variables for Canvas environment. Must be declared for demo/real mode.
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "YOUR_API_KEY_HERE", 
+            authDomain: "nepo-super-app-demo.firebaseapp.com",
+            projectId: "nepo-super-app-demo",
+            storageBucket: "nepo-super-app-demo.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdefg12345"
+        };
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : firebaseConfig.projectId; 
+        
+        let db, auth;
+        let userId = 'demo-user-' + Math.random().toString(36).substring(2, 10);
+        let isAuthReady = false;
+        let isFirebaseActive = false;
+        // --- END FIREBASE CONFIGURATION FIX ---
+
+        // Set log level for debugging
+        setLogLevel('Debug');
+
+        // --- Service Definitions ---
+        const serviceMap = {
+            news: { name: 'Nepo News', icon: 'fa-newspaper', color: 'bg-red-600' },
+            calendar: { name: 'Nepo Calendar', icon: 'fa-calendar-days', color: 'bg-orange-600' },
+            driving: { name: 'Nepo Driving', icon: 'fa-car-side', color: 'bg-indigo-600' },
+            care: { name: 'Nepo Care', icon: 'fa-hand-holding-medical', color: 'bg-teal-600' },
+            secondhand: { name: 'Nepo Second-Hand Market', icon: 'fa-tags', color: 'bg-green-600' },
+            shopping: { name: 'Nepo Online Shopping', icon: 'fa-bag-shopping', color: 'bg-purple-600' },
+            visa: { name: 'Nepo Visa Check', icon: 'fa-passport', color: 'bg-blue-600' },
+            donation: { name: 'Nepo Donation', icon: 'fa-hand-holding-heart', color: 'bg-pink-600' },
+            roomrent: { name: 'Nepo Room Rent', icon: 'fa-house-chimney', color: 'bg-yellow-600' },
+            jobs: { name: 'Nepo Part-Time Job', icon: 'fa-briefcase', color: 'bg-gray-600' },
+        };
+
+        const newsSources = [
+            'https://www.onlinekhabar.com/', 
+            'https://myrepublica.nagariknetwork.com/', 
+            'https://kathmandupost.com/', 
+            'https://nepalitimes.com/', 
+            'https://www.thehimalayantimes.com/', 
+            'https://annapurnapost.com/', 
+            'https://ekantipur.com/', 
+            'https://www.setopati.com/', 
+            'https://www.ratopati.com/', 
+            'https://www.himalkhabar.com/'
+        ];
+        
+        // Function to get a random news source URL
+        const getRandomSourceUrl = () => newsSources[Math.floor(Math.random() * newsSources.length)];
+
+        // --- Mock Data ---
+        const forecastMessages = [
+            { icon: 'fa-cloud-showers-heavy', message: 'Heavy Rain Alert: Use your umbrella!', color: 'text-blue-300' },
+            { icon: 'fa-sun', message: 'Hot & Sunny: Stay hydrated today!', color: 'text-yellow-300' },
+            { icon: 'fa-smog', message: 'Air Quality Alert: Minimize outdoor activities.', color: 'text-gray-400' },
+            { icon: 'fa-cloud', message: 'Partly cloudy, pleasant weather for travel.', color: 'text-gray-200' },
+            { icon: 'fa-cloud-rain', message: 'Light Drizzle: Carry light rain gear.', color: 'text-blue-300' },
+            { icon: 'fa-mountain', message: 'Clear Mountain Views: Great trekking weather.', color: 'text-green-300' },
+            { icon: 'fa-temperature-low', message: 'Cold Morning: Wear warm layers if heading out early.', color: 'text-cyan-300' }
+        ];
+
+        const sevenDayForecast = [
+            { day: "Today", condition: "Light Drizzle", temp: "18° / 12° C", wind: "10 km/h", icon: "fa-cloud-rain" },
+            { day: "Wed", condition: "Heavy Rain", temp: "15° / 10° C", wind: "15 km/h", icon: "fa-cloud-showers-heavy" },
+            { day: "Thu", condition: "Partly Sunny", temp: "21° / 13° C", wind: "8 km/h", icon: "fa-cloud-sun" },
+            { day: "Fri", condition: "Clear", temp: "23° / 14° C", wind: "5 km/h", icon: "fa-sun" },
+            { day: "Sat", condition: "Smog", temp: "19° / 11° C", wind: "3 km/h", icon: "fa-smog" },
+            { day: "Sun", condition: "Cloudy", temp: "17° / 10° C", wind: "12 km/h", icon: "fa-cloud" },
+            { day: "Mon", condition: "Light Wind", temp: "20° / 12° C", wind: "7 km/h", icon: "fa-wind" }
+        ];
+
+        const nepoDrivingPastExamples = [
+            { pickup: "Thamel", dropoff: "Tribhuvan Airport", status: "Completed", type: "Car", cost: 850 },
+            { pickup: "Lalitpur", dropoff: "Boudhanath Stupa", status: "Completed", type: "Bike", cost: 250 },
+            { pickup: "Baneshwor", dropoff: "Patan Durbar Square", status: "Completed", type: "Carpool", cost: 320 },
+            { pickup: "Gongabu", dropoff: "New Road", status: "Completed", type: "Car", cost: 480 },
+            { pickup: "Teku", dropoff: "Kirtipur Hill", status: "Completed", type: "Premium", cost: 1100 }
+        ];
+
+        const nepoNewsExamples_full = [
+            // Added placeholder URL field for each item
+            { title: "Kathmandu Valley Air Quality Improves Slightly After Monsoon Rainfall", source: "Online Khabar", time: "1 hr ago", category: "Environment", color: "bg-blue-500", url: getRandomSourceUrl() },
+            { title: "New Foreign Investment Policy Aims to Boost Technology Sector", source: "MyRepublica", time: "3 hrs ago", category: "Business", color: "bg-green-500", url: getRandomSourceUrl() },
+            { title: "Historic Bhaktapur Durbar Square Restoration Enters Final Phase", source: "The Kathmandu Post", time: "5 hrs ago", category: "Culture", color: "bg-orange-500", url: getRandomSourceUrl() },
+            { title: "Local Football Team Wins Regional Championship, Fans Celebrate", source: "Nepali Times", time: "Yesterday", category: "Sports", color: "bg-red-500", url: getRandomSourceUrl() },
+            { title: "Government Launches Digital Literacy Campaign in Rural Provinces", source: "The Himalayan Times", time: "1 day ago", category: "Technology", color: "bg-purple-500", url: getRandomSourceUrl() }
+        ];
+
+        const nepoCalendarExamples_full = [
+            { name: "Dashain (Mahanavami)", date: "Aswin 24, 2082 B.S.", type: "National Festival", color: "bg-red-600", icon: "fa-champagne-glasses" },
+            { name: "Tihar (Laxmi Puja)", date: "Kartik 10, 2082 B.S.", type: "National Festival", color: "bg-orange-600", icon: "fa-lightbulb" },
+            { name: "Lhosar", date: "Magh 25, 2082 B.S.", type: "Community Event", color: "bg-blue-600", icon: "fa-dragon" },
+            { name: "My Friend's Birthday", date: "Bhadra 5, 2082 B.S.", type: "Personal Reminder", color: "bg-purple-600", icon: "fa-cake-candles" },
+            { name: "Full Moon (Purnima)", date: "Upcoming: Jestha 1, 2083 B.S.", type: "Lunar Cycle", color: "bg-teal-600", icon: "fa-moon" }
+        ];
+
+        const nepoCareExamples_full = [
+            { service: "Home Nurse Visit (Post-Op Care)", provider: "Shanti Health Services", date: "Sept 15, 2025", cost: 3500, icon: "fa-user-nurse" },
+            { service: "Pediatric Tele-Consultation", provider: "Dr. R. Sharma", date: "Tomorrow, 10:00 AM", cost: 1200, icon: "fa-user-md" },
+            { service: "Physiotherapy Session", provider: "KTM Rehab Center", date: "Scheduled", cost: 1800, icon: "fa-stethoscope" },
+            { service: "Eldercare Giver (4 hours)", provider: "Community Help Group", date: "Oct 1, 2025", cost: 2000, icon: "fa-hand-holding-heart" },
+            { service: "Mental Health Session", provider: "Counselor S. Thapa", date: "Scheduled", cost: 2500, icon: "fa-brain" }
+        ];
+
+        const nepoSecondHandExamples_full = [
+            { item: "iPhone 12 (128GB)", price: 45000, condition: "Excellent", location: "Pokhara", icon: "fa-mobile-screen-button" },
+            { item: "Wooden Dining Table (6-seater)", price: 18000, condition: "Good", location: "Baneshwor", icon: "fa-couch" },
+            { item: "Canon DSLR Camera (Used)", price: 32000, condition: "Fair", location: "Lalitpur", icon: "fa-camera" },
+            { item: "Electric Scooter (2023 Model)", price: 75000, condition: "Like New", location: "Kathmandu", icon: "fa-motorcycle" },
+            { item: "Old Nepali Coin Collection", price: 5000, condition: "Collectible", location: "Bhaktapur", icon: "fa-coins" }
+        ];
+
+        const nepoShoppingExamples_full = [
+            { item: "Traditional Dhaka Topi", price: 850, vendor: "Himalaya Weavers", status: "Shipped", icon: "fa-hat-cowboy" },
+            { item: "Basmati Rice (25kg)", price: 2800, vendor: "Local Grocer", status: "Delivered", icon: "fa-wheat-awn" },
+            { item: "Men's Jacket (Winter)", price: 4500, vendor: "Kathmandu Fashion", status: "Processing", icon: "fa-shirt" },
+            { item: "Nepali Coffee Beans (500g)", price: 1200, vendor: "Organic Farms", status: "Delivered", icon: "fa-mug-saucer" },
+            { item: "Set of Clay Pots", price: 1500, vendor: "Artisan Crafts", status: "Pending", icon: "fa-bowl-food" }
+        ];
+
+        const nepoVisaExamples_full = [
+            { country: "Australia (Student Visa)", applicant: "Ramesh P.", status: "Processing", date: "Applied Mar '25", icon: "fa-graduation-cap" },
+            { country: "USA (H1B Renewal)", applicant: "Sita G.", status: "Approved", date: "Expires Dec '26", icon: "fa-briefcase" },
+            { country: "Canada (Visitor Visa)", applicant: "Prakash T.", status: "Denied", date: "Updated Today", icon: "fa-plane-up" },
+            { country: "UK (Skilled Worker)", applicant: "Asha M.", status: "Interview Scheduled", date: "Oct 20, 2025", icon: "fa-hospital" },
+            { country: "Japan (Training Visa)", applicant: "Dev K.", status: "Documents Submitted", date: "Next Update: 7 days", icon: "fa-wrench" }
+        ];
+
+        const nepoDonationExamples_full = [
+            { cause: "Nepal Flood Relief Fund", amount: 5000, recipient: "National Disaster Authority", date: "Sept 1, 2025", type: "Disaster Relief", icon: "fa-house-tsunami" },
+            { cause: "Community School Books Drive", amount: 1500, recipient: "Rural Education NGO", date: "Aug 20, 2025", type: "Education", icon: "fa-book" },
+            { cause: "Animal Shelter Renovation", amount: 1000, recipient: "KTM Animal Welfare", date: "Pending", type: "Animal Care", icon: "fa-paw" },
+            { cause: "Eldercare Food Program", amount: 2000, recipient: "Elderly Home Patan", date: "Monthly Recurring", type: "Social Welfare", icon: "fa-shield-heart" },
+            { cause: "Local Temple Preservation", amount: 800, recipient: "Temple Committee", date: "Sept 5, 2025", type: "Culture", icon: "fa-gopuram" }
+        ];
+
+        const nepoRoomRentExamples_full = [
+            { title: "Single Room near TU (Male/Student)", rent: 6000, deposit: 1, location: "Kirtipur", type: "Room", icon: "fa-door-open" },
+            { title: "2BHK Apartment (Family Friendly)", rent: 25000, deposit: 2, location: "Boudha", type: "Apartment", icon: "fa-building" },
+            { title: "Shared Flat for Females (Professional)", rent: 4500, deposit: 1, location: "New Baneshwor", type: "Shared", icon: "fa-users" },
+            { title: "Ground Floor Shop/Studio Space", rent: 15000, deposit: 3, location: "Thamel", type: "Commercial", icon: "fa-shop" },
+            { title: "Small House for Rent (Garden)", rent: 18000, deposit: 2, location: "Godawari", type: "House", icon: "fa-house" }
+        ];
+
+        const nepoJobsExamples_full = [
+            { title: "Weekend Cafe Assistant", company: "Himalayan Brews", pay: "NPR 500/hr", location: "Thamel", type: "Hospitality", icon: "fa-mug-hot" },
+            { title: "Freelance Graphic Designer", company: "Digital Solutions Co.", pay: "Project Based", location: "Remote", type: "Creative", icon: "fa-pen-nib" },
+            { title: "After School Tutor (Maths/Science)", company: "Private Client", pay: "NPR 1000/session", location: "Lalitpur", type: "Education", icon: "fa-chalkboard-user" },
+            { title: "Data Entry Specialist (Evening Shift)", company: "BPO Center", pay: "NPR 20k/month", location: "Baneshwor", type: "Admin", icon: "fa-keyboard" },
+            { title: "Delivery Rider (Own Bike Required)", company: "Local Logistics", pay: "Per Delivery + Bonus", location: "KTM Area", type: "Logistics", icon: "fa-biking" }
+        ];
+
+        const nepoWalletTransactions_full = [
+            { type: "Payment Received", amount: 15000, source: "Freelance Client", date: "Oct 25, 2025", category: "Income", icon: "fa-arrow-down", color: "text-green-600" },
+            { type: "Electricity Bill", amount: -2850, source: "Nepal Electricity", date: "Oct 24, 2025", category: "Utility", icon: "fa-plug", color: "text-red-600" },
+            { type: "Mobile Top-up", amount: -500, source: "NTC", date: "Oct 24, 2025", category: "Communication", icon: "fa-mobile-alt", color: "text-red-600" },
+            { type: "Mutual Fund Investment", amount: -10000, source: "Nepo Invest", date: "Oct 23, 2025", category: "Savings", icon: "fa-chart-line", color: "text-blue-600" },
+            { type: "ATM Withdrawal", amount: -5000, source: "Bank Name", date: "Oct 22, 2025", category: "Cash", icon: "fa-money-bill-transfer", color: "text-gray-600" },
+        ];
+
+        const nepoExploreExamples_full = [
+            { name: "Swayambhunath Stupa (Monkey Temple)", type: "Historic Site", distance: "4.5 km", rating: 4.8, icon: "fa-temple", color: "text-amber-600" },
+            { name: "Farmers Market at Patan", type: "Local Event", distance: "2.1 km", rating: 4.9, icon: "fa-seedling", color: "text-green-600" },
+            { name: "New Road Shopping Complex", type: "Shopping", distance: "7.0 km", rating: 4.3, icon: "fa-bag-shopping", color: "text-purple-600" },
+            { name: "Kathmandu Contemporary Art Center", type: "Culture & Arts", distance: "3.2 km", rating: 4.6, icon: "fa-palette", color: "text-pink-600" },
+            { name: "Sundarijal Waterfall Trek", type: "Nature & Outdoors", distance: "15 km", rating: 4.7, icon: "fa-mountain-sun", color: "text-blue-600" },
+        ];
+        
+        // This is used for the Profile and the Founder section
+        const nepoProfileData = {
+            name: "Asha Lama",
+            status: "Verified Platinum User",
+            phone: "+977 98XXXXXXXX",
+            email: "asha.lama@example.com",
+            address: "Boudha, Kathmandu",
+            memberSince: "May 2023",
+            nepoPoints: 1250, 
+            securityStatus: "High (2FA Enabled)",
+            recentActivity: [
+                { type: "Ride", details: "Thamel to Airport", date: "Oct 30", status: "Completed", icon: "fa-car" },
+                { type: "Shopping", details: "Dhaka Topi Purchase", date: "Oct 28", status: "Delivered", icon: "fa-bag-shopping" },
+                { type: "Donation", details: "Flood Relief Fund", date: "Oct 25", status: "Success", icon: "fa-hand-holding-heart" },
+                { type: "Job", details: "Applied: Cafe Assistant", date: "Oct 24", status: "Pending", icon: "fa-briefcase" },
+            ],
+            founder: {
+                name: "Bipin Hamal",
+                title: "Student, IoT at Baekseok University",
+                contact: "01067083312",
+                email: "bipinhamal2025@gmail.com"
+            }
+        };
+
+
+        // --- Core Functions ---
+
+        function displayForecast() {
+            const forecastEl = document.getElementById('weather-forecast');
+            if (forecastEl) {
+                const randomForecast = forecastMessages[Math.floor(Math.random() * forecastMessages.length)];
+                
+                // Use JSON.stringify and encodeURIComponent to safely pass the object in the onclick handler
+                const forecastJson = encodeURIComponent(JSON.stringify(randomForecast));
+                
+                forecastEl.innerHTML = `
+                    <div class="flex items-center w-full cursor-pointer" onclick="openForecastModal('${forecastJson}')">
+                        <i class="fas ${randomForecast.icon} text-lg mr-2 ${randomForecast.color}"></i>
+                        <span class="text-sm font-medium">${randomForecast.message}</span>
+                        <i class="fas fa-chevron-right text-xs ml-auto opacity-70"></i>
+                    </div>
+                `;
+            }
+        }
+
+        function openAppInfoModal() {
+            const infoModal = document.getElementById('app-info-modal');
+            if (infoModal) {
+                infoModal.classList.remove('hidden');
+            }
+        }
+        window.openAppInfoModal = openAppInfoModal;
+
+
+        async function initializeFirebase() {
+            // Check if API key is a placeholder
+            if (firebaseConfig.apiKey === "YOUR_API_KEY_HERE" || !firebaseConfig.apiKey || !firebaseConfig.projectId) {
+                console.warn("⚠️ Firestore is in DEMO MODE. Please replace placeholder config for database features (e.g., Nepo Driving) to work.");
+                isAuthReady = true; 
+                isFirebaseActive = false;
+                window.dispatchEvent(new CustomEvent('authReady'));
+                loadServiceData();
+                return;
+            }
+
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                isFirebaseActive = true;
+
+                // Authentication listener
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("Authenticated User ID:", userId);
+                    } else {
+                        // Sign in anonymously if no user is authenticated
+                        try {
+                            await signInAnonymously(auth);
+                            userId = auth.currentUser.uid;
+                            console.log("Signed in anonymously. User ID:", userId);
+                        } catch (error) {
+                            console.error("Anonymous sign-in failed:", error);
+                        }
+                    }
+                    isAuthReady = true;
+                    window.dispatchEvent(new CustomEvent('authReady'));
+
+                    loadServiceData();
+                    setupRealtimeServices();
+                });
+
+                // Use custom token if provided
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                    console.log("Signed in with custom token.");
+                } else {
+                    // Fallback to anonymous sign-in if no token is available (listener will handle it too)
+                    await signInAnonymously(auth);
+                }
+
+            } catch (error) {
+                console.error("Firebase initialization failed:", error);
+                displayMessage(`Firebase error: ${error.code}. Running in demo mode.`, 'error');
+                isAuthReady = true; 
+                isFirebaseActive = false;
+                window.dispatchEvent(new CustomEvent('authReady'));
+                loadServiceData();
+            }
+        }
+
+        // --- Firestore Utilities (Guarded for Demo Mode) ---
+
+        function getServiceCollectionRef(serviceKey) {
+            if (!isFirebaseActive || !db || !userId) throw new Error("Firestore is not active, initialized, or user is not ready.");
+            // Using a Public path for multi-user visibility of active ride requests
+            const path = `artifacts/${appId}/public/data/driving_requests`; 
+            return collection(db, path);
+        }
+
+        async function addItem(serviceKey, itemData) {
+            if (!isFirebaseActive) {
+                return displayMessage("Cannot add item. App is in DEMO MODE (Missing Firebase Key).", 'warning');
+            }
+            if (!isAuthReady || !userId) return console.warn("Auth not ready. Cannot add item.");
+            try {
+                const docRef = await addDoc(getServiceCollectionRef(serviceKey), {
+                    ...itemData,
+                    createdBy: userId,
+                    createdAt: serverTimestamp()
+                });
+                console.log("Document written with ID: ", docRef.id);
+                return true;
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                displayMessage(`Error adding item: ${e.message}`, 'error');
+                return false;
+            }
+        }
+
+        // Realtime Listener for Services (Only for 'Nepo Driving' demo)
+        function setupRealtimeServices() {
+            if (!isFirebaseActive || !isAuthReady || !db || !userId) return;
+            
+            const serviceKey = 'driving';
+            try {
+                // Query for active (status 'requested') ride requests
+                const q = query(
+                    getServiceCollectionRef(serviceKey), 
+                    where("status", "==", "requested")
+                );
+
+                onSnapshot(q, (snapshot) => {
+                    const items = [];
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        items.push({ id: doc.id, ...data, 
+                            // Convert Firestore Timestamp to Date object if needed
+                            createdAt: data.createdAt ? (data.createdAt.toDate ? data.createdAt.toDate() : data.createdAt) : null
+                        });
+                    });
+                    updateServiceView(serviceKey, items);
+                }, (error) => {
+                    console.error(`Error listening to ${serviceKey} collection: `, error);
+                });
+            } catch (e) {
+                console.error("Failed to set up real-time listener:", e);
+            }
+        }
+
+        // --- UI Logic and Data Handling ---
+
+        let currentService = null;
+        const serviceModalEl = document.getElementById('service-modal');
+        const modalTitleEl = document.getElementById('modal-title');
+        const modalContentEl = document.getElementById('modal-content');
+
+        // Initial mock data for the 'driving' list before any potential DB load
+        let serviceData = {
+            driving: [] 
+        };
+
+        function updateServiceView(serviceKey, items) {
+            serviceData[serviceKey] = items;
+            // Only re-render the modal if it's the currently open service
+            if (currentService === serviceKey) {
+                renderModalContent(serviceKey);
+            }
+        }
+
+        function openModal(serviceKey) {
+            currentService = serviceKey;
+            const service = serviceMap[serviceKey];
+            
+            modalTitleEl.textContent = service ? service.name : (serviceKey === 'wallet' ? 'My Wallet' : serviceKey === 'explore' ? 'Explore Local' : serviceKey === 'profile' ? 'My Profile' : 'Service Details');
+            
+            serviceModalEl.classList.remove('hidden');
+
+            renderModalContent(serviceKey);
+        }
+
+        function closeModal() {
+            serviceModalEl.classList.add('hidden');
+            modalContentEl.innerHTML = '';
+            currentService = null;
+        }
+        
+        function openGreeting() {
+            const greetingModal = document.getElementById('greeting-modal');
+            if (greetingModal) {
+                setTimeout(() => {
+                    greetingModal.classList.remove('hidden');
+                }, 500); 
+            }
+        }
+        window.openGreeting = openGreeting; 
+        window.openForecastModal = openForecastModal;
+
+
+        function openForecastModal(forecastJson) {
+            const currentForecast = JSON.parse(decodeURIComponent(forecastJson));
+            
+            currentService = 'weather_forecast'; 
+            
+            modalTitleEl.textContent = "Today's Weather & Outlook";
+            serviceModalEl.classList.remove('hidden');
+
+            renderForecastModalContent(currentForecast);
+        }
+
+        function renderForecastModalContent(current) {
+            const todayData = sevenDayForecast[0];
+
+            let html = `<div class="p-4">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Current Conditions</h3>
+                
+                <!-- Current Condition Card -->
+                <div class="p-6 rounded-xl shadow-lg mb-6 bg-indigo-50 text-gray-800 border-l-4 border-indigo-500">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-4xl font-extrabold">${todayData.temp.split(' / ')[0]}</span>
+                        <i class="fas ${todayData.icon} text-5xl text-indigo-500"></i>
+                    </div>
+                    <p class="text-lg font-semibold mb-1">${current.message.split(':')[0]}</p>
+                    <p class="text-sm text-gray-600 font-medium">${current.message.split(': ')[1] || current.message}</p>
+                    <hr class="my-3 border-gray-200">
+                    <div class="flex justify-between text-xs text-gray-500 font-medium">
+                        <span><i class="fas fa-wind mr-1"></i> Wind: ${todayData.wind}</span>
+                        <span><i class="fas fa-temperature-three-quarters mr-1"></i> High/Low: ${todayData.temp}</span>
+                    </div>
+                </div>
+
+                <!-- 7-Day Outlook -->
+                <h3 class="text-lg font-semibold mb-3 text-gray-800">7-Day Outlook</h3>
+                <div class="space-y-2 max-h-[45vh] scrollable-content overflow-y-auto pb-4">
+                    ${sevenDayForecast.map((day, index) => `
+                        <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl ${index === 0 ? 'shadow-md border-indigo-200' : 'shadow-sm'}">
+                            <span class="text-sm font-medium ${index === 0 ? 'text-indigo-600' : 'text-gray-700'}">${day.day}</span>
+                            <div class="flex items-center text-xs text-gray-500 w-32 justify-end">
+                                <i class="fas ${day.icon} mr-2 text-base w-4 text-center"></i>
+                                <span>${day.condition}</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm font-semibold">${day.temp}</span>
+                                <p class="text-xs text-gray-400">Wind: ${day.wind}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div class="text-center p-4 text-gray-400 text-sm">-- Forecast provided by Nepo Weather --</div>
+                </div>
+            </div>`;
+            modalContentEl.innerHTML = html;
+        }
+
+
+        function renderModalContent(serviceKey) {
+            const data = serviceData[serviceKey] || [];
+            const service = serviceMap[serviceKey];
+            let html = `<div class="p-4">`;
+            const color = service ? service.color : 'bg-gray-600'; 
+
+            if (serviceKey === 'driving') {
+                // Functional service for demo: Nepo Driving
+                
+                // Add warning if Firebase is inactive
+                const demoWarning = !isFirebaseActive ? `
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-3 mb-4 rounded-lg text-sm font-medium">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> Real-time features are disabled (DEMO MODE).
+                    </div>` : '';
+                
+                // Show the current user ID for multi-user collaboration visibility
+                const userIdDisplay = isAuthReady ? `<p class="text-xs text-gray-500 mb-2">Your User ID: <span class="font-mono text-indigo-600">${userId}</span></p>` : '';
+
+                html += `
+                    ${demoWarning}
+                    ${userIdDisplay}
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Request a Ride (Ride-hailing)</h3>
+                    <form id="driving-form" class="space-y-4 mb-8">
+                        <input type="text" id="driving-pickup" placeholder="Pickup Location (GPS)" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <input type="text" id="driving-dropoff" placeholder="Destination" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <select id="driving-car-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="Standard">Standard Car</option>
+                            <option value="Carpool">Carpool (Save money)</option>
+                            <option value="Premium">Premium SUV</option>
+                        </select>
+                        <button type="submit" class="w-full py-3 ${color} text-white font-bold rounded-lg hover:opacity-90 transition duration-150">Find Driver</button>
+                    </form>
+
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Active Ride Requests (${data.length})</h3>
+                    <div class="space-y-3 mb-6">
+                        ${data.length === 0
+                            ? '<p class="text-gray-500 text-sm">No active ride requests found. Request one above!</p>'
+                            : data.map(ride => {
+                                const isMine = ride.createdBy === userId;
+                                return `
+                                <div class="p-3 bg-white border border-gray-200 rounded-lg shadow-sm flex justify-between items-center ${isMine ? 'border-indigo-500 bg-indigo-50' : ''}">
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${ride.pickupLocation} <i class="fas fa-arrow-right mx-1 text-xs"></i> ${ride.dropoffLocation}</p>
+                                        <p class="text-xs text-gray-500">${ride.carType} - Requested by ${isMine ? 'You' : ride.createdBy.substring(0, 8) + '...'}</p>
+                                    </div>
+                                    <span class="text-sm font-bold text-indigo-600">Searching...</span>
+                                </div>
+                                `;
+                            }).join('')
+                        }
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Recent Completed Rides (Examples)</h3>
+                    <div class="space-y-3 max-h-64 scrollable-content overflow-y-auto">
+                        ${nepoDrivingPastExamples.map(ride => `
+                            <div class="p-3 bg-gray-50 border border-gray-200 rounded-lg flex justify-between items-center">
+                                <div>
+                                    <p class="font-medium text-sm text-gray-800">${ride.pickup} <i class="fas fa-arrow-right mx-1 text-xs"></i> ${ride.dropoff}</p>
+                                    <p class="text-xs text-gray-500">${ride.type}</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm font-bold text-green-600">NPR ${ride.cost.toLocaleString()}</span>
+                                    <p class="text-xs text-gray-400">${ride.status}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (serviceKey === 'news') {
+                 // Nepo News - UPDATED TO INCLUDE HYPERLINKS TO EXTERNAL SOURCES
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Personalized News Feed</h3>
+                    <p class="text-sm text-gray-500 mb-4">Clicking a headline will redirect to the original source portal.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoNewsExamples_full.map(news => `
+                            <a href="${news.url}" target="_blank" class="block">
+                                <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-150 cursor-pointer">
+                                    <div class="flex items-center mb-1">
+                                        <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white ${news.color}">${news.category}</span>
+                                    </div>
+                                    <p class="font-medium text-base text-gray-800 leading-snug">${news.title}</p>
+                                    <div class="flex justify-between items-center text-xs mt-1 text-gray-500">
+                                        <span>${news.source}</span>
+                                        <span><i class="fas fa-clock mr-1"></i>${news.time}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of news feed examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'calendar') {
+                // Nepo Calendar
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Upcoming Events (Bikram Sambat)</h3>
+                    <p class="text-sm text-gray-500 mb-4">Nepali dates, festivals, and personal reminders.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoCalendarExamples_full.map(item => `
+                            <div class="flex items-start p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
+                                <div class="flex-shrink-0 w-10 h-10 ${item.color} rounded-full flex items-center justify-center text-white mr-3">
+                                    <i class="fas ${item.icon} text-lg"></i>
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="font-semibold text-sm text-gray-800">${item.name}</p>
+                                    <p class="text-xs text-gray-600">${item.date}</p>
+                                    <span class="text-xs text-gray-400">${item.type}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of calendar examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'care') {
+                // Nepo Care
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Health & Home-Care Bookings</h3>
+                    <p class="text-sm text-gray-500 mb-4">Bookings for nurses, doctors, and caregivers.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoCareExamples_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas ${item.icon} text-xl text-teal-600 mr-3"></i>
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${item.service}</p>
+                                        <p class="text-xs text-gray-500">${item.provider} | ${item.date}</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-gray-700">NPR ${item.cost.toLocaleString()}</span>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of care examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'secondhand') {
+                // Nepo Second-Hand Market
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Featured Second-Hand Listings</h3>
+                    <p class="text-sm text-gray-500 mb-4">Buy and sell verified used goods locally.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoSecondHandExamples_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas ${item.icon} text-xl text-green-600 mr-3"></i>
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${item.item}</p>
+                                        <p class="text-xs text-gray-500">Condition: ${item.condition} | ${item.location}</p>
+                                    </div>
+                                </div>
+                                <span class="text-base font-bold text-gray-700">NPR ${item.price.toLocaleString()}</span>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of market examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'shopping') {
+                // Nepo Online Shopping
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Your Recent Shopping Orders</h3>
+                    <p class="text-sm text-gray-500 mb-4">Tracking digital marketplace purchases.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoShoppingExamples_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex items-center justify-between">
+                                <div class="flex items-center">
+                                     <i class="fas ${item.icon} text-xl text-purple-600 mr-3"></i>
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${item.item}</p>
+                                        <p class="text-xs text-gray-500">From: ${item.vendor}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm font-bold text-gray-700">NPR ${item.price.toLocaleString()}</span>
+                                    <p class="text-xs font-semibold ${item.status === 'Delivered' ? 'text-green-500' : item.status === 'Shipped' ? 'text-blue-500' : 'text-orange-500'}">${item.status}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of shopping examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'visa') {
+                // Nepo Visa Check
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Visa/Immigration Status Checks</h3>
+                    <p class="text-sm text-gray-500 mb-4">API-based status verification for citizens abroad.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoVisaExamples_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas ${item.icon} text-xl text-blue-600 mr-3"></i>
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${item.country}</p>
+                                        <p class="text-xs text-gray-500">Applicant: ${item.applicant} | ${item.date}</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold ${item.status === 'Approved' ? 'text-green-600' : item.status === 'Denied' ? 'text-red-600' : 'text-orange-600'}">${item.status}</span>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of visa check examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'donation') {
+                // Nepo Donation
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Your Donation History</h3>
+                    <p class="text-sm text-gray-500 mb-4">Secure platform to donate and track organizations.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoDonationExamples_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas ${item.icon} text-xl text-pink-600 mr-3"></i>
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${item.cause}</p>
+                                        <p class="text-xs text-gray-500">${item.recipient} | ${item.date}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm font-bold text-gray-700">NPR ${item.amount.toLocaleString()}</span>
+                                    <p class="text-xs text-gray-400">${item.type}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of donation examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'roomrent') {
+                // Nepo Room Rent
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Featured Rental Listings</h3>
+                    <p class="text-sm text-gray-500 mb-4">Search or list rooms, flats, and houses.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoRoomRentExamples_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
+                                <div class="flex justify-between items-start mb-1">
+                                    <p class="font-semibold text-sm text-gray-800">${item.title}</p>
+                                    <span class="text-sm font-bold text-yellow-600">NPR ${item.rent.toLocaleString()}</span>
+                                </div>
+                                <div class="text-xs text-gray-500 flex justify-between">
+                                    <span><i class="fas ${item.icon} mr-1"></i>${item.type} | ${item.location}</span>
+                                    <span>Deposit: ${item.deposit} month${item.deposit > 1 ? 's' : ''}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of rental examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'jobs') {
+                // Nepo Part-Time Job
+                html += `
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Local Part-Time Opportunities</h3>
+                    <p class="text-sm text-gray-500 mb-4">Job board for students and freelance workers.</p>
+                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoJobsExamples_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
+                                <div class="flex justify-between items-center mb-1">
+                                    <p class="font-semibold text-sm text-gray-800">${item.title}</p>
+                                    <span class="text-sm font-bold text-gray-700">${item.pay}</span>
+                                </div>
+                                <div class="text-xs text-gray-500 flex justify-between">
+                                    <span><i class="fas fa-building mr-1"></i>${item.company} | ${item.location}</span>
+                                    <span class="text-gray-400">${item.type}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of job examples --</div>
+                    </div>
+                `;
+            } else if (serviceKey === 'wallet') {
+                // My Wallet
+                html += `<div class="p-4">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">My Nepo Wallet</h3>
+                    
+                    <!-- Current Balance Card -->
+                    <div class="header-gradient p-6 rounded-xl shadow-lg mb-6 text-white">
+                        <p class="text-sm opacity-80">Wallet Balance</p>
+                        <p class="text-4xl font-bold mb-1">NPR 45,678.00</p>
+                    </div>
+
+                    <!-- Wallet Actions -->
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <button class="flex flex-col items-center justify-center p-3 bg-indigo-100 text-indigo-700 rounded-xl shadow-md hover:bg-indigo-200 transition">
+                            <i class="fas fa-money-bill-transfer text-2xl mb-1"></i>
+                            <span class="text-sm font-semibold">Top Up</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-3 bg-green-100 text-green-700 rounded-xl shadow-md hover:bg-green-200 transition">
+                            <i class="fas fa-paper-plane text-2xl mb-1"></i>
+                            <span class="text-sm font-semibold">Send Money</span>
+                        </button>
+                    </div>
+
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Recent Wallet Activity</h3>
+                    <div class="space-y-3 max-h-[40vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoWalletTransactions_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas ${item.icon} text-xl ${item.color} mr-3 w-5 text-center"></i>
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${item.type}</p>
+                                        <p class="text-xs text-gray-500">${item.source} | ${item.date}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm font-bold ${item.amount > 0 ? 'text-green-600' : 'text-red-600'}">
+                                        ${item.amount > 0 ? '+' : ''}NPR ${Math.abs(item.amount).toLocaleString()}
+                                    </span>
+                                    <p class="text-xs text-gray-400">${item.category}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of wallet examples --</div>
+                    </div>
+                </div>`;
+            } else if (serviceKey === 'explore') {
+                // Explore Destinations
+                html += `<div class="p-4">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Explore: Local Destinations</h3>
+                    <p class="text-sm text-gray-500 mb-4">Discover popular local events, sites, and activities near you.</p>
+
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Featured Spots (Examples)</h3>
+                    <div class="space-y-3 max-h-[60vh] scrollable-content overflow-y-auto pb-4">
+                        ${nepoExploreExamples_full.map(item => `
+                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-150 cursor-pointer">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas ${item.icon} text-xl ${item.color} mr-3 w-5 text-center"></i>
+                                        <div>
+                                            <p class="font-medium text-sm text-gray-800">${item.name}</p>
+                                            <p class="text-xs text-gray-500">${item.type} | ${item.distance} away</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right flex items-center">
+                                        <span class="text-sm font-bold text-amber-500"><i class="fas fa-star mr-1 text-xs"></i>${item.rating}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of explore examples --</div>
+                    </div>
+                </div>`;
+            } else if (serviceKey === 'profile') {
+                // User Profile
+                const profile = nepoProfileData;
+                html += `<div class="p-4">
+                    <div class="flex flex-col items-center p-6 bg-gray-50 rounded-xl shadow-inner mb-6">
+                        <div class="w-24 h-24 rounded-full bg-indigo-500 text-white flex items-center justify-center text-4xl font-bold mb-3 border-4 border-white shadow-lg">
+                            ${profile.name[0]}
+                        </div>
+                        <p class="text-xl font-bold text-gray-900">${profile.name}</p>
+                        <p class="text-sm font-medium ${profile.status.includes('Platinum') ? 'text-amber-600' : 'text-green-600'}">${profile.status}</p>
+
+                        <!-- Rewards Points -->
+                        <div class="mt-4 p-2 bg-amber-100 rounded-lg w-full text-center">
+                            <p class="text-sm font-semibold text-amber-700">
+                                <i class="fas fa-medal mr-1"></i> Nepo Points: ${profile.nepoPoints.toLocaleString()}
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Contact & Membership</h3>
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-phone-alt w-5 text-center text-indigo-500 mr-2"></i>
+                            <span>${profile.phone}</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-envelope w-5 text-center text-indigo-500 mr-2"></i>
+                            <span>${profile.email}</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-map-marker-alt w-5 text-center text-indigo-500 mr-2"></i>
+                            <span>${profile.address}</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-calendar-alt w-5 text-center text-indigo-500 mr-2"></i>
+                            <span>Member Since: ${profile.memberSince}</span>
+                        </div>
+                        <!-- Security Status -->
+                        <div class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-shield-alt w-5 text-center text-green-500 mr-2"></i>
+                            <span>Security: <span class="font-medium text-green-600">${profile.securityStatus}</span></span>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800 mt-6">Recent Nepo Activity</h3>
+                    <div class="space-y-3 max-h-[20vh] scrollable-content overflow-y-auto pb-4">
+                        ${profile.recentActivity.map(activity => `
+                            <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
+                                <div class="flex items-center">
+                                    <i class="fas ${activity.icon} text-lg text-gray-500 mr-3"></i>
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${activity.type}: ${activity.details}</p>
+                                        <p class="text-xs text-gray-400">${activity.date}</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-semibold ${activity.status === 'Completed' || activity.status === 'Delivered' || activity.status === 'Success' ? 'text-green-600' : 'text-gray-500'}">${activity.status}</span>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of activity --</div>
+                    </div>
+                </div>`;
+
+            } else {
+                // Generic content for the other services
+                html += `
+                    <p class="text-center text-gray-500 pt-8 text-lg font-medium">
+                        Welcome to the <span class="text-gray-800 font-bold">${service.name}</span> service!
+                    </p>
+                    <div class="text-center p-8">
+                        <i class="fas ${service.icon} text-6xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-400 mt-2">This feature is coming soon and will include its core functions: ${service.name} is about ${service.name === 'Nepo News' ? 'real-time local updates and personalized feeds.' : service.name === 'Nepo Calendar' ? 'Bikram Sambat dates, festivals, and event reminders.' : service.name === 'Nepo Care' ? 'online health bookings and remote consultations.' : service.name === 'Nepo Second-Hand Market' ? 'verified listings to buy and sell used goods safely.' : service.name === 'Nepo Online Shopping' ? 'a digital marketplace with fast local delivery.' : service.name === 'Nepo Visa Check' ? 'API-based visa and immigration status verification.' : service.name === 'Nepo Donation' ? 'a secure platform to donate to local charities and causes.' : service.name === 'Nepo Room Rent' ? 'an online service connecting landlords and tenants for housing.' : 'a local job board for part-time and freelance opportunities.'}</p>
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+            modalContentEl.innerHTML = html;
+            attachFormListeners(serviceKey);
+        }
+
+        // Attach listeners to newly rendered forms
+        function attachFormListeners(serviceKey) {
+            const form = document.getElementById(`${serviceKey}-form`);
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    if (!isAuthReady) return displayMessage("App is still initializing authentication. Please wait.", 'warning');
+
+                    let itemData = {};
+
+                    if (serviceKey === 'driving') {
+                        itemData = {
+                            pickupLocation: document.getElementById('driving-pickup').value,
+                            dropoffLocation: document.getElementById('driving-dropoff').value,
+                            carType: document.getElementById('driving-car-type').value,
+                            status: 'requested'
+                        };
+                    } else {
+                        // This block should theoretically not be hit since we only attach the listener for 'driving'
+                        displayMessage(`The ${serviceMap[serviceKey].name} feature is still under development!`, 'info');
+                        form.reset();
+                        return;
+                    }
+
+                    const success = await addItem(serviceKey, itemData);
+                    if (success) {
+                        form.reset();
+                        displayMessage(`${serviceMap[serviceKey].name} request successful! Looking for a match!`, 'success');
+                    }
+                });
+            }
+        }
+
+
+        function displayMessage(text, type = 'info') {
+            const messageEl = document.getElementById('message-box');
+            messageEl.textContent = text;
+            messageEl.className = 'fixed top-4 right-4 p-3 rounded-xl shadow-xl z-50 transition duration-300';
+
+            if (type === 'success') {
+                messageEl.classList.add('bg-green-500', 'text-white');
+            } else if (type === 'error') {
+                messageEl.classList.add('bg-red-500', 'text-white');
+            } else if (type === 'warning') {
+                messageEl.classList.add('bg-yellow-500', 'text-gray-900');
+            } else {
+                messageEl.classList.add('bg-blue-500', 'text-white');
+            }
+
+            messageEl.classList.remove('opacity-0');
+
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                messageEl.classList.add('opacity-0');
+            }, 3000);
+            
+            // Re-enable pointer events after transition
+            setTimeout(() => {
+                messageEl.classList.remove('pointer-events-auto');
+                messageEl.classList.add('pointer-events-none');
+            }, 3300);
+            messageEl.classList.remove('pointer-events-none');
+            messageEl.classList.add('pointer-events-auto');
+        }
+
+
+        // Function to initialize the main service grid
+        function loadServiceData() {
+            const gridEl = document.getElementById('service-grid');
+            if (!gridEl) return;
+
+            const serviceKeys = Object.keys(serviceMap);
+            gridEl.innerHTML = serviceKeys.map(key => {
+                const service = serviceMap[key];
+                return `
+                    <div class="service-card ${service.color} p-6 rounded-xl shadow-lg flex flex-col items-center text-white text-center" data-service-key="${key}">
+                        <i class="fas ${service.icon} text-4xl mb-3"></i>
+                        <span class="font-semibold text-lg">${service.name.replace('Nepo ', '')}</span>
+                        <span class="text-xs opacity-80 mt-1">${service.name}</span>
+                    </div>
+                `;
+            }).join('');
+
+            // Attach click listeners to the service cards
+            gridEl.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const key = e.currentTarget.getAttribute('data-service-key');
+                    if (key) {
+                        openModal(key);
+                    }
+                });
+            });
+        }
+
+        // Initialize on window load
+        window.onload = () => {
+            initializeFirebase();
+            displayForecast();
+            openGreeting();
+        };
+        window.openModal = openModal; 
+        window.closeModal = closeModal;
+    </script>
+
+    <!-- Main App Container -->
+    <div class="max-w-md mx-auto h-screen flex flex-col bg-white shadow-xl">
+
+        <!-- Header: Title, Notifications, and Forecast -->
+        <header class="header-gradient p-6 rounded-b-3xl shadow-lg">
+            <div class="flex justify-between items-center text-white mb-4">
+                <h1 class="text-2xl font-extrabold tracking-tight">Nepo App</h1>
+                <div class="flex space-x-3 items-center">
+                    <!-- New App Info Icon -->
+                    <button onclick="openAppInfoModal()" class="text-white text-lg opacity-80 hover:opacity-100 transition"><i class="fas fa-info-circle"></i></button>
+                    <!-- Existing Notification Bell -->
+                    <button class="text-white text-lg opacity-80 hover:opacity-100 transition"><i class="fas fa-bell"></i></button>
+                </div>
+            </div>
+
+            <!-- Today's Forecast Section -->
+            <div id="weather-forecast" class="flex items-center text-white p-2 bg-white bg-opacity-20 rounded-lg">
+                <!-- Content inserted by JS displayForecast() -->
+                <i class="fas fa-cloud text-lg mr-2 text-gray-200"></i>
+                <span class="text-sm font-medium">Loading today's forecast...</span>
+            </div>
+        </header>
+
+        <!-- Main Service Grid -->
+        <main id="main-content" class="flex-grow p-4 scrollable-content overflow-y-auto">
+
+            <!-- Development Notice -->
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-6 rounded-xl shadow-md" role="alert">
+                <div class="flex items-center">
+                    <i class="fas fa-tools mr-3 text-lg"></i>
+                    <p class="font-semibold text-sm">Development Notice: Prototype in DEMO Mode.</p>
+                </div>
+                <p class="text-xs mt-1 ml-6">Replace placeholder Firebase config to enable **Nepo Driving** real-time features.</p>
+            </div>
+
+            <!-- Quick Access (Top 3 New Services) -->
+            <section class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-800 mb-3">Quick Access</h2>
+                <div id="quick-access-grid" class="grid grid-cols-3 gap-3">
+                    <div onclick="openModal('news')" class="bg-red-100 text-red-800 p-3 rounded-xl text-center transition hover:bg-red-200 cursor-pointer shadow-md">
+                        <i class="fas fa-newspaper text-xl mb-1"></i>
+                        <p class="text-xs font-medium">News</p>
+                    </div>
+                    <div onclick="openModal('calendar')" class="bg-orange-100 text-orange-800 p-3 rounded-xl text-center transition hover:bg-orange-200 cursor-pointer shadow-md">
+                        <i class="fas fa-calendar-days text-xl mb-1"></i>
+                        <p class="text-xs font-medium">Calendar</p>
+                    </div>
+                    <div onclick="openModal('driving')" class="bg-indigo-100 text-indigo-800 p-3 rounded-xl text-center transition hover:bg-indigo-200 cursor-pointer shadow-md">
+                        <i class="fas fa-car-side text-xl mb-1"></i>
+                        <p class="text-xs font-medium">Driving</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- All Services -->
+            <section class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-800 mb-3">All 10 Main Features</h2>
+                <div id="service-grid" class="grid grid-cols-2 gap-4">
+                    <!-- Service cards will be inserted here by JavaScript -->
+                    <div class="text-center p-8 text-gray-400">Loading features...</div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Navigation Bar -->
+        <nav class="bg-white border-t border-gray-200 p-2 shadow-2xl">
+            <div class="flex justify-around items-center">
+                <a href="#" class="flex flex-col items-center text-indigo-600">
+                    <i class="fas fa-home text-xl"></i>
+                    <span class="text-xs mt-1">Home</span>
+                </a>
+                <a onclick="openModal('wallet')" class="flex flex-col items-center text-gray-400 hover:text-gray-600 cursor-pointer">
+                    <i class="fas fa-wallet text-xl"></i>
+                    <span class="text-xs mt-1">Wallet</span>
+                </a>
+                <a onclick="openModal('explore')" class="flex flex-col items-center text-gray-400 hover:text-gray-600 cursor-pointer">
+                    <i class="fas fa-map-marked-alt text-xl"></i>
+                    <span class="text-xs mt-1">Explore</span>
+                </a>
+                <a onclick="openModal('profile')" class="flex flex-col items-center text-gray-400 hover:text-gray-600 cursor-pointer">
+                    <i class="fas fa-user-circle text-xl"></i>
+                    <span class="text-xs mt-1">Profile</span>
+                </a>
+            </div>
+        </nav>
+
+    </div>
+
+    <!-- Service Modal (Full screen overlay) -->
+    <div id="service-modal" class="modal hidden fixed inset-0 z-40 bg-gray-900 bg-opacity-50 flex items-end justify-center">
+        <div class="modal-content w-full max-w-md bg-white rounded-t-3xl shadow-2xl max-h-[85vh] flex flex-col transform translate-y-0" role="dialog" aria-modal="true">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white p-4 border-b border-gray-200 rounded-t-3xl flex justify-between items-center">
+                <h2 id="modal-title" class="text-xl font-bold text-gray-900">Service Name</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 p-1">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <!-- Modal Body (Scrollable content) -->
+            <div id="modal-content" class="flex-grow scrollable-content overflow-y-auto">
+                <!-- Service specific content goes here -->
+                <div class="p-8 text-center text-gray-400">Loading content...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Greeting Modal (Centered Overlay) -->
+    <div id="greeting-modal" class="hidden fixed inset-0 z-50 bg-gray-900 bg-opacity-70 flex items-center justify-center transition duration-300" role="dialog" aria-modal="true">
+        <div class="bg-white p-8 rounded-xl shadow-2xl text-center transform scale-100 transition duration-300 max-w-xs mx-4">
+            <p class="text-6xl mb-4">नमस्ते🙏</p>
+            <p class="text-lg font-semibold text-gray-800">Welcome to Nepo Super App!</p>
+            <p class="text-sm text-gray-500 mt-1">Tap below to start exploring the prototype.</p>
+            <button onclick="document.getElementById('greeting-modal').classList.add('hidden')" class="mt-4 w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md">
+                Enter App
+            </button>
+        </div>
+    </div>
+
+    <!-- App Info Modal (Centered Overlay) -->
+    <div id="app-info-modal" class="hidden fixed inset-0 z-50 bg-gray-900 bg-opacity-70 flex items-center justify-center transition duration-300" role="dialog" aria-modal="true">
+        <div class="bg-white p-8 rounded-xl shadow-2xl text-center transform scale-100 transition duration-300 max-w-xs mx-4">
+            <p class="text-4xl mb-4 text-indigo-600"><i class="fas fa-satellite-dish"></i></p>
+            <p class="text-lg font-semibold text-gray-800">Nepo Super App</p>
+            <p class="text-sm text-gray-500 mt-1 mb-4">Version 1.0.2 - Demo Prototype</p>
+
+            <!-- Founder Information Block -->
+            <div class="text-gray-900 space-y-2 mb-4 p-4 bg-gray-100 rounded-lg shadow-inner text-left">
+                <p class="text-lg font-bold text-center">Bipin Hamal</p>
+                <p class="text-sm font-medium text-green-600 text-center mb-3">Visionary & IoT Student</p>
+                
+                <div class="text-xs space-y-1 text-gray-700 pt-2 border-t border-gray-200">
+                    <p class="font-semibold mb-1">Academic Background:</p>
+                    <p class="ml-2">Baekseok University, South Korea</p>
+                    <p class="ml-2">Major: Internet of Things (IoT)</p>
+                </div>
+
+                <div class="text-xs space-y-1 text-gray-700 pt-2 border-t border-gray-200">
+                    <p class="font-semibold mb-1">Contact:</p>
+                    <p class="ml-2">bipinhamal2025@gmail.com</p>
+                    <p class="ml-2">+82 10-6708-3312</p>
+                </div>
+            </div>
+            <!-- End Founder Information Block -->
+            
+            <a href="mailto:bipinhamal2025@gmail.com?subject=Suggestion%20for%20Nepo%20Super%20App" class="mt-4 w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md flex items-center justify-center">
+                <i class="fas fa-envelope mr-2"></i> Send Suggestion Email
+            </a>
+            
+            <button onclick="document.getElementById('app-info-modal').classList.add('hidden')" class="mt-2 w-full py-3 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition duration-150 shadow-md">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Message Box (Toast Notification) -->
+    <div id="message-box" class="fixed top-4 right-4 p-3 rounded-xl shadow-xl z-50 transition duration-300 opacity-0 pointer-events-none"></div>
+
+</body>
+</html>
+
+
