@@ -60,6 +60,28 @@
         .modal.hidden .modal-content {
             transform: scale(0.9);
         }
+
+        /* --- New Construction Effect CSS --- */
+        @keyframes stripes-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 0; }
+        }
+
+        .construction-effect {
+            /* Yellow/Orange striped background */
+            background-image: repeating-linear-gradient(
+                45deg,
+                #fcd34d 0, /* Amber 300 */
+                #fcd34d 10px,
+                #fcd34d 10px, /* Amber 300 */
+                #f59e0b 20px /* Amber 500 */
+            );
+            background-size: 40px 40px;
+            animation: stripes-move 0.7s linear infinite;
+            border-color: #f59e0b;
+            color: #78350f; /* Dark brown text for contrast */
+        }
+        /* --- End Construction Effect CSS --- */
     </style>
 </head>
 <body class="min-h-screen antialiased">
@@ -1045,10 +1067,10 @@
             <div class="flex justify-between items-center text-white mb-4">
                 <h1 class="text-2xl font-extrabold tracking-tight">Nepo App</h1>
                 <div class="flex space-x-3 items-center">
-                    <!-- New App Info Icon -->
-                    <button onclick="openAppInfoModal()" class="text-white text-lg opacity-80 hover:opacity-100 transition"><i class="fas fa-info-circle"></i></button>
-                    <!-- Existing Notification Bell -->
-                    <button class="text-white text-lg opacity-80 hover:opacity-100 transition"><i class="fas fa-bell"></i></button>
+                    <!-- Updated App Info Icon to fa-circle-info -->
+                    <button onclick="openAppInfoModal()" class="text-white text-2xl opacity-90 hover:opacity-100 transition">
+                        <i class="fas fa-circle-info"></i>
+                    </button>
                 </div>
             </div>
 
@@ -1063,13 +1085,12 @@
         <!-- Main Service Grid -->
         <main id="main-content" class="flex-grow p-4 scrollable-content overflow-y-auto">
 
-            <!-- Development Notice -->
-            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 mb-6 rounded-xl shadow-md" role="alert">
+            <!-- Updated Development Notice Banner with construction-effect class -->
+            <div class="construction-effect border-l-8 p-4 mb-6 rounded-xl shadow-md" role="alert">
                 <div class="flex items-center">
                     <i class="fas fa-tools mr-3 text-lg"></i>
-                    <p class="font-semibold text-sm">Development Notice: Prototype in DEMO Mode.</p>
+                    <p class="font-semibold text-sm">App is under construction.</p>
                 </div>
-                <p class="text-xs mt-1 ml-6">Replace placeholder Firebase config to enable **Nepo Driving** real-time features.</p>
             </div>
 
             <!-- Quick Access (Top 3 New Services) -->
@@ -1155,15 +1176,48 @@
         </div>
     </div>
 
-    <!-- App Info Modal (Centered Overlay) -->
+    <!-- App Info Modal (Centered Overlay) - WITH COMPREHENSIVE ABOUT US -->
     <div id="app-info-modal" class="hidden fixed inset-0 z-50 bg-gray-900 bg-opacity-70 flex items-center justify-center transition duration-300" role="dialog" aria-modal="true">
-        <div class="bg-white p-8 rounded-xl shadow-2xl text-center transform scale-100 transition duration-300 max-w-xs mx-4">
+        <!-- Increased max-width for better readability of detailed content -->
+        <div class="bg-white p-8 rounded-xl shadow-2xl text-center transform scale-100 transition duration-300 max-w-md mx-4 max-h-[90vh] overflow-y-auto">
             <p class="text-4xl mb-4 text-indigo-600"><i class="fas fa-satellite-dish"></i></p>
-            <p class="text-lg font-semibold text-gray-800">Nepo Super App</p>
-            <p class="text-sm text-gray-500 mt-1 mb-4">Version 1.0.2 - Demo Prototype</p>
+            <p class="text-xl font-extrabold text-gray-900">🇳🇵 Nepo Super App</p>
+            <p class="text-sm text-gray-500 mt-1 mb-4">Version 1.0.2 - Demo Prototype | <span class="font-semibold text-indigo-700">Goal: Full Release by Late 2028</span></p>
+
+            <!-- App Overview -->
+            <div class="text-left mb-6 p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+                <h3 class="font-bold text-base text-indigo-700 mb-2">Project Vision: Unified Digital Ecosystem</h3>
+                <p class="text-sm text-gray-700">The Nepo Super App is envisioned as a unified, multi-service digital ecosystem aiming to streamline daily life for the Nepali public. By consolidating 11 essential services—from mobility and finance to health and community resources—into a single interface, it maximizes convenience and efficiency.</p>
+            </div>
+
+            <!-- Core Services Pillars -->
+            <h3 class="font-bold text-base text-gray-800 mb-2 text-left">11 Core Services & Pillars</h3>
+            <div class="space-y-1.5 mb-6 text-sm text-left max-h-48 overflow-y-auto p-3 bg-gray-50 rounded-xl shadow-inner border border-gray-200">
+                <p class="font-semibold text-indigo-600">I. Mobility & Logistics:</p>
+                <p class="ml-3"><i class="fas fa-car-side mr-1"></i> **Nepo Driving** (Ride-Hailing) | <i class="fas fa-map-marked-alt mr-1"></i> **Explore Local** (Destination Discovery)</p>
+                <hr class="my-1 border-gray-200">
+                <p class="font-semibold text-teal-600">II. Health & Wellness:</p>
+                <p class="ml-3"><i class="fas fa-hand-holding-medical mr-1"></i> **Nepo Care** (Health & Appoint. Tracking) | <i class="fas fa-hand-holding-heart mr-1"></i> **Nepo Donation** (Charitable Contributions)</p>
+                <hr class="my-1 border-gray-200">
+                <p class="font-semibold text-amber-600">III. Finance & Commerce:</p>
+                <p class="ml-3"><i class="fas fa-wallet mr-1"></i> **My Wallet** (Digital Finance Hub) | <i class="fas fa-bag-shopping mr-1"></i> **Online Shopping** (Order Tracking)</p>
+                <p class="ml-3"><i class="fas fa-tags mr-1"></i> **Second-Hand Market** (Community Listings)</p>
+                <hr class="my-1 border-gray-200">
+                <p class="font-semibold text-purple-600">IV. Information & Utility:</p>
+                <p class="ml-3"><i class="fas fa-newspaper mr-1"></i> **Nepo News** (Media Aggregation) | <i class="fas fa-calendar-days mr-1"></i> **Nepo Calendar** (Bikram Sambat Ref.)</p>
+                <p class="ml-3"><i class="fas fa-briefcase mr-1"></i> **Part-Time Job** (Local Job Board) | <i class="fas fa-passport mr-1"></i> **Visa Check** (Status Verification)</p>
+            </div>
+
+            <!-- Roadmap & Rationale -->
+            <h3 class="font-bold text-base text-gray-800 mb-2 text-left">3-Year Roadmap Rationale</h3>
+            <div class="space-y-2 mb-6 text-sm text-left p-3 bg-red-50 rounded-xl border border-red-200">
+                <p class="text-gray-700"><i class="fas fa-shield-alt mr-1 text-red-600"></i> **Security & Scalability:** Building robust infrastructure for mass adoption and financial regulatory compliance.</p>
+                <p class="text-gray-700"><i class="fas fa-rocket mr-1 text-red-600"></i> **Real-Time Compliance:** Finalizing complex backend for secure instant transactions and driver matching (e.g., Nepo Driving, My Wallet).</p>
+                <p class="text-gray-700"><i class="fas fa-user-check mr-1 text-red-600"></i> **Feature Maturity & UX:** Ensuring all 11 services are fully functional, interconnected, and simple for users of all digital literacy levels.</p>
+            </div>
 
             <!-- Founder Information Block -->
-            <div class="text-gray-900 space-y-2 mb-4 p-4 bg-gray-100 rounded-lg shadow-inner text-left">
+            <div class="text-gray-900 space-y-2 mb-4 p-4 bg-gray-100 rounded-xl shadow-inner text-left">
                 <p class="text-lg font-bold text-center">Bipin Hamal</p>
                 <p class="text-sm font-medium text-green-600 text-center mb-3">Visionary & IoT Student</p>
                 
@@ -1196,5 +1250,3 @@
 
 </body>
 </html>
-
-
