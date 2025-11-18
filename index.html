@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nepo Super App</title>
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -86,7 +84,6 @@
 </head>
 <body class="min-h-screen antialiased">
 
-    <!-- Firebase SDK Imports -->
     <script type="module">
         // IMPORTANT: These imports are required for Firebase/Firestore functionality
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -191,6 +188,321 @@
             { name: "Full Moon (Purnima)", date: "Upcoming: Jestha 1, 2083 B.S.", type: "Lunar Cycle", color: "bg-teal-600", icon: "fa-moon" }
         ];
 
+        // --- 20 Common Disease Data (English & Nepali) ---
+        const nepoDiseaseData = {
+            // 1. Common Cold
+            'cold': {
+                icon: 'fa-head-side-cough', color: 'text-blue-500', name_en: 'Common Cold', name_ne: 'सामान्य रुघा',
+                en: {
+                    intro: 'A viral infection of the nose and throat, characterized by sneezing, congestion, and sore throat.',
+                    causes: 'Caused by hundreds of different viruses, primarily rhinoviruses, spread through air or direct contact.',
+                    aware: 'Maintain good hygiene, wash hands frequently, and avoid close contact with infected individuals. Cover your mouth and nose when coughing or sneezing.'
+                },
+                ne: {
+                    intro: 'नाक र घाँटीको भाइरल संक्रमण हो, जसको विशेषता हाच्छिउँ आउनु, नाक बन्द हुनु र घाँटी दुख्नु हो।',
+                    causes: 'मुख्यतया राइनोभाइरस लगायत सयौं विभिन्न भाइरसका कारणले हुन्छ, जुन हावा वा प्रत्यक्ष सम्पर्कबाट फैलिन्छ।',
+                    aware: 'सफा रहनुहोस्, बारम्बार हात धुनुहोस्, र संक्रमित व्यक्तिहरूसँगको नजिकको सम्पर्कबाट जोगिनुहोस्। खोक्दा वा हाच्छिउँ गर्दा मुख र नाक छोप्नुहोस्।'
+                }
+            },
+            // 2. Influenza (Flu)
+            'flu': {
+                icon: 'fa-virus', color: 'text-red-500', name_en: 'Influenza (Flu)', name_ne: 'इन्फ्लुएन्जा (फ्लू)',
+                en: {
+                    intro: 'A contagious respiratory illness, more severe than a cold, causing fever, body aches, and fatigue.',
+                    causes: 'Caused by influenza viruses. It spreads mainly by droplets when infected people cough, sneeze or talk.',
+                    aware: 'Get an annual flu shot. Avoid touching your eyes, nose, and mouth. Stay home when sick to prevent spreading the virus.'
+                },
+                ne: {
+                    intro: 'रूघा भन्दा कडा श्वासप्रश्वासको संक्रामक रोग हो, जसले ज्वरो, शरीर दुख्ने र थकान महसुस गराउँछ।',
+                    causes: 'इन्फ्लुएन्जा भाइरसले गर्दा हुन्छ। यो मुख्यतया संक्रमित व्यक्तिले खोक्दा, हाच्छिउँ गर्दा वा कुरा गर्दा निस्कने थोपाहरूबाट फैलिन्छ।',
+                    aware: 'हरेक वर्ष फ्लूको खोप लगाउनुहोस्। आँखा, नाक र मुख छुनबाट जोगिनुहोस्। भाइरस फैलिनबाट रोक्न बिरामी हुँदा घरमै बस्नुहोस्।'
+                }
+            },
+            // 3. Dengue Fever
+            'dengue': {
+                icon: 'fa-mosquito', color: 'text-orange-500', name_en: 'Dengue Fever', name_ne: 'डेङ्गु ज्वरो',
+                en: {
+                    intro: 'A painful, debilitating mosquito-borne disease common in tropical and subtropical regions.',
+                    causes: 'Caused by the dengue virus, transmitted through the bite of Aedes mosquitoes, especially during monsoon.',
+                    aware: 'Eliminate standing water sources around your home. Use mosquito nets and repellents. Wear long sleeves and pants during peak biting hours.'
+                },
+                ne: {
+                    intro: 'उष्णकटिबंधीय क्षेत्रहरूमा सामान्य लामखुट्टेबाट सर्ने पीडादायक र कमजोर बनाउने रोग हो।',
+                    causes: 'डेङ्गु भाइरसका कारणले हुन्छ, जुन एडिस लामखुट्टेको टोकाइबाट सर्छ, विशेषगरी मनसुनमा।',
+                    aware: 'आफ्नो घर वरपर जमेको पानी हटाउनुहोस्। लामखुट्टेको जाली र भगाउने औषधि प्रयोग गर्नुहोस्। लामखुट्टेले बढी टोक्ने समयमा लामो बाहुला र पाइन्ट लगाउनुहोस्।'
+                }
+            },
+            // 4. Typhoid Fever
+            'typhoid': {
+                icon: 'fa-bowl-food', color: 'text-yellow-600', name_en: 'Typhoid Fever', name_ne: 'टाइफाइड ज्वरो',
+                en: {
+                    intro: 'A bacterial infection that can spread throughout the body, affecting many organs. High fever is a primary symptom.',
+                    causes: 'Caused by Salmonella Typhi bacteria, spread through contaminated food or water.',
+                    aware: 'Ensure food is thoroughly cooked and served hot. Drink only boiled, purified, or bottled water. Get vaccinated if traveling to endemic areas.'
+                },
+                ne: {
+                    intro: 'यो एक ब्याक्टेरियल संक्रमण हो जुन शरीरभरि फैलिएर धेरै अंगहरूलाई असर गर्न सक्छ। उच्च ज्वरो यसको मुख्य लक्षण हो।',
+                    causes: 'साल्मोनेला टाइफी ब्याक्टेरियाको कारणले हुन्छ, जुन दूषित खाना वा पानीबाट फैलिन्छ।',
+                    aware: 'खाना राम्ररी पकाएको र तातो सेवा गरिएको सुनिश्चित गर्नुहोस्। उमालेको, शुद्ध वा बोतलको मात्र पानी पिउनुहोस्। महामारी भएको क्षेत्रमा यात्रा गर्दा खोप लगाउनुहोस्।'
+                }
+            },
+            // 5. Diabetes Mellitus (Type 2)
+            'diabetes': {
+                icon: 'fa-sugar-cube', color: 'text-pink-600', name_en: 'Diabetes (Type 2)', name_ne: 'मधुमेह (टाइप २)',
+                en: {
+                    intro: 'A chronic condition where the body does not effectively use insulin or cannot produce enough, leading to high blood sugar levels.',
+                    causes: 'A combination of genetic factors, obesity, poor diet, and lack of physical activity.',
+                    aware: 'Maintain a healthy body weight and consume a balanced diet low in processed sugars. Engage in regular physical activity (at least 30 minutes daily).'
+                },
+                ne: {
+                    intro: 'एक दीर्घकालीन अवस्था हो जहाँ शरीरले इन्सुलिनलाई प्रभावकारी रूपमा प्रयोग गर्दैन वा पर्याप्त उत्पादन गर्न सक्दैन, जसले रगतमा चिनीको मात्रा बढाउँछ।',
+                    causes: 'आनुवंशिक कारक, मोटोपना, खराब आहार र शारीरिक गतिविधिको कमीको संयोजन हो।',
+                    aware: 'स्वस्थ शरीरको तौल कायम राख्नुहोस् र प्रशोधित चिनी कम भएको सन्तुलित आहार सेवन गर्नुहोस्। नियमित शारीरिक गतिविधिमा संलग्न हुनुहोस् (दैनिक कम्तिमा ३० मिनेट)।'
+                }
+            },
+            // 6. Hypertension (High Blood Pressure)
+            'hyper': {
+                icon: 'fa-heart-pulse', color: 'text-indigo-600', name_en: 'Hypertension (High BP)', name_ne: 'उच्च रक्तचाप',
+                en: {
+                    intro: 'A condition in which the force of the blood against the artery walls is too high, leading to heart disease and stroke risks.',
+                    causes: 'Often develops over time due to unhealthy lifestyle choices, such as high salt intake, lack of exercise, and smoking.',
+                    aware: 'Reduce salt and caffeine intake. Limit alcohol consumption and quit smoking. Exercise regularly and manage stress through meditation or yoga.'
+                },
+                ne: {
+                    intro: 'धमनीका भित्ताहरू विरुद्ध रगतको बल धेरै उच्च हुने अवस्था हो, जसले हृदय रोग र स्ट्रोकको जोखिम बढाउँछ।',
+                    causes: 'प्रायः उच्च नुन सेवन, व्यायामको कमी र धूम्रपान जस्ता अस्वस्थ जीवनशैलीका कारण समयसँगै विकसित हुन्छ।',
+                    aware: 'नुन र क्याफिन सेवन कम गर्नुहोस्। मदिरा सेवन सीमित गर्नुहोस् र धूम्रपान छोड्नुहोस्। नियमित व्यायाम गर्नुहोस् र ध्यान वा योग मार्फत तनाव व्यवस्थापन गर्नुहोस्।'
+                }
+            },
+            // 7. Tuberculosis (TB)
+            'tb': {
+                icon: 'fa-lungs', color: 'text-brown-500', name_en: 'Tuberculosis (TB)', name_ne: 'क्षयरोग (टीबी)',
+                en: {
+                    intro: 'A potentially serious infectious disease that mainly affects the lungs. It is spread through the air when an infected person coughs or sneezes.',
+                    causes: 'Caused by the bacterium Mycobacterium tuberculosis.',
+                    aware: 'Ensure proper ventilation in living spaces. If diagnosed, complete the full course of medication without interruption. Get infants vaccinated with the BCG vaccine.'
+                },
+                ne: {
+                    intro: 'यो एक सम्भावित गम्भीर संक्रामक रोग हो जसले मुख्यतया फोक्सोलाई असर गर्छ। यो संक्रमित व्यक्तिले खोक्दा वा हाच्छिउँ गर्दा हावा मार्फत फैलिन्छ।',
+                    causes: 'माइकोब्याक्टेरियम ट्युबरकुलोसिस नामक ब्याक्टेरियाबाट हुन्छ।',
+                    aware: 'बस्ने ठाउँहरूमा उचित भेन्टिलेसन सुनिश्चित गर्नुहोस्। यदि निदान गरिएमा, औषधिको पूर्ण कोर्स बिना अवरोध पूरा गर्नुहोस्। शिशुहरूलाई बीसीजी खोप लगाउनुहोस्।'
+                }
+            },
+            // 8. Gastritis/Indigestion
+            'gastritis': {
+                icon: 'fa-stomach', color: 'text-green-600', name_en: 'Gastritis/Indigestion', name_ne: 'ग्यास्ट्राइटिस/अपच',
+                en: {
+                    intro: 'Inflammation of the stomach lining, often causing stomach pain, bloating, and nausea.',
+                    causes: 'Caused by regular use of pain relievers, excessive alcohol, or Helicobacter pylori (H. pylori) infection.',
+                    aware: 'Avoid spicy, oily, and highly acidic foods. Eat smaller, frequent meals. Manage stress and limit the use of non-steroidal anti-inflammatory drugs (NSAIDs).'
+                },
+                ne: {
+                    intro: 'पेटको अस्तरको सूजन हो, जसले प्रायः पेट दुख्ने, पेट फुल्ने र वाकवाकी लाग्ने गर्छ।',
+                    causes: 'दुखाइ कम गर्ने औषधिहरूको नियमित प्रयोग, अत्यधिक मदिरा वा हेलिकोब्याक्टर पाइलोरी (H. pylori) संक्रमणका कारणले हुन्छ।',
+                    aware: 'पिरो, चिल्लो र धेरै अमिलो खानेकुराबाट जोगिनुहोस्। थोरै-थोरै र बारम्बार खानुहोस्। तनाव व्यवस्थापन गर्नुहोस् र एनएसएआईडीएस (NSAIDs) को प्रयोग सीमित गर्नुहोस्।'
+                }
+            },
+            // 9. Chronic Obstructive Pulmonary Disease (COPD)
+            'copd': {
+                icon: 'fa-smoking-ban', color: 'text-gray-800', name_en: 'COPD', name_ne: 'फोक्सोको दीर्घकालीन रोग',
+                en: {
+                    intro: 'A group of lung diseases that block airflow and make it difficult to breathe, including emphysema and chronic bronchitis.',
+                    causes: 'Long-term exposure to irritating gases or particulate matter, most often from cigarette smoke or indoor pollution (e.g., biomass fuel smoke).',
+                    aware: 'Crucially, quit smoking immediately. Minimize exposure to dust, fumes, and smoke, including indoor cooking smoke. Use prescribed inhalers correctly.'
+                },
+                ne: {
+                    intro: 'फोक्सोको रोगहरूको समूह हो जसले वायु प्रवाहलाई रोक्छ र सास फेर्न गाह्रो बनाउँछ, जसमा वातस्फीति र दीर्घकालीन ब्रोंकाइटिस समावेश छन्।',
+                    causes: 'लामो समयसम्म चिढाउने ग्यास वा कण पदार्थको सम्पर्कमा रहनु, प्राय: चुरोटको धुवाँ वा घरभित्रको प्रदूषण (जस्तै: दाउराको धुवाँ) बाट।',
+                    aware: 'तत्काल धूम्रपान छोड्नुहोस्। धुलो, धुवाँ, र भित्री खाना पकाउने धुवाँ सहितको सम्पर्कलाई कम गर्नुहोस्। निर्धारित इन्हेलरहरू सही तरिकाले प्रयोग गर्नुहोस्।'
+                }
+            },
+            // 10. Kidney Stones
+            'kidney': {
+                icon: 'fa-urology', color: 'text-cyan-600', name_en: 'Kidney Stones', name_ne: 'मिर्गौलाको पत्थरी',
+                en: {
+                    intro: 'Hard deposits of minerals and salts that form inside the kidneys, often causing severe pain when passing through the urinary tract.',
+                    causes: 'Concentrated urine, often caused by dehydration, diet, and certain medical conditions.',
+                    aware: 'Drink plenty of water throughout the day (2-3 liters). Reduce sodium, sugar, and animal protein intake. Consult a doctor for dietary recommendations.'
+                },
+                ne: {
+                    intro: 'मिर्गौला भित्र बन्ने खनिज र नुनको कडा निक्षेप हो, जुन पिसाब नलीबाट जाँदा प्रायः तीव्र पीडा निम्त्याउँछ।',
+                    causes: 'प्रायः निर्जलीकरण, आहार र केही स्वास्थ्य अवस्थाहरूका कारण पिसाब गाढा हुनु।',
+                    aware: 'दिनभरि प्रशस्त पानी पिउनुहोस् (२-३ लिटर)। सोडियम, चिनी र जनावरको प्रोटिन सेवन कम गर्नुहोस्। आहारसम्बन्धी सिफारिसहरूको लागि डाक्टरसँग सल्लाह लिनुहोस्।'
+                }
+            },
+            // 11. Asthma
+            'asthma': {
+                icon: 'fa-person-running', color: 'text-purple-500', name_en: 'Asthma', name_ne: 'दम रोग',
+                en: {
+                    intro: 'A chronic disease involving airway inflammation and narrowing, leading to difficulty breathing, wheezing, and coughing.',
+                    causes: 'Triggers include air pollution, allergens (pollen, dust mites), respiratory infections, and exercise.',
+                    aware: 'Identify and avoid personal triggers. Always carry and correctly use prescribed inhalers. Monitor peak flow regularly.'
+                },
+                ne: {
+                    intro: 'श्वासमार्गको सूजन र साँघुरोपना समावेश भएको एक दीर्घकालीन रोग हो, जसले सास फेर्न कठिनाई, सुस्केरा र खोकी निम्त्याउँछ।',
+                    causes: 'प्रदूषण, एलर्जी (परागकण, धूलो), श्वासप्रश्वास संक्रमण, र व्यायामले यसलाई उत्प्रेरित गर्दछ।',
+                    aware: 'व्यक्तिगत ट्रिगरहरू पहिचान गर्नुहोस् र तिनीहरूबाट जोगिनुहोस्। निर्धारित इन्हेलरहरू सधैं बोक्नुहोस् र सही रूपमा प्रयोग गर्नुहोस्। नियमित रूपमा पीक फ्लो निगरानी गर्नुहोस्।'
+            }
+            },
+            // 12. Diarrhea
+            'diarrhea': {
+                icon: 'fa-toilet', color: 'text-brown-500', name_en: 'Diarrhea', name_ne: 'पखाला',
+                en: {
+                    intro: 'Frequent passage of loose or watery stools, leading to dehydration if not managed quickly.',
+                    causes: 'Bacterial or viral infections, parasites, or certain medications. Commonly due to consuming contaminated water/food.',
+                    aware: 'Maintain strict hand hygiene, especially before eating and after using the toilet. Drink ORS (Oral Rehydration Solution) immediately. Ensure water is safe.'
+                },
+                ne: {
+                    intro: 'पातलो वा पानी जस्तो दिसा बारम्बार हुनु, जसलाई तुरुन्तै व्यवस्थापन नगरे निर्जलीकरण हुन सक्छ।',
+                    causes: 'ब्याक्टेरिया वा भाइरल संक्रमण, परजीवी वा केही औषधिहरू। सामान्यतया दूषित पानी/खाना उपभोग गर्दा।',
+                    aware: 'शौचालय प्रयोग गरेपछि र खाना खानु अघि हातको सरसफाइमा कडाइ गर्नुहोस्। तुरुन्तै ओआरएस (जीवनजल) पिउनुहोस्। पानी सुरक्षित भएको सुनिश्चित गर्नुहोस्।'
+                }
+            },
+            // 13. Jaundice (Hepatitis)
+            'jaundice': {
+                icon: 'fa-tint', color: 'text-amber-500', name_en: 'Jaundice (Hepatitis)', name_ne: 'जन्डिस (कलेजोको रोग)',
+                en: {
+                    intro: 'A yellow discoloration of the skin and eyes caused by excess bilirubin in the blood. It often indicates a liver problem.',
+                    causes: 'Viral infections (Hepatitis A, B, C), gallstones, or excessive alcohol use.',
+                    aware: 'Get vaccinated against Hepatitis A and B. Maintain clean sanitation and hygiene. Avoid uncooked or contaminated food and water.'
+                },
+                ne: {
+                    intro: 'रगतमा बिलिरुबिनको अधिकताका कारण छाला र आँखा पहेँलो हुने अवस्था। यसले प्रायः कलेजोको समस्यालाई संकेत गर्दछ।',
+                    causes: 'भाइरल संक्रमण (हेपाटाइटिस ए, बी, सी), पित्तथैलीको पत्थरी, वा अत्यधिक मदिरा सेवन।',
+                    aware: 'हेपाटाइटिस ए र बी विरुद्ध खोप लगाउनुहोस्। सफा सरसफाइ र स्वच्छता कायम राख्नुहोस्। नपाकेको वा दूषित खाना र पानीबाट जोगिनुहोस्।'
+                }
+            },
+            // 14. Anemia
+            'anemia': {
+                icon: 'fa-droplet', color: 'text-red-700', name_en: 'Anemia', name_ne: 'रक्तअल्पता',
+                en: {
+                    intro: 'A condition where the body lacks enough healthy red blood cells to carry adequate oxygen to body tissues, causing fatigue and weakness.',
+                    causes: 'Iron deficiency, Vitamin B12 deficiency, or chronic diseases.',
+                    aware: 'Consume iron-rich foods (red meat, spinach, beans) and Vitamin C (citrus fruits) to aid iron absorption. Take prescribed iron supplements if necessary.'
+                },
+                ne: {
+                    intro: 'शरीरमा पर्याप्त अक्सिजन पुर्याउनको लागि पर्याप्त स्वस्थ रातो रक्त कोशिकाको कमी हुने अवस्था, जसले थकान र कमजोरी निम्त्याउँछ।',
+                    causes: 'आइरनको कमी, भिटामिन बी१२ को कमी, वा दीर्घकालीन रोगहरू।',
+                    aware: 'आइरन युक्त खानेकुरा (रातो मासु, पालक, सिमी) र आइरन अवशोषणमा सहयोग गर्न भिटामिन सी (सिट्रस फलफूल) सेवन गर्नुहोस्। आवश्यक भएमा निर्धारित आइरन सप्लिमेन्टहरू लिनुहोस्।'
+            }
+            },
+            // 15. Arthritis
+            'arthritis': {
+                icon: 'fa-joint', color: 'text-teal-700', name_en: 'Arthritis', name_ne: 'जोर्नीको दुखाइ',
+                en: {
+                    intro: 'Inflammation or degeneration of one or more joints, causing pain, stiffness, and reduced mobility.',
+                    causes: 'Wear-and-tear (osteoarthritis), autoimmune disorders (rheumatoid arthritis), and infections.',
+                    aware: 'Maintain a healthy weight to reduce joint stress. Engage in low-impact exercises (swimming, walking). Use heat or cold therapy for pain relief.'
+                },
+                ne: {
+                    intro: 'एक वा बढी जोर्नीहरूको सूजन वा क्षय, जसले दुखाइ, कडापन, र गतिशीलतामा कमी ल्याउँछ।',
+                    causes: 'जोर्नी खिइनु (ओस्टियोआर्थराइटिस), अटोइम्यून विकार (रूमेटोइड आर्थराइटिस), र संक्रमणहरू।',
+                    aware: 'जोर्नीको तनाव कम गर्न स्वस्थ तौल कायम राख्नुहोस्। कम प्रभाव पार्ने व्यायामहरू (पौडी खेल्ने, हिड्ने) मा संलग्न हुनुहोस्। दुखाइ कम गर्न तातो वा चिसो थेरापी प्रयोग गर्नुहोस्।'
+                }
+            },
+            // 16. Malaria
+            'malaria': {
+                icon: 'fa-bed-alt', color: 'text-lime-500', name_en: 'Malaria', name_ne: 'औलो',
+                en: {
+                    intro: 'A mosquito-borne infectious disease characterized by fever, chills, and flu-like illness.',
+                    causes: 'Caused by Plasmodium parasites, transmitted through the bite of infected female Anopheles mosquitoes.',
+                    aware: 'Use insecticide-treated bed nets. Take antimalarial prophylactic drugs if traveling to high-risk areas. Eliminate mosquito breeding sites.'
+                },
+                ne: {
+                    intro: 'ज्वरो, चिसो लाग्ने र फ्लू जस्तो बिमारी हुने लामखुट्टेबाट सर्ने संक्रामक रोग।',
+                    causes: 'संक्रमित पोथी एनोफिलिस लामखुट्टेको टोकाइबाट सर्ने प्लाज्मोडियम परजीवीका कारणले हुन्छ।',
+                    aware: 'कीटनाशकले उपचार गरिएको ओछ्यानको जाली प्रयोग गर्नुहोस्। उच्च जोखिम क्षेत्रमा यात्रा गर्दा औलो विरोधी रोकथाम औषधि लिनुहोस्। लामखुट्टेको प्रजनन स्थलहरू हटाउनुहोस्।'
+                }
+            },
+            // 17. Urinary Tract Infection (UTI)
+            'uti': {
+                icon: 'fa-urinal', color: 'text-purple-700', name_en: 'UTI', name_ne: 'मूत्र संक्रमण',
+                en: {
+                    intro: 'An infection in any part of the urinary system (kidneys, ureters, bladder, and urethra), often causing burning during urination.',
+                    causes: 'Bacteria entering the urinary tract, commonly E. coli.',
+                    aware: 'Drink plenty of water. Wipe from front to back after using the toilet. Urinate when you feel the need and after intercourse.'
+                },
+                ne: {
+                    intro: 'मूत्र प्रणाली (मिर्गौला, मूत्रवाहिनी, मूत्राशय, र मूत्रमार्ग) को कुनै पनि भागमा हुने संक्रमण, जसले प्रायः पिसाब गर्दा जलन निम्त्याउँछ।',
+                    causes: 'मूत्र नलीमा प्रवेश गर्ने ब्याक्टेरिया, सामान्यतया ई. कोलाई।',
+                    aware: 'प्रशस्त पानी पिउनुहोस्। शौचालय प्रयोग गरेपछि अगाडिबाट पछाडि पुछ्नुहोस्। पिसाब लाग्दा र यौन सम्पर्कपछि पिसाब गर्नुहोस्।'
+                }
+            },
+            // 18. Lower Back Pain
+            'backpain': {
+                icon: 'fa-person-walking-with-cane', color: 'text-amber-700', name_en: 'Lower Back Pain', name_ne: 'कम्मर दुखाइ',
+                en: {
+                    intro: 'A very common condition involving pain or discomfort in the lower back area, often acute or chronic.',
+                    causes: 'Poor posture, heavy lifting, sedentary lifestyle, muscle strains, or disc problems.',
+                    aware: 'Practice correct lifting techniques (lift with legs, not back). Maintain good posture while sitting and standing. Engage in core strengthening exercises.'
+                },
+                ne: {
+                    intro: 'कम्मरको तल्लो भागमा हुने दुखाइ वा असुविधा, जुन प्रायः तीव्र वा दीर्घकालीन हुन्छ।',
+                    causes: 'गलत आसन, भारी सामान उठाउनु, निष्क्रिय जीवनशैली, मांसपेशी तानिनु, वा डिस्क समस्याहरू।',
+                    aware: 'उचित तरिकाले उठाउने अभ्यास गर्नुहोस् (कम्मरले होइन, खुट्टाले उठाउनुहोस्)। बस्दा र उभिँदा राम्रो आसन कायम राख्नुहोस्। कोर बलियो बनाउने व्यायामहरूमा संलग्न हुनुहोस्।'
+                }
+            },
+            // 19. Depression/Anxiety
+            'mental': {
+                icon: 'fa-brain', color: 'text-fuchsia-600', name_en: 'Depression/Anxiety', name_ne: 'डिप्रेसन/चिन्ता',
+                en: {
+                    intro: 'Common mental health disorders causing persistent sadness, lack of interest, excessive worry, and physical symptoms.',
+                    causes: 'A complex interplay of genetic, biological, environmental, and psychological factors, including chronic stress and trauma.',
+                    aware: 'Prioritize sleep and nutrition. Practice mindfulness and relaxation techniques. Seek professional help (counseling/therapy) if symptoms persist. Do not ignore mental health.'
+                },
+                ne: {
+                    intro: 'सामान्य मानसिक स्वास्थ्य विकारहरू जसले निरन्तर उदासी, रुचि नहुनु, अत्यधिक चिन्ता, र शारीरिक लक्षणहरू निम्त्याउँछ।',
+                    causes: 'आनुवंशिक, जैविक, वातावरणीय, र मनोवैज्ञानिक कारकहरूको जटिल अन्तरक्रिया, जसमा दीर्घकालीन तनाव र आघात समावेश छन्।',
+                    aware: 'सुत्ने र पोषणमा प्राथमिकता दिनुहोस्। माइन्डफुलनेस र विश्राम प्रविधिहरूको अभ्यास गर्नुहोस्। यदि लक्षणहरू जारी रहन्छन् भने पेशेवर मद्दत (परामर्श/चिकित्सा) खोज्नुहोस्। मानसिक स्वास्थ्यलाई बेवास्ता नगर्नुहोस्।'
+                }
+            },
+            // 20. Skin Fungal Infections
+            'fungal': {
+                icon: 'fa-spa', color: 'text-gray-500', name_en: 'Skin Fungal Infections', name_ne: 'छालाको फंगल संक्रमण',
+                en: {
+                    intro: 'Common skin infections like ringworm and athlete\'s foot, typically causing red, itchy, and scaly patches.',
+                    causes: 'Fungi thriving in warm, moist environments, spread through contact with infected individuals or contaminated surfaces.',
+                    aware: 'Keep skin clean and dry, especially in folds (groin, armpits, toes). Wear clean, breathable clothing. Avoid sharing towels and personal items.'
+                },
+                ne: {
+                    intro: 'दाद र एथलीटको खुट्टा जस्ता सामान्य छाला संक्रमणहरू, जसले प्रायः रातो, चिलाउने र पाप्रो आउने दागहरू निम्त्याउँछ।',
+                    causes: 'न्यानो, ओसिलो वातावरणमा फंगसहरू फस्टाउँछन्, जुन संक्रमित व्यक्तिहरू वा दूषित सतहहरूसँगको सम्पर्कबाट फैलिन्छ।',
+                    aware: 'छालालाई सफा र सुख्खा राख्नुहोस्, विशेष गरी तहहरूमा (ग्रोइन, काखी, औंलाहरू)। सफा, सास फेर्ने लुगा लगाउनुहोस्। तौलिया र व्यक्तिगत सामानहरू साझा गर्नबाट जोगिनुहोस्।'
+                }
+            },
+            // 21. Appendicitis (Example for extending to 20+)
+            'appendicitis': {
+                icon: 'fa-plus', color: 'text-red-900', name_en: 'Appendicitis', name_ne: 'एपेन्डिसाइटिस',
+                en: {
+                    intro: 'Inflammation of the appendix, a finger-shaped pouch that projects from your colon. Requires immediate medical attention.',
+                    causes: 'Blockage in the lining of the appendix, often by stool or a foreign body.',
+                    aware: 'There is no prevention. Be aware of sharp pain that migrates from the navel to the lower right abdomen and seek emergency care if suspected.'
+                },
+                ne: {
+                    intro: 'एपेंडिक्सको सूजन, जुन तपाईको ठूलो आन्द्राबाट निस्कने औंलाको आकारको थैली हो। यसलाई तत्काल चिकित्सा ध्यान चाहिन्छ।',
+                    causes: 'एपेंडिक्सको अस्तरमा अवरोध, प्रायः मल वा विदेशी वस्तुले गर्दा।',
+                    aware: 'यसको रोकथाम छैन। नाभीबाट तल्लो दायाँ पेटमा सर्ने तीखो दुखाइको बारेमा सचेत हुनुहोस् र शंका लागेमा आपतकालीन उपचार खोज्नुहोस्।'
+                }
+            },
+            // 22. Cataracts
+            'cataracts': {
+                icon: 'fa-eye', color: 'text-blue-800', name_en: 'Cataracts', name_ne: 'मोतिबिन्दु',
+                en: {
+                    intro: 'Clouding of the eye lens that leads to a decrease in vision. Common in older people.',
+                    causes: 'Aging, diabetes, smoking, UV radiation exposure, and eye injuries.',
+                    aware: 'Wear sunglasses outdoors to block UV light. Maintain a healthy diet rich in antioxidants. Schedule regular eye exams, especially after age 40.'
+                },
+                ne: {
+                    intro: 'आँखाको लेन्समा बादल लाग्नु जसले दृष्टिको कमी निम्त्याउँछ। यो वृद्धहरूमा सामान्य छ।',
+                    causes: 'बुढ्यौली, मधुमेह, धूम्रपान, यूभी विकिरणको सम्पर्क, र आँखामा चोटपटक।',
+                    aware: 'यूभी प्रकाश रोक्न बाहिर चश्मा लगाउनुहोस्। एन्टिअक्सिडेन्टहरूमा धनी स्वस्थ आहार कायम राख्नुहोस्। विशेष गरी ४० वर्षपछि नियमित आँखा परीक्षण गर्नुहोस्।'
+                }
+            }
+        };
+        // Use 20 entries (1-20). The last two entries (21, 22) are placeholders.
+        const diseaseKeys = Object.keys(nepoDiseaseData).slice(0, 20); 
+
+
         const nepoCareExamples_full = [
             { service: "Home Nurse Visit (Post-Op Care)", provider: "Shanti Health Services", date: "Sept 15, 2025", cost: 3500, icon: "fa-user-nurse" },
             { service: "Pediatric Tele-Consultation", provider: "Dr. R. Sharma", date: "Tomorrow, 10:00 AM", cost: 1200, icon: "fa-user-md" },
@@ -198,6 +510,8 @@
             { service: "Eldercare Giver (4 hours)", provider: "Community Help Group", date: "Oct 1, 2025", cost: 2000, icon: "fa-hand-holding-heart" },
             { service: "Mental Health Session", provider: "Counselor S. Thapa", date: "Scheduled", cost: 2500, icon: "fa-brain" }
         ];
+
+        // ... (rest of the mock data remains the same)
 
         const nepoSecondHandExamples_full = [
             { item: "iPhone 12 (128GB)", price: 45000, condition: "Excellent", location: "Pokhara", icon: "fa-mobile-screen-button" },
@@ -256,11 +570,11 @@
         ];
 
         const nepoExploreExamples_full = [
-            { name: "Swayambhunath Stupa (Monkey Temple)", type: "Historic Site", distance: "4.5 km", rating: 4.8, icon: "fa-temple", color: "text-amber-600" },
-            { name: "Farmers Market at Patan", type: "Local Event", distance: "2.1 km", rating: 4.9, icon: "fa-seedling", color: "text-green-600" },
-            { name: "New Road Shopping Complex", type: "Shopping", distance: "7.0 km", rating: 4.3, icon: "fa-bag-shopping", color: "text-purple-600" },
-            { name: "Kathmandu Contemporary Art Center", type: "Culture & Arts", distance: "3.2 km", rating: 4.6, icon: "fa-palette", color: "text-pink-600" },
-            { name: "Sundarijal Waterfall Trek", type: "Nature & Outdoors", distance: "15 km", rating: 4.7, icon: "fa-mountain-sun", color: "text-blue-600" },
+            { name: "Swayambhunath Stupa (Monkey Temple)", type: "Historic Site", distance: "4.5 km", rating: 4.8, icon: "fa-temple", color: 'text-amber-600' },
+            { name: "Farmers Market at Patan", type: "Local Event", distance: "2.1 km", rating: 4.9, icon: "fa-seedling", color: 'text-green-600' },
+            { name: "New Road Shopping Complex", type: "Shopping", distance: "7.0 km", rating: 4.3, icon: "fa-bag-shopping", color: 'text-purple-600' },
+            { name: "Kathmandu Contemporary Art Center", type: "Culture & Arts", distance: "3.2 km", rating: 4.6, icon: "fa-palette", color: 'text-pink-600' },
+            { name: "Sundarijal Waterfall Trek", type: "Nature & Outdoors", distance: "15 km", rating: 4.7, icon: "fa-mountain-sun", color: 'text-blue-600' },
         ];
         
         // This is used for the Profile and the Founder section
@@ -434,7 +748,7 @@
             }
         }
 
-        // --- UI Logic and Data Handling ---
+        // --- UI Logic and Data Handling (Including Nepo Care Language Toggle) ---
 
         let currentService = null;
         const serviceModalEl = document.getElementById('service-modal');
@@ -445,6 +759,104 @@
         let serviceData = {
             driving: [] 
         };
+        
+        // Global state for language
+        let currentLang = 'en'; 
+
+        // Functions for Nepo Care Language Toggle
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // 1. Update button styling
+            const langEnBtn = document.getElementById('lang-en');
+            const langNeBtn = document.getElementById('lang-ne');
+            
+            if (langEnBtn && langNeBtn) {
+                langEnBtn.classList.remove('bg-indigo-600', 'text-white', 'bg-gray-200', 'text-gray-700');
+                langNeBtn.classList.remove('bg-indigo-600', 'text-white', 'bg-gray-200', 'text-gray-700');
+                
+                if (lang === 'en') {
+                    langEnBtn.classList.add('bg-indigo-600', 'text-white');
+                    langNeBtn.classList.add('bg-gray-200', 'text-gray-700');
+                } else {
+                    langNeBtn.classList.add('bg-indigo-600', 'text-white');
+                    langEnBtn.classList.add('bg-gray-200', 'text-gray-700');
+                }
+            }
+
+
+            // 2. Toggle visibility of language-specific elements (list & footer)
+            document.querySelectorAll('.disease-name-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+            document.querySelectorAll('.disease-name-ne').forEach(el => el.classList.toggle('hidden', lang !== 'ne'));
+            document.querySelectorAll('.footer-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+            document.querySelectorAll('.footer-ne').forEach(el => el.classList.toggle('hidden', lang !== 'ne'));
+            
+            // 3. Re-render the details section with the new language
+            // Find the currently selected disease button (highlighted with bg-indigo-200)
+            const currentSelectedButton = document.querySelector('#disease-list-buttons button.bg-indigo-200');
+            // Use the key from the selected button, or default to the first disease if none is selected
+            const diseaseKey = currentSelectedButton ? currentSelectedButton.getAttribute('data-disease-key') : diseaseKeys[0]; 
+            
+            if (diseaseKey) {
+                // IMPORTANT: Pass the new language here, which updates the view.
+                showDiseaseDetails(diseaseKey, lang);
+            } else if (document.getElementById('disease-details-display').innerHTML === '') {
+                // If the modal is opened for the first time and language is switched before clicking a button,
+                // load the default content in the new language.
+                showDiseaseDetails(diseaseKeys[0], lang); 
+            }
+        }
+
+        function showDiseaseDetails(diseaseKey, lang) {
+            const data = nepoDiseaseData[diseaseKey];
+            // Ensure the language passed is the active one, defaulting to the current global state if needed
+            const actualLang = lang || currentLang;
+            const content = data[actualLang];
+            
+            if (!data || !content) {
+                console.error(`Error: Data not found for diseaseKey: ${diseaseKey} and language: ${actualLang}`);
+                return;
+            }
+
+            // Update button active state
+            document.querySelectorAll('#disease-list-buttons button').forEach(btn => {
+                btn.classList.remove('bg-indigo-200', 'font-bold');
+                btn.classList.add('bg-white', 'font-normal');
+            });
+            const activeBtn = document.querySelector(`button[data-disease-key="${diseaseKey}"]`);
+            if(activeBtn) {
+                 activeBtn.classList.remove('bg-white', 'font-normal');
+                 activeBtn.classList.add('bg-indigo-200', 'font-bold');
+            }
+           
+            
+            const detailsHtml = `
+                <h4 class="text-xl font-extrabold mb-3 text-gray-900">${actualLang === 'en' ? data.name_en : data.name_ne}</h4>
+                
+                <div class="mb-4 p-3 bg-gray-50 rounded-lg">
+                    <p class="font-semibold text-indigo-700 text-sm mb-1">${actualLang === 'en' ? 'I. Introduction:' : '१. परिचय:'}</p>
+                    <p class="text-sm text-gray-700">${content.intro}</p>
+                </div>
+                
+                <div class="mb-4 p-3 bg-gray-50 rounded-lg">
+                    <p class="font-semibold text-indigo-700 text-sm mb-1">${actualLang === 'en' ? 'II. Causes:' : '२. कारणहरू:'}</p>
+                    <p class="text-sm text-gray-700">${content.causes}</p>
+                </div>
+                
+                <div class="mb-4">
+                    <p class="font-semibold text-indigo-700 text-sm mb-1">${actualLang === 'en' ? 'III. Prevention & Awareness (Formal Suggestion):' : '३. रोकथाम र सचेतना (औपचारिक सुझाव):'}</p>
+                    <div class="p-3 bg-green-100 rounded-lg border border-green-300 shadow-sm">
+                        <p class="text-sm text-green-800 font-medium">${content.aware}</p>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('disease-details-display').innerHTML = detailsHtml;
+        }
+
+        // Must attach these functions to the window object to be called from inline HTML
+        window.switchLanguage = switchLanguage;
+        window.showDiseaseDetails = showDiseaseDetails;
 
         function updateServiceView(serviceKey, items) {
             serviceData[serviceKey] = items;
@@ -500,7 +912,6 @@
             let html = `<div class="p-4">
                 <h3 class="text-xl font-semibold mb-4 text-gray-800">Current Conditions</h3>
                 
-                <!-- Current Condition Card -->
                 <div class="p-6 rounded-xl shadow-lg mb-6 bg-indigo-50 text-gray-800 border-l-4 border-indigo-500">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-4xl font-extrabold">${todayData.temp.split(' / ')[0]}</span>
@@ -515,7 +926,6 @@
                     </div>
                 </div>
 
-                <!-- 7-Day Outlook -->
                 <h3 class="text-lg font-semibold mb-3 text-gray-800">7-Day Outlook</h3>
                 <div class="space-y-2 max-h-[45vh] scrollable-content overflow-y-auto pb-4">
                     ${sevenDayForecast.map((day, index) => `
@@ -606,6 +1016,75 @@
                         `).join('')}
                     </div>
                 `;
+            } else if (serviceKey === 'care') {
+                // Nepo Care - Disease Awareness Feature
+                const defaultDiseaseKey = diseaseKeys[0]; 
+
+                html = `
+                    <div class="p-4 pt-2 sticky top-0 bg-white z-10">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Nepo Care: Disease Awareness</h3>
+                        <div class="flex justify-center space-x-4 border-b border-gray-200 pb-3">
+                            <button id="lang-en" onclick="switchLanguage('en')" class="px-4 py-2 text-sm font-semibold rounded-lg shadow-md bg-indigo-600 text-white transition hover:bg-indigo-700">English</button>
+                            <button id="lang-ne" onclick="switchLanguage('ne')" class="px-4 py-2 text-sm font-semibold rounded-lg shadow-md bg-gray-200 text-gray-700 transition hover:bg-gray-300">नेपाली</button>
+                        </div>
+                    </div>
+
+                    <div class="flex max-h-[70vh]">
+                        <div class="w-2/5 border-r border-gray-200 overflow-y-auto scrollable-content p-2">
+                            <p class="text-xs text-gray-500 font-medium p-2 sticky top-0 bg-white">Select Disease (${diseaseKeys.length})</p>
+                            <div id="disease-list-buttons" class="space-y-1">
+                                ${diseaseKeys.map(key => {
+                                    const d = nepoDiseaseData[key];
+                                    // Default active state for the first button, ensuring it shows details on load
+                                    const isActive = key === defaultDiseaseKey ? 'bg-indigo-200 font-bold' : 'bg-white font-normal';
+                                    return `
+                                        <button onclick="showDiseaseDetails('${key}')" class="w-full text-left p-2 rounded-lg text-sm transition hover:bg-indigo-50 active:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 ${isActive}" data-disease-key="${key}">
+                                            <i class="fas ${d.icon} w-4 mr-2 ${d.color}"></i>
+                                            <span class="disease-name-en ${currentLang !== 'en' ? 'hidden' : ''}">${d.name_en}</span>
+                                            <span class="disease-name-ne ${currentLang !== 'ne' ? 'hidden' : ''}">${d.name_ne}</span>
+                                        </button>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        <div class="w-3/5 overflow-y-auto scrollable-content p-4">
+                            <div id="disease-details-display">
+                                </div>
+
+                            <div class="mt-8 p-3 bg-red-100 border-l-4 border-red-500 text-red-800 rounded-lg text-sm font-medium">
+                                <i class="fas fa-hospital-user mr-2"></i>
+                                <span class="footer-en ${currentLang !== 'en' ? 'hidden' : ''}">If you experience symptoms, please visit your nearest health center immediately.</span>
+                                <span class="footer-ne ${currentLang !== 'ne' ? 'hidden' : ''}">यदि तपाईलाई कुनै लक्षण देखिएमा, कृपया तुरुन्तै आफ्नो नजिकको स्वास्थ्य केन्द्रमा जानुहोस्।</span>
+                            </div>
+
+                            <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <h4 class="text-md font-semibold text-gray-800 mb-2">Health & Home-Care Services (Examples)</h4>
+                                <div class="space-y-2">
+                                    ${nepoCareExamples_full.map(item => `
+                                        <div class="flex items-center justify-between text-xs text-gray-700">
+                                            <div class="flex items-center">
+                                                <i class="fas ${item.icon} text-sm text-teal-600 mr-2"></i>
+                                                <span>${item.service.split(' (')[0]}</span>
+                                            </div>
+                                            <span class="font-medium">NPR ${item.cost.toLocaleString()}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                modalContentEl.innerHTML = html;
+                
+                // FIX APPLIED: Delay the initialization slightly to ensure all DOM elements created by innerHTML are queryable.
+                setTimeout(() => {
+                    // Initialize display language and show the default disease
+                    // We call showDiseaseDetails directly on the default key to load the initial content
+                    showDiseaseDetails(defaultDiseaseKey, currentLang); 
+                }, 50); // 50ms delay to ensure DOM is ready
+                
+
             } else if (serviceKey === 'news') {
                  // Nepo News - UPDATED TO INCLUDE HYPERLINKS TO EXTERNAL SOURCES
                 html += `
@@ -648,27 +1127,6 @@
                             </div>
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of calendar examples --</div>
-                    </div>
-                `;
-            } else if (serviceKey === 'care') {
-                // Nepo Care
-                html += `
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Health & Home-Care Bookings</h3>
-                    <p class="text-sm text-gray-500 mb-4">Bookings for nurses, doctors, and caregivers.</p>
-                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
-                        ${nepoCareExamples_full.map(item => `
-                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas ${item.icon} text-xl text-teal-600 mr-3"></i>
-                                    <div>
-                                        <p class="font-medium text-sm text-gray-800">${item.service}</p>
-                                        <p class="text-xs text-gray-500">${item.provider} | ${item.date}</p>
-                                    </div>
-                                </div>
-                                <span class="text-sm font-bold text-gray-700">NPR ${item.cost.toLocaleString()}</span>
-                            </div>
-                        `).join('')}
-                        <div class="text-center p-4 text-gray-400 text-sm">-- End of care examples --</div>
                     </div>
                 `;
             } else if (serviceKey === 'secondhand') {
@@ -808,13 +1266,11 @@
                 html += `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">My Nepo Wallet</h3>
                     
-                    <!-- Current Balance Card -->
                     <div class="header-gradient p-6 rounded-xl shadow-lg mb-6 text-white">
                         <p class="text-sm opacity-80">Wallet Balance</p>
                         <p class="text-4xl font-bold mb-1">NPR 45,678.00</p>
                     </div>
 
-                    <!-- Wallet Actions -->
                     <div class="grid grid-cols-2 gap-4 mb-8">
                         <button class="flex flex-col items-center justify-center p-3 bg-indigo-100 text-indigo-700 rounded-xl shadow-md hover:bg-indigo-200 transition">
                             <i class="fas fa-money-bill-transfer text-2xl mb-1"></i>
@@ -886,7 +1342,6 @@
                         <p class="text-xl font-bold text-gray-900">${profile.name}</p>
                         <p class="text-sm font-medium ${profile.status.includes('Platinum') ? 'text-amber-600' : 'text-green-600'}">${profile.status}</p>
 
-                        <!-- Rewards Points -->
                         <div class="mt-4 p-2 bg-amber-100 rounded-lg w-full text-center">
                             <p class="text-sm font-semibold text-amber-700">
                                 <i class="fas fa-medal mr-1"></i> Nepo Points: ${profile.nepoPoints.toLocaleString()}
@@ -912,7 +1367,6 @@
                             <i class="fas fa-calendar-alt w-5 text-center text-indigo-500 mr-2"></i>
                             <span>Member Since: ${profile.memberSince}</span>
                         </div>
-                        <!-- Security Status -->
                         <div class="flex items-center text-sm text-gray-700">
                             <i class="fas fa-shield-alt w-5 text-center text-green-500 mr-2"></i>
                             <span>Security: <span class="font-medium text-green-600">${profile.securityStatus}</span></span>
@@ -1059,33 +1513,26 @@
         window.closeModal = closeModal;
     </script>
 
-    <!-- Main App Container -->
     <div class="max-w-md mx-auto h-screen flex flex-col bg-white shadow-xl">
 
-        <!-- Header: Title, Notifications, and Forecast -->
         <header class="header-gradient p-6 rounded-b-3xl shadow-lg">
             <div class="flex justify-between items-center text-white mb-4">
                 <h1 class="text-2xl font-extrabold tracking-tight">Nepo App</h1>
                 <div class="flex space-x-3 items-center">
-                    <!-- Updated App Info Icon to fa-circle-info -->
                     <button onclick="openAppInfoModal()" class="text-white text-2xl opacity-90 hover:opacity-100 transition">
                         <i class="fas fa-circle-info"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Today's Forecast Section -->
             <div id="weather-forecast" class="flex items-center text-white p-2 bg-white bg-opacity-20 rounded-lg">
-                <!-- Content inserted by JS displayForecast() -->
                 <i class="fas fa-cloud text-lg mr-2 text-gray-200"></i>
                 <span class="text-sm font-medium">Loading today's forecast...</span>
             </div>
         </header>
 
-        <!-- Main Service Grid -->
         <main id="main-content" class="flex-grow p-4 scrollable-content overflow-y-auto">
 
-            <!-- Updated Development Notice Banner with construction-effect class -->
             <div class="construction-effect border-l-8 p-4 mb-6 rounded-xl shadow-md" role="alert">
                 <div class="flex items-center">
                     <i class="fas fa-tools mr-3 text-lg"></i>
@@ -1093,7 +1540,6 @@
                 </div>
             </div>
 
-            <!-- Quick Access (Top 3 New Services) -->
             <section class="mb-6">
                 <h2 class="text-lg font-semibold text-gray-800 mb-3">Quick Access</h2>
                 <div id="quick-access-grid" class="grid grid-cols-3 gap-3">
@@ -1112,17 +1558,14 @@
                 </div>
             </section>
 
-            <!-- All Services -->
             <section class="mb-6">
                 <h2 class="text-lg font-semibold text-gray-800 mb-3">All 10 Main Features</h2>
                 <div id="service-grid" class="grid grid-cols-2 gap-4">
-                    <!-- Service cards will be inserted here by JavaScript -->
                     <div class="text-center p-8 text-gray-400">Loading features...</div>
                 </div>
             </section>
         </main>
 
-        <!-- Navigation Bar -->
         <nav class="bg-white border-t border-gray-200 p-2 shadow-2xl">
             <div class="flex justify-around items-center">
                 <a href="#" class="flex flex-col items-center text-indigo-600">
@@ -1146,51 +1589,42 @@
 
     </div>
 
-    <!-- Service Modal (Full screen overlay) -->
     <div id="service-modal" class="modal hidden fixed inset-0 z-40 bg-gray-900 bg-opacity-50 flex items-end justify-center">
         <div class="modal-content w-full max-w-md bg-white rounded-t-3xl shadow-2xl max-h-[85vh] flex flex-col transform translate-y-0" role="dialog" aria-modal="true">
-            <!-- Modal Header -->
-            <div class="sticky top-0 bg-white p-4 border-b border-gray-200 rounded-t-3xl flex justify-between items-center">
+            <div class="sticky top-0 bg-white p-4 border-b border-gray-200 rounded-t-3xl flex justify-between items-center z-20">
                 <h2 id="modal-title" class="text-xl font-bold text-gray-900">Service Name</h2>
                 <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 p-1">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
-            <!-- Modal Body (Scrollable content) -->
-            <div id="modal-content" class="flex-grow scrollable-content overflow-y-auto">
-                <!-- Service specific content goes here -->
+            <div id="modal-content" class="flex-grow">
                 <div class="p-8 text-center text-gray-400">Loading content...</div>
             </div>
         </div>
     </div>
     
-    <!-- Greeting Modal (Centered Overlay) -->
     <div id="greeting-modal" class="hidden fixed inset-0 z-50 bg-gray-900 bg-opacity-70 flex items-center justify-center transition duration-300" role="dialog" aria-modal="true">
         <div class="bg-white p-8 rounded-xl shadow-2xl text-center transform scale-100 transition duration-300 max-w-xs mx-4">
             <p class="text-6xl mb-4">नमस्ते🙏</p>
             <p class="text-lg font-semibold text-gray-800">Welcome to Nepo Super App!</p>
-            <p class="text-sm text-gray-500 mt-1">Tap below to start exploring the prototype.</p>
+            <p class="text-sm text-gray-500 mt-1">Tap below to start exploring the digital world of Nepal🇳🇵</p>
             <button onclick="document.getElementById('greeting-modal').classList.add('hidden')" class="mt-4 w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md">
                 Enter App
             </button>
         </div>
     </div>
 
-    <!-- App Info Modal (Centered Overlay) - WITH COMPREHENSIVE ABOUT US -->
     <div id="app-info-modal" class="hidden fixed inset-0 z-50 bg-gray-900 bg-opacity-70 flex items-center justify-center transition duration-300" role="dialog" aria-modal="true">
-        <!-- Increased max-width for better readability of detailed content -->
         <div class="bg-white p-8 rounded-xl shadow-2xl text-center transform scale-100 transition duration-300 max-w-md mx-4 max-h-[90vh] overflow-y-auto">
             <p class="text-4xl mb-4 text-indigo-600"><i class="fas fa-satellite-dish"></i></p>
             <p class="text-xl font-extrabold text-gray-900">🇳🇵 Nepo Super App</p>
             <p class="text-sm text-gray-500 mt-1 mb-4">Version 1.0.2 - Demo Prototype | <span class="font-semibold text-indigo-700">Goal: Full Release by Late 2028</span></p>
 
-            <!-- App Overview -->
             <div class="text-left mb-6 p-4 bg-indigo-50 rounded-xl border border-indigo-200">
                 <h3 class="font-bold text-base text-indigo-700 mb-2">Project Vision: Unified Digital Ecosystem</h3>
                 <p class="text-sm text-gray-700">The Nepo Super App is envisioned as a unified, multi-service digital ecosystem aiming to streamline daily life for the Nepali public. By consolidating 11 essential services—from mobility and finance to health and community resources—into a single interface, it maximizes convenience and efficiency.</p>
             </div>
 
-            <!-- Core Services Pillars -->
             <h3 class="font-bold text-base text-gray-800 mb-2 text-left">11 Core Services & Pillars</h3>
             <div class="space-y-1.5 mb-6 text-sm text-left max-h-48 overflow-y-auto p-3 bg-gray-50 rounded-xl shadow-inner border border-gray-200">
                 <p class="font-semibold text-indigo-600">I. Mobility & Logistics:</p>
@@ -1203,12 +1637,11 @@
                 <p class="ml-3"><i class="fas fa-wallet mr-1"></i> **My Wallet** (Digital Finance Hub) | <i class="fas fa-bag-shopping mr-1"></i> **Online Shopping** (Order Tracking)</p>
                 <p class="ml-3"><i class="fas fa-tags mr-1"></i> **Second-Hand Market** (Community Listings)</p>
                 <hr class="my-1 border-gray-200">
-                <p class="font-semibold text-purple-600">IV. Information & Utility:</p>
+                <p class="font-semibold text-purple-600">V. Information & Utility:</p>
                 <p class="ml-3"><i class="fas fa-newspaper mr-1"></i> **Nepo News** (Media Aggregation) | <i class="fas fa-calendar-days mr-1"></i> **Nepo Calendar** (Bikram Sambat Ref.)</p>
                 <p class="ml-3"><i class="fas fa-briefcase mr-1"></i> **Part-Time Job** (Local Job Board) | <i class="fas fa-passport mr-1"></i> **Visa Check** (Status Verification)</p>
             </div>
 
-            <!-- Roadmap & Rationale -->
             <h3 class="font-bold text-base text-gray-800 mb-2 text-left">3-Year Roadmap Rationale</h3>
             <div class="space-y-2 mb-6 text-sm text-left p-3 bg-red-50 rounded-xl border border-red-200">
                 <p class="text-gray-700"><i class="fas fa-shield-alt mr-1 text-red-600"></i> **Security & Scalability:** Building robust infrastructure for mass adoption and financial regulatory compliance.</p>
@@ -1216,7 +1649,6 @@
                 <p class="text-gray-700"><i class="fas fa-user-check mr-1 text-red-600"></i> **Feature Maturity & UX:** Ensuring all 11 services are fully functional, interconnected, and simple for users of all digital literacy levels.</p>
             </div>
 
-            <!-- Founder Information Block -->
             <div class="text-gray-900 space-y-2 mb-4 p-4 bg-gray-100 rounded-xl shadow-inner text-left">
                 <p class="text-lg font-bold text-center">Bipin Hamal</p>
                 <p class="text-sm font-medium text-green-600 text-center mb-3">Visionary & IoT Student</p>
@@ -1233,8 +1665,6 @@
                     <p class="ml-2">+82 10-6708-3312</p>
                 </div>
             </div>
-            <!-- End Founder Information Block -->
-            
             <a href="mailto:bipinhamal2025@gmail.com?subject=Suggestion%20for%20Nepo%20Super%20App" class="mt-4 w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md flex items-center justify-center">
                 <i class="fas fa-envelope mr-2"></i> Send Suggestion Email
             </a>
@@ -1245,8 +1675,8 @@
         </div>
     </div>
 
-    <!-- Message Box (Toast Notification) -->
     <div id="message-box" class="fixed top-4 right-4 p-3 rounded-xl shadow-xl z-50 transition duration-300 opacity-0 pointer-events-none"></div>
 
 </body>
 </html>
+
