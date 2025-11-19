@@ -470,36 +470,7 @@
                     aware: 'छालालाई सफा र सुख्खा राख्नुहोस्, विशेष गरी तहहरूमा (ग्रोइन, काखी, औंलाहरू)। सफा, सास फेर्ने लुगा लगाउनुहोस्। तौलिया र व्यक्तिगत सामानहरू साझा गर्नबाट जोगिनुहोस्।'
                 }
             },
-            // 21. Appendicitis (Example for extending to 20+)
-            'appendicitis': {
-                icon: 'fa-plus', color: 'text-red-900', name_en: 'Appendicitis', name_ne: 'एपेन्डिसाइटिस',
-                en: {
-                    intro: 'Inflammation of the appendix, a finger-shaped pouch that projects from your colon. Requires immediate medical attention.',
-                    causes: 'Blockage in the lining of the appendix, often by stool or a foreign body.',
-                    aware: 'There is no prevention. Be aware of sharp pain that migrates from the navel to the lower right abdomen and seek emergency care if suspected.'
-                },
-                ne: {
-                    intro: 'एपेंडिक्सको सूजन, जुन तपाईको ठूलो आन्द्राबाट निस्कने औंलाको आकारको थैली हो। यसलाई तत्काल चिकित्सा ध्यान चाहिन्छ।',
-                    causes: 'एपेंडिक्सको अस्तरमा अवरोध, प्रायः मल वा विदेशी वस्तुले गर्दा।',
-                    aware: 'यसको रोकथाम छैन। नाभीबाट तल्लो दायाँ पेटमा सर्ने तीखो दुखाइको बारेमा सचेत हुनुहोस् र शंका लागेमा आपतकालीन उपचार खोज्नुहोस्।'
-                }
-            },
-            // 22. Cataracts
-            'cataracts': {
-                icon: 'fa-eye', color: 'text-blue-800', name_en: 'Cataracts', name_ne: 'मोतिबिन्दु',
-                en: {
-                    intro: 'Clouding of the eye lens that leads to a decrease in vision. Common in older people.',
-                    causes: 'Aging, diabetes, smoking, UV radiation exposure, and eye injuries.',
-                    aware: 'Wear sunglasses outdoors to block UV light. Maintain a healthy diet rich in antioxidants. Schedule regular eye exams, especially after age 40.'
-                },
-                ne: {
-                    intro: 'आँखाको लेन्समा बादल लाग्नु जसले दृष्टिको कमी निम्त्याउँछ। यो वृद्धहरूमा सामान्य छ।',
-                    causes: 'बुढ्यौली, मधुमेह, धूम्रपान, यूभी विकिरणको सम्पर्क, र आँखामा चोटपटक।',
-                    aware: 'यूभी प्रकाश रोक्न बाहिर चश्मा लगाउनुहोस्। एन्टिअक्सिडेन्टहरूमा धनी स्वस्थ आहार कायम राख्नुहोस्। विशेष गरी ४० वर्षपछि नियमित आँखा परीक्षण गर्नुहोस्।'
-                }
-            }
         };
-        // Use 20 entries (1-20). The last two entries (21, 22) are placeholders.
         const diseaseKeys = Object.keys(nepoDiseaseData).slice(0, 20); 
 
 
@@ -510,9 +481,7 @@
             { service: "Eldercare Giver (4 hours)", provider: "Community Help Group", date: "Oct 1, 2025", cost: 2000, icon: "fa-hand-holding-heart" },
             { service: "Mental Health Session", provider: "Counselor S. Thapa", date: "Scheduled", cost: 2500, icon: "fa-brain" }
         ];
-
-        // ... (rest of the mock data remains the same)
-
+        
         const nepoSecondHandExamples_full = [
             { item: "iPhone 12 (128GB)", price: 45000, condition: "Excellent", location: "Pokhara", icon: "fa-mobile-screen-button" },
             { item: "Wooden Dining Table (6-seater)", price: 18000, condition: "Good", location: "Baneshwor", icon: "fa-couch" },
@@ -587,11 +556,21 @@
             memberSince: "May 2023",
             nepoPoints: 1250, 
             securityStatus: "High (2FA Enabled)",
+            // EXPANDED RECENT ACTIVITY
             recentActivity: [
-                { type: "Ride", details: "Thamel to Airport", date: "Oct 30", status: "Completed", icon: "fa-car" },
-                { type: "Shopping", details: "Dhaka Topi Purchase", date: "Oct 28", status: "Delivered", icon: "fa-bag-shopping" },
-                { type: "Donation", details: "Flood Relief Fund", date: "Oct 25", status: "Success", icon: "fa-hand-holding-heart" },
+                { type: "Ride", details: "Thamel to Airport (Completed)", date: "Oct 30", status: "Completed", icon: "fa-car" },
+                { type: "Shopping", details: "Dhaka Topi Purchase (Delivered)", date: "Oct 28", status: "Delivered", icon: "fa-bag-shopping" },
+                { type: "SecondHand", details: "Bought iPhone 12 (45,000 NPR)", date: "Oct 26", status: "Completed", icon: "fa-mobile-screen-button" },
+                { type: "Donation", details: "Flood Relief Fund (5,000 NPR)", date: "Oct 25", status: "Success", icon: "fa-hand-holding-heart" },
                 { type: "Job", details: "Applied: Cafe Assistant", date: "Oct 24", status: "Pending", icon: "fa-briefcase" },
+                { type: "Wallet", details: "Electricity Bill Payment (2,850 NPR)", date: "Oct 22", status: "Completed", icon: "fa-plug" },
+                { type: "Care", details: "Booked Home Nurse Visit", date: "Oct 20", status: "Scheduled", icon: "fa-user-nurse" },
+                { type: "Ride", details: "Patan to Baneshwor (Completed)", date: "Oct 20", status: "Completed", icon: "fa-car" },
+                { type: "Visa", details: "AU Student Check (Processing)", date: "Oct 18", status: "Processing", icon: "fa-passport" },
+                { type: "Wallet", details: "Received Freelance Pay (15,000 NPR)", date: "Oct 15", status: "Success", icon: "fa-arrow-down" },
+                { type: "RoomRent", details: "Viewed Kirtipur Listing", date: "Oct 10", status: "Viewed", icon: "fa-house-chimney" },
+                { type: "Shopping", details: "Nepali Coffee Beans (Delivered)", date: "Oct 08", status: "Delivered", icon: "fa-mug-saucer" },
+                { type: "Explore", details: "Visited Swayambhunath Stupa", date: "Oct 01", status: "Completed", icon: "fa-temple" },
             ],
             founder: {
                 name: "Bipin Hamal",
@@ -601,6 +580,165 @@
             }
         };
 
+        // --- Mock Pharmacy Data (New) ---
+        const nepoPharmacyData = [
+            {
+                name: "Janata Pharmacy, Thamel",
+                medicines: [
+                    { name: "Paracetamol (500mg)", price: 5, stock: 150, category: "Pain Relief" },
+                    { name: "Amoxicillin (250mg)", price: 20, stock: 80, category: "Antibiotic" },
+                    { name: "Jivan Jal (ORS)", price: 40, stock: 200, category: "Electrolyte" },
+                    { name: "Cetirizine (10mg)", price: 8, stock: 120, category: "Allergy" },
+                    { name: "Amlodipine (5mg)", price: 15, stock: 50, category: "Hypertension" },
+                    { name: "Metformin (500mg)", price: 12, stock: 65, category: "Diabetes" },
+                    { name: "Ibuprofen (400mg)", price: 7, stock: 90, category: "Pain Relief" },
+                    { name: "Omeprazole (20mg)", price: 10, stock: 110, category: "Antacid" },
+                    { name: "Vitamin C (Chewable)", price: 2, stock: 300, category: "Supplement" },
+                    { name: "Bandage Roll (Medium)", price: 50, stock: 45, category: "First Aid" },
+                ]
+            },
+            {
+                name: "Patan Health Mart",
+                medicines: [
+                    { name: "Azithromycin (500mg)", price: 55, stock: 40, category: "Antibiotic" },
+                    { name: "Loratadine (10mg)", price: 10, stock: 75, category: "Allergy" },
+                    { name: "Furosemide (40mg)", price: 18, stock: 30, category: "Diuretic" },
+                    { name: "Insulin Pen (Short-acting)", price: 1200, stock: 15, category: "Diabetes" },
+                    { name: "Dolo-650", price: 6, stock: 180, category: "Pain Relief" },
+                    { name: "Diclofenac Gel", price: 80, stock: 55, category: "Topical" },
+                    { name: "Zincovit Syrup (100ml)", price: 150, stock: 60, category: "Supplement" },
+                    { name: "Domperidone (10mg)", price: 9, stock: 95, category: "Antiemetic" },
+                    { name: "Gauze Pads (Sterile)", price: 30, stock: 70, category: "First Aid" },
+                    { name: "Simvastatin (20mg)", price: 25, stock: 25, category: "Cholesterol" },
+                ]
+            },
+            {
+                name: "Boudha Medical Center Dispensary",
+                medicines: [
+                    { name: "Cefixime (200mg)", price: 45, stock: 50, category: "Antibiotic" },
+                    { name: "Ranitidine (150mg)", price: 7, stock: 100, category: "Antacid" },
+                    { name: "Ondansetron (4mg)", price: 22, stock: 35, category: "Antiemetic" },
+                    { name: "Clopidogrel (75mg)", price: 30, stock: 20, category: "Cardiology" },
+                    { name: "Eye Drop (Ciprofloxacin)", price: 150, stock: 40, category: "Ophthalmic" },
+                    { name: "Nebulizer Solution", price: 60, stock: 70, category: "Respiratory" },
+                    { name: "Hydrocortisone Cream", price: 90, stock: 60, category: "Topical" },
+                    { name: "Calcium & D3 Tabs", price: 4, stock: 250, category: "Supplement" },
+                    { name: "Dextromethorphan Syrup", price: 120, stock: 45, category: "Cough" },
+                    { name: "Surgical Mask (N95)", price: 70, stock: 100, category: "PPE" },
+                ]
+            },
+            {
+                name: "Kathmandu Pharmacy Central",
+                medicines: [
+                    { name: "Codeine Cough Syrup", price: 250, stock: 20, category: "Cough" },
+                    { name: "Lisinopril (10mg)", price: 14, stock: 55, category: "Hypertension" },
+                    { name: "Montelukast (10mg)", price: 35, stock: 40, category: "Asthma" },
+                    { name: "Atorvastatin (10mg)", price: 28, stock: 30, category: "Cholesterol" },
+                    { name: "Metronidazole (400mg)", price: 11, stock: 90, category: "Antiparasitic" },
+                    { name: "Fungal Cream (Clotrimazole)", price: 75, stock: 65, category: "Topical" },
+                    { name: "Gastro-B (Probiotic)", price: 18, stock: 120, category: "Digestive" },
+                    { name: "Thermometer (Digital)", price: 350, stock: 25, category: "Medical Device" },
+                    { name: "Electrolyte Powder Sachets", price: 35, stock: 150, category: "Electrolyte" },
+                    { name: "Cold-EZ Tablets", price: 10, stock: 80, category: "Cold Relief" },
+                ]
+            },
+            {
+                name: "Lalitpur Pharma Store",
+                medicines: [
+                    { name: "Levofloxacin (500mg)", price: 60, stock: 35, category: "Antibiotic" },
+                    { name: "Oxycodone (5mg)", price: 80, stock: 10, category: "Pain Relief" },
+                    { name: "Albuterol Inhaler", price: 600, stock: 15, category: "Asthma" },
+                    { name: "Thyroxine (50mcg)", price: 9, stock: 70, category: "Hormone" },
+                    { name: "Iron & Folic Acid Tabs", price: 3, stock: 200, category: "Supplement" },
+                    { name: "Kidney Support Herbal Tea", price: 180, stock: 50, category: "Herbal" },
+                    { name: "Infrared Lamp", price: 1500, stock: 5, category: "Medical Device" },
+                    { name: "Gliclazide (80mg)", price: 17, stock: 45, category: "Diabetes" },
+                    { name: "Eardrops (Antiseptic)", price: 110, stock: 60, category: "Otic" },
+                    { name: "Antiseptic Wipes (Box)", price: 130, stock: 85, category: "First Aid" },
+                ]
+            },
+            {
+                name: "Swoyambhu Pharmacy & Health",
+                medicines: [
+                    { name: "Cough Lozenges (Mint)", price: 1, stock: 500, category: "Cough" },
+                    { name: "Hydrochlorothiazide (25mg)", price: 13, stock: 40, category: "Diuretic" },
+                    { name: "Multivitamin (A-Z)", price: 5, stock: 180, category: "Supplement" },
+                    { name: "Hand Sanitizer (500ml)", price: 250, stock: 100, category: "Hygiene" },
+                    { name: "Povidone-iodine Solution", price: 85, stock: 75, category: "First Aid" },
+                    { name: "Glucosamine Sulphate", price: 45, stock: 30, category: "Joint Health" },
+                    { name: "Calamine Lotion", price: 100, stock: 60, category: "Topical" },
+                    { name: "ORS Zink Combo", price: 70, stock: 90, category: "Electrolyte" },
+                    { name: "Nimesulide (100mg)", price: 18, stock: 55, category: "Pain Relief" },
+                    { name: "Paracetamol Syrup (Pedi)", price: 95, stock: 70, category: "Pain Relief" },
+                ]
+            },
+            {
+                name: "Balaju Pharma Supply",
+                medicines: [
+                    { name: "Warfarin (5mg)", price: 20, stock: 20, category: "Cardiology" },
+                    { name: "Sertraline (50mg)", price: 40, stock: 15, category: "Mental Health" },
+                    { name: "Potassium Chloride", price: 15, stock: 80, category: "Electrolyte" },
+                    { name: "Infant Formula (Stage 1)", price: 2200, stock: 10, category: "Maternity" },
+                    { name: "Tetanus Vaccine", price: 400, stock: 5, category: "Vaccine" },
+                    { name: "Gynaecological Cream", price: 190, stock: 35, category: "Women's Health" },
+                    { name: "Magnesium Tablets", price: 8, stock: 150, category: "Supplement" },
+                    { name: "Anti-Diarrheal Caps", price: 12, stock: 90, category: "Digestive" },
+                    { name: "Blood Pressure Monitor", price: 3500, stock: 8, category: "Medical Device" },
+                    { name: "Gloves (Sterile Pair)", price: 15, stock: 120, category: "First Aid" },
+                ]
+            },
+            {
+                name: "New Road Chemist",
+                medicines: [
+                    { name: "Finasteride (1mg)", price: 55, stock: 25, category: "Hair/Skin" },
+                    { name: "Viagra (Sildenafil)", price: 150, stock: 5, category: "Men's Health" },
+                    { name: "Nicotine Gum", price: 40, stock: 30, category: "Smoking Cessation" },
+                    { name: "Propranolol (40mg)", price: 16, stock: 60, category: "Cardiology" },
+                    { name: "Sunscreen (SPF 50)", price: 450, stock: 50, category: "Skin Care" },
+                    { name: "Painkiller Spray", price: 200, stock: 40, category: "Pain Relief" },
+                    { name: "Throat Spray (Antiseptic)", price: 130, stock: 75, category: "Throat" },
+                    { name: "Diaper Rash Cream", price: 110, stock: 65, category: "Maternity" },
+                    { name: "Zinc Sulphate Tabs", price: 7, stock: 100, category: "Supplement" },
+                    { name: "Cold Compress Gel Pack", price: 180, stock: 45, category: "First Aid" },
+                ]
+            },
+            {
+                name: "Airport Road Pharma",
+                medicines: [
+                    { name: "Travel Sickness Tabs", price: 15, stock: 70, category: "Travel" },
+                    { name: "Ivermectin (12mg)", price: 90, stock: 25, category: "Antiparasitic" },
+                    { name: "B Complex Forte", price: 10, stock: 150, category: "Supplement" },
+                    { name: "Migraine Relief Tablets", price: 30, stock: 55, category: "Pain Relief" },
+                    { name: "Pregnancy Test Kit", price: 100, stock: 40, category: "Maternity" },
+                    { name: "Saline Nasal Spray", price: 120, stock: 60, category: "Respiratory" },
+                    { name: "First Aid Kit (Complete)", price: 1500, stock: 10, category: "First Aid" },
+                    { name: "Laxative Powder", price: 80, stock: 50, category: "Digestive" },
+                    { name: "Diabetic Foot Cream", price: 280, stock: 35, category: "Diabetes" },
+                    { name: "Disinfectant Liquid (1L)", price: 350, stock: 80, category: "Hygiene" },
+                ]
+            },
+            {
+                name: "Godavari Herbs & Pharma",
+                medicines: [
+                    { name: "Ashwagandha Powder", price: 300, stock: 60, category: "Herbal" },
+                    { name: "Turmeric Capsules", price: 150, stock: 80, category: "Herbal" },
+                    { name: "Ginseng Extract", price: 400, stock: 40, category: "Herbal" },
+                    { name: "Ayurvedic Pain Balm", price: 90, stock: 120, category: "Topical" },
+                    { name: "Blood Purifier Syrup", price: 180, stock: 55, category: "Herbal" },
+                    { name: "Stress Relief Oil (Aromatherapy)", price: 250, stock: 70, category: "Mental Health" },
+                    { name: "Chyawanprash (500g)", price: 650, stock: 30, category: "Supplement" },
+                    { name: "Pillow for Back Pain", price: 900, stock: 15, category: "Medical Device" },
+                    { name: "Tea Tree Oil (Antifungal)", price: 160, stock: 45, category: "Topical" },
+                    { name: "Herbal Detox Tea", price: 120, stock: 100, category: "Herbal" },
+                ]
+            }
+        ];
+        // --- End Mock Pharmacy Data ---
+        
+        // Global state for language
+        let currentLang = 'en'; 
+        // Global state for the active tab (either 'awareness' or 'pharmacy')
+        let currentCareTab = 'awareness'; 
 
         // --- Core Functions ---
 
@@ -748,7 +886,7 @@
             }
         }
 
-        // --- UI Logic and Data Handling (Including Nepo Care Language Toggle) ---
+        // --- UI Logic and Data Handling (Including Nepo Care Language Toggle and Pharmacy Tabs) ---
 
         let currentService = null;
         const serviceModalEl = document.getElementById('service-modal');
@@ -760,8 +898,6 @@
             driving: [] 
         };
         
-        // Global state for language
-        let currentLang = 'en'; 
 
         // Functions for Nepo Care Language Toggle
         function switchLanguage(lang) {
@@ -857,6 +993,88 @@
         // Must attach these functions to the window object to be called from inline HTML
         window.switchLanguage = switchLanguage;
         window.showDiseaseDetails = showDiseaseDetails;
+        
+        // Function to switch between the care service tabs (awareness/pharmacy)
+        function switchCareTab(tab) {
+            currentCareTab = tab;
+            
+            // Update button styling
+            document.getElementById('tab-awareness').classList.remove('bg-indigo-600', 'text-white', 'bg-gray-200', 'text-gray-700');
+            document.getElementById('tab-pharmacy').classList.remove('bg-indigo-600', 'text-white', 'bg-gray-200', 'text-gray-700');
+            
+            if (tab === 'awareness') {
+                document.getElementById('tab-awareness').classList.add('bg-indigo-600', 'text-white');
+                document.getElementById('tab-pharmacy').classList.add('bg-gray-200', 'text-gray-700');
+                
+                // Set language buttons appropriately when returning to awareness
+                switchLanguage(currentLang);
+            } else {
+                document.getElementById('tab-pharmacy').classList.add('bg-indigo-600', 'text-white');
+                document.getElementById('tab-awareness').classList.add('bg-gray-200', 'text-gray-700');
+            }
+            
+            // Toggle content visibility
+            document.getElementById('care-content-awareness').classList.toggle('hidden', tab !== 'awareness');
+            document.getElementById('care-content-pharmacy').classList.toggle('hidden', tab !== 'pharmacy');
+            
+            // If switching to pharmacy, re-run the filter to display initial list
+            if (tab === 'pharmacy') {
+                filterMedicines(); 
+            }
+        }
+        window.switchCareTab = switchCareTab; // Expose to window
+
+        // Function to search/filter the medicines (New)
+        function filterMedicines() {
+            const searchTerm = document.getElementById('medicine-search').value.toLowerCase();
+            const storeListEl = document.getElementById('pharmacy-store-list');
+            
+            if (!storeListEl) return;
+
+            let filteredHtml = '';
+            let matchCount = 0;
+
+            nepoPharmacyData.forEach(store => {
+                const matchingMedicines = store.medicines.filter(med => 
+                    med.name.toLowerCase().includes(searchTerm) || 
+                    med.category.toLowerCase().includes(searchTerm)
+                );
+
+                if (matchingMedicines.length > 0) {
+                    matchCount++;
+                    filteredHtml += `
+                        <div class="mb-4 p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
+                            <h4 class="font-bold text-base text-teal-700 border-b pb-1 mb-2">${store.name} <span class="text-xs font-normal text-gray-500 ml-2">(${matchingMedicines.length} match${matchingMedicines.length !== 1 ? 'es' : ''})</span></h4>
+                            <div class="space-y-2 text-sm">
+                                ${matchingMedicines.map(med => `
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800">${med.name}</span>
+                                        <div class="text-right">
+                                            <span class="font-semibold text-gray-700">NPR ${med.price.toLocaleString()}</span>
+                                            <p class="text-xs text-gray-500">${med.category} | <span class="${med.stock > 50 ? 'text-green-500' : med.stock > 15 ? 'text-orange-500' : 'text-red-500'}">${med.stock} in stock</span></p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            if (matchCount === 0) {
+                storeListEl.innerHTML = `
+                    <div class="text-center p-8 text-gray-500">
+                        <i class="fas fa-box-open text-4xl mb-3"></i>
+                        <p>No medicines found matching your search term: **"${searchTerm}"**.</p>
+                        <p class="text-xs mt-2">Try a different name or category (e.g., 'Pain Relief', 'Antibiotic').</p>
+                    </div>
+                `;
+            } else {
+                storeListEl.innerHTML = filteredHtml;
+            }
+        }
+        window.filterMedicines = filterMedicines; // Expose to window
+
 
         function updateServiceView(serviceKey, items) {
             serviceData[serviceKey] = items;
@@ -1017,73 +1235,111 @@
                     </div>
                 `;
             } else if (serviceKey === 'care') {
-                // Nepo Care - Disease Awareness Feature
+                // Nepo Care - Disease Awareness and Pharmacy Feature
                 const defaultDiseaseKey = diseaseKeys[0]; 
 
                 html = `
-                    <div class="p-4 pt-2 sticky top-0 bg-white z-10">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Nepo Care: Disease Awareness</h3>
-                        <div class="flex justify-center space-x-4 border-b border-gray-200 pb-3">
-                            <button id="lang-en" onclick="switchLanguage('en')" class="px-4 py-2 text-sm font-semibold rounded-lg shadow-md bg-indigo-600 text-white transition hover:bg-indigo-700">English</button>
-                            <button id="lang-ne" onclick="switchLanguage('ne')" class="px-4 py-2 text-sm font-semibold rounded-lg shadow-md bg-gray-200 text-gray-700 transition hover:bg-gray-300">नेपाली</button>
+                    <div class="p-4 pt-2 sticky top-0 bg-white z-10 border-b border-gray-200">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">${service.name}</h3>
+                        
+                        <div class="flex justify-around space-x-2">
+                            <button id="tab-awareness" onclick="switchCareTab('awareness')" 
+                                class="w-full px-4 py-2 text-sm font-semibold rounded-lg transition shadow-md ${currentCareTab === 'awareness' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">
+                                <i class="fas fa-notes-medical mr-1"></i> Disease Awareness
+                            </button>
+                            <button id="tab-pharmacy" onclick="switchCareTab('pharmacy')" 
+                                class="w-full px-4 py-2 text-sm font-semibold rounded-lg transition shadow-md ${currentCareTab === 'pharmacy' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">
+                                <i class="fas fa-pills mr-1"></i> Nepo Pharmacy
+                            </button>
                         </div>
                     </div>
 
-                    <div class="flex max-h-[70vh]">
-                        <div class="w-2/5 border-r border-gray-200 overflow-y-auto scrollable-content p-2">
-                            <p class="text-xs text-gray-500 font-medium p-2 sticky top-0 bg-white">Select Disease (${diseaseKeys.length})</p>
-                            <div id="disease-list-buttons" class="space-y-1">
-                                ${diseaseKeys.map(key => {
-                                    const d = nepoDiseaseData[key];
-                                    // Default active state for the first button, ensuring it shows details on load
-                                    const isActive = key === defaultDiseaseKey ? 'bg-indigo-200 font-bold' : 'bg-white font-normal';
-                                    return `
-                                        <button onclick="showDiseaseDetails('${key}')" class="w-full text-left p-2 rounded-lg text-sm transition hover:bg-indigo-50 active:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 ${isActive}" data-disease-key="${key}">
-                                            <i class="fas ${d.icon} w-4 mr-2 ${d.color}"></i>
-                                            <span class="disease-name-en ${currentLang !== 'en' ? 'hidden' : ''}">${d.name_en}</span>
-                                            <span class="disease-name-ne ${currentLang !== 'ne' ? 'hidden' : ''}">${d.name_ne}</span>
-                                        </button>
-                                    `;
-                                }).join('')}
+                    <div class="max-h-[70vh] pb-4">
+                        <div id="care-content-awareness" class="flex h-[68vh] max-h-[68vh] ${currentCareTab !== 'awareness' ? 'hidden' : ''}">
+                            <div class="w-2/5 border-r border-gray-200 overflow-y-auto scrollable-content p-2">
+                                <p class="text-xs text-gray-500 font-medium p-2 sticky top-0 bg-white z-20 shadow-sm">
+                                    <span>Select Disease (${diseaseKeys.length})</span>
+                                    <div class="flex justify-between items-center mt-2">
+                                        <button id="lang-en" onclick="switchLanguage('en')" 
+                                            class="flex-1 py-1 text-xs font-semibold rounded-l-md transition ${currentLang === 'en' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">ENG</button>
+                                        <button id="lang-ne" onclick="switchLanguage('ne')" 
+                                            class="flex-1 py-1 text-xs font-semibold rounded-r-md transition ${currentLang === 'ne' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">नेप</button>
+                                    </div>
+                                </p>
+                                <div id="disease-list-buttons" class="space-y-1 mt-2">
+                                    ${diseaseKeys.map(key => {
+                                        const d = nepoDiseaseData[key];
+                                        // Default active state for the first button
+                                        const isActive = key === defaultDiseaseKey ? 'bg-indigo-200 font-bold' : 'bg-white font-normal';
+                                        return `
+                                            <button onclick="showDiseaseDetails('${key}')" class="w-full text-left p-2 rounded-lg text-sm transition hover:bg-indigo-50 active:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 ${isActive}" data-disease-key="${key}">
+                                                <i class="fas ${d.icon} w-4 mr-2 ${d.color}"></i>
+                                                <span class="disease-name-en ${currentLang !== 'en' ? 'hidden' : ''}">${d.name_en}</span>
+                                                <span class="disease-name-ne ${currentLang !== 'ne' ? 'hidden' : ''}">${d.name_ne}</span>
+                                            </button>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+
+                            <div class="w-3/5 overflow-y-auto scrollable-content p-4">
+                                <div id="disease-details-display">
+                                    </div>
+
+                                <div class="mt-8 p-3 bg-red-100 border-l-4 border-red-500 text-red-800 rounded-lg text-sm font-medium">
+                                    <i class="fas fa-hospital-user mr-2"></i>
+                                    <span class="footer-en ${currentLang !== 'en' ? 'hidden' : ''}">If you experience symptoms, please visit your nearest health center immediately.</span>
+                                    <span class="footer-ne ${currentLang !== 'ne' ? 'hidden' : ''}">यदि तपाईलाई कुनै लक्षण देखिएमा, कृपया तुरुन्तै आफ्नो नजिकको स्वास्थ्य केन्द्रमा जानुहोस्।</span>
+                                </div>
+                                
+                                <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <h4 class="text-md font-semibold text-gray-800 mb-2">Health & Home-Care Services (Examples)</h4>
+                                    <div class="space-y-2">
+                                        ${nepoCareExamples_full.map(item => `
+                                            <div class="flex items-center justify-between text-xs text-gray-700">
+                                                <div class="flex items-center">
+                                                    <i class="fas ${item.icon} text-sm text-teal-600 mr-2"></i>
+                                                    <span>${item.service.split(' (')[0]}</span>
+                                                </div>
+                                                <span class="font-medium">NPR ${item.cost.toLocaleString()}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="w-3/5 overflow-y-auto scrollable-content p-4">
-                            <div id="disease-details-display">
-                                </div>
-
-                            <div class="mt-8 p-3 bg-red-100 border-l-4 border-red-500 text-red-800 rounded-lg text-sm font-medium">
-                                <i class="fas fa-hospital-user mr-2"></i>
-                                <span class="footer-en ${currentLang !== 'en' ? 'hidden' : ''}">If you experience symptoms, please visit your nearest health center immediately.</span>
-                                <span class="footer-ne ${currentLang !== 'ne' ? 'hidden' : ''}">यदि तपाईलाई कुनै लक्षण देखिएमा, कृपया तुरुन्तै आफ्नो नजिकको स्वास्थ्य केन्द्रमा जानुहोस्।</span>
-                            </div>
-
-                            <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                <h4 class="text-md font-semibold text-gray-800 mb-2">Health & Home-Care Services (Examples)</h4>
-                                <div class="space-y-2">
-                                    ${nepoCareExamples_full.map(item => `
-                                        <div class="flex items-center justify-between text-xs text-gray-700">
-                                            <div class="flex items-center">
-                                                <i class="fas ${item.icon} text-sm text-teal-600 mr-2"></i>
-                                                <span>${item.service.split(' (')[0]}</span>
-                                            </div>
-                                            <span class="font-medium">NPR ${item.cost.toLocaleString()}</span>
-                                        </div>
-                                    `).join('')}
+                        <div id="care-content-pharmacy" class="p-4 ${currentCareTab !== 'pharmacy' ? 'hidden' : ''}">
+                            <p class="text-sm text-gray-500 mb-3">Search real-time stock and prices across 10 partner pharmacies.</p>
+                            
+                            <div class="mb-4 sticky top-0 bg-white pt-1 pb-2 z-20 shadow-sm">
+                                <div class="relative">
+                                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" id="medicine-search" onkeyup="filterMedicines()" placeholder="Search medicine name or category (e.g., Paracetamol, Antibiotic)" 
+                                        class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-sm">
                                 </div>
                             </div>
+                            
+                            <div id="pharmacy-store-list" class="space-y-4 max-h-[50vh] scrollable-content overflow-y-auto">
+                                </div>
+
+                            <div class="text-center p-4 text-gray-400 text-sm mt-4">-- Prices are indicative, final cost may vary --</div>
                         </div>
                     </div>
                 `;
                 modalContentEl.innerHTML = html;
                 
-                // FIX APPLIED: Delay the initialization slightly to ensure all DOM elements created by innerHTML are queryable.
+                // Initialize the display based on the current active tab
                 setTimeout(() => {
                     // Initialize display language and show the default disease
-                    // We call showDiseaseDetails directly on the default key to load the initial content
-                    showDiseaseDetails(defaultDiseaseKey, currentLang); 
-                }, 50); // 50ms delay to ensure DOM is ready
-                
+                    if (currentCareTab === 'awareness') {
+                        showDiseaseDetails(defaultDiseaseKey, currentLang); 
+                        switchLanguage(currentLang); 
+                    } else if (currentCareTab === 'pharmacy') {
+                         filterMedicines(); // Populate the initial pharmacy list
+                         switchCareTab('pharmacy'); 
+                    }
+                }, 50); 
 
             } else if (serviceKey === 'news') {
                  // Nepo News - UPDATED TO INCLUDE HYPERLINKS TO EXTERNAL SOURCES
@@ -1330,9 +1586,9 @@
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of explore examples --</div>
                     </div>
-                </div>`;
+                `;
             } else if (serviceKey === 'profile') {
-                // User Profile
+                // User Profile (Scrolling Fix Applied to Recent Activity)
                 const profile = nepoProfileData;
                 html += `<div class="p-4">
                     <div class="flex flex-col items-center p-6 bg-gray-50 rounded-xl shadow-inner mb-6">
@@ -1373,8 +1629,8 @@
                         </div>
                     </div>
 
-                    <h3 class="text-lg font-semibold mb-3 text-gray-800 mt-6">Recent Nepo Activity</h3>
-                    <div class="space-y-3 max-h-[20vh] scrollable-content overflow-y-auto pb-4">
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800 mt-6">Recent Nepo Activity (${profile.recentActivity.length})</h3>
+                    <div class="space-y-3 max-h-[25vh] scrollable-content overflow-y-auto pb-4">
                         ${profile.recentActivity.map(activity => `
                             <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
                                 <div class="flex items-center">
@@ -1679,4 +1935,3 @@
 
 </body>
 </html>
-
