@@ -59,7 +59,7 @@
             transform: scale(0.9);
         }
 
-        /* --- Construction Effect CSS --- */
+        /* --- New Construction Effect CSS --- */
         @keyframes stripes-move {
             0% { background-position: 0 0; }
             100% { background-position: 40px 0; }
@@ -90,7 +90,8 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, serverTimestamp, setLogLevel, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- FIREBASE CONFIGURATION ---
+        // --- FIREBASE CONFIGURATION FIX ---
+        // Global variables for Canvas environment. Must be declared for demo/real mode.
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
             apiKey: "YOUR_API_KEY_HERE", 
             authDomain: "nepo-super-app-demo.firebaseapp.com",
@@ -106,7 +107,7 @@
         let userId = 'demo-user-' + Math.random().toString(36).substring(2, 10);
         let isAuthReady = false;
         let isFirebaseActive = false;
-        // --- END FIREBASE CONFIGURATION ---
+        // --- END FIREBASE CONFIGURATION FIX ---
 
         // Set log level for debugging
         setLogLevel('Debug');
@@ -162,18 +163,19 @@
             { day: "Mon", condition: "Light Wind", temp: "20° / 12° C", wind: "7 km/h", icon: "fa-wind" }
         ];
 
-        // --- NEW: 10 Driving Examples (History) ---
+        // --- UPDATED: 10 Driving Examples ---
         const nepoDrivingPastExamples = [
-            { pickup: "Thamel, Kathmandu", dropoff: "Tribhuvan Airport", status: "Completed", type: "Taxi", cost: 850, date: "Today" },
-            { pickup: "Pulchowk, Lalitpur", dropoff: "Boudhanath Stupa", status: "Completed", type: "Bike", cost: 250, date: "Yesterday" },
-            { pickup: "New Baneshwor", dropoff: "Patan Durbar Square", status: "Completed", type: "Carpool", cost: 320, date: "2 days ago" },
-            { pickup: "Gongabu Bus Park", dropoff: "New Road Gate", status: "Completed", type: "Scooter", cost: 180, date: "3 days ago" },
-            { pickup: "Teku", dropoff: "Kirtipur Hill Top", status: "Completed", type: "Premium SUV", cost: 1100, date: "Nov 10" },
-            { pickup: "Pokhara Lakeside", dropoff: "Pokhara Airport", status: "Completed", type: "Taxi", cost: 950, date: "Nov 08" },
-            { pickup: "Dharan Buspark", dropoff: "Bhedetar View Point", status: "Completed", type: "Bike", cost: 300, date: "Nov 05" },
-            { pickup: "Buddhanagar", dropoff: "Maitidevi Temple", status: "Completed", type: "Carpool", cost: 210, date: "Nov 02" },
-            { pickup: "Jhamsikhel", dropoff: "Balaju Industrial Area", status: "Completed", type: "Premium SUV", cost: 1300, date: "Oct 30" },
-            { pickup: "Bhaktapur Durbar", dropoff: "Sanga Hill (Shiva)", status: "Completed", type: "Scooter", cost: 420, date: "Oct 28" }
+            { pickup: "Thamel", dropoff: "Tribhuvan Airport", status: "Completed", type: "Car", cost: 850 },
+            { pickup: "Lalitpur", dropoff: "Boudhanath Stupa", status: "Completed", type: "Bike", cost: 250 },
+            { pickup: "Baneshwor", dropoff: "Patan Durbar Square", status: "Completed", type: "Carpool", cost: 320 },
+            { pickup: "Gongabu", dropoff: "New Road", status: "Completed", type: "Car", cost: 480 },
+            { pickup: "Teku", dropoff: "Kirtipur Hill", status: "Completed", type: "Premium", cost: 1100 },
+            // Added 5 more
+            { pickup: "Pokhara Lakeside", dropoff: "Pokhara Airport", status: "Completed", type: "Car", cost: 950 },
+            { pickup: "Dharan Buspark", dropoff: "Bhedetar", status: "Completed", type: "Bike", cost: 300 },
+            { pickup: "Buddhanagar", dropoff: "Maitidevi", status: "Completed", type: "Carpool", cost: 210 },
+            { pickup: "Jhamsikhel", dropoff: "Balaju", status: "Completed", type: "Premium", cost: 1300 },
+            { pickup: "Bhaktapur", dropoff: "Sanga Hill", status: "Completed", type: "Car", cost: 720 }
         ];
 
         // --- UPDATED: 10 News Examples ---
@@ -183,6 +185,7 @@
             { title: "International Arrivals Recover to 98% of Pre-Pandemic Levels in 2025", source: "Travel & Tour World", time: "5 hrs ago", category: "Tourism", color: "bg-orange-500", url: getRandomSourceUrl() },
             { title: "NEPSE Posts Double-Digit Gain; All Sectors Close in Green", source: "The Himalayan Times", time: "Yesterday", category: "Business", color: "bg-red-500", url: getRandomSourceUrl() },
             { title: "FDI Commitment Soars, Led by Information and Communication Technology", source: "Xinhua", time: "1 day ago", category: "Economy", color: "bg-purple-500", url: getRandomSourceUrl() },
+            // Added 5 more original examples
             { title: "Kathmandu Valley Air Quality Improves Slightly After Monsoon Rainfall", source: "Online Khabar", time: "2 days ago", category: "Environment", color: "bg-blue-600", url: getRandomSourceUrl() },
             { title: "New Foreign Investment Policy Aims to Boost Technology Sector", source: "MyRepublica", time: "3 days ago", category: "Business", color: "bg-green-700", url: getRandomSourceUrl() },
             { title: "Historic Bhaktapur Durbar Square Restoration Enters Final Phase", source: "The Kathmandu Post", time: "4 days ago", category: "Culture", color: "bg-orange-700", url: getRandomSourceUrl() },
@@ -197,6 +200,7 @@
             { name: "Lhosar", date: "Magh 25, 2082 B.S.", type: "Community Event", color: "bg-blue-600", icon: "fa-dragon" },
             { name: "My Friend's Birthday", date: "Bhadra 5, 2082 B.S.", type: "Personal Reminder", color: "bg-purple-600", icon: "fa-cake-candles" },
             { name: "Full Moon (Purnima)", date: "Upcoming: Jestha 1, 2083 B.S.", type: "Lunar Cycle", color: "bg-teal-600", icon: "fa-moon" },
+            // Added 5 more
             { name: "Republic Day", date: "Jestha 15, 2083 B.S.", type: "National Holiday", color: "bg-green-600", icon: "fa-flag" },
             { name: "Teej Festival", date: "Bhadra 1, 2082 B.S.", type: "National Festival", color: "bg-pink-600", icon: "fa-person-dress" },
             { name: "Nepal Sambat New Year", date: "Kartik 11, 2082 B.S.", type: "Cultural Event", color: "bg-red-700", icon: "fa-gopuram" },
@@ -204,40 +208,288 @@
             { name: "Scheduled Medical Checkup", date: "Poush 10, 2082 B.S.", type: "Personal Reminder", color: "bg-cyan-600", icon: "fa-user-nurse" }
         ];
 
-        // --- 20 Common Disease Data (English & Nepali) ---
+        // --- 20 Common Disease Data (English & Nepali) - Unchanged for brevity ---
         const nepoDiseaseData = {
+            // 1. Common Cold
             'cold': {
                 icon: 'fa-head-side-cough', color: 'text-blue-500', name_en: 'Common Cold', name_ne: 'सामान्य रुघा',
-                en: { intro: 'A viral infection of the nose and throat.', causes: 'Caused by rhinoviruses spread through air.', aware: 'Maintain hygiene and wash hands frequently.' },
-                ne: { intro: 'नाक र घाँटीको भाइरल संक्रमण हो।', causes: 'राइनोभाइरसका कारणले हुन्छ।', aware: 'सफा रहनुहोस् र बारम्बार हात धुनुहोस्।' }
+                en: {
+                    intro: 'A viral infection of the nose and throat, characterized by sneezing, congestion, and sore throat.',
+                    causes: 'Caused by hundreds of different viruses, primarily rhinoviruses, spread through air or direct contact.',
+                    aware: 'Maintain good hygiene, wash hands frequently, and avoid close contact with infected individuals. Cover your mouth and nose when coughing or sneezing.'
+                },
+                ne: {
+                    intro: 'नाक र घाँटीको भाइरल संक्रमण हो, जसको विशेषता हाच्छिउँ आउनु, नाक बन्द हुनु र घाँटी दुख्नु हो।',
+                    causes: 'मुख्यतया राइनोभाइरस लगायत सयौं विभिन्न भाइरसका कारणले हुन्छ, जुन हावा वा प्रत्यक्ष सम्पर्कबाट फैलिन्छ।',
+                    aware: 'सफा रहनुहोस्, बारम्बार हात धुनुहोस्, र संक्रमित व्यक्तिहरूसँगको नजिकको सम्पर्कबाट जोगिनुहोस्। खोक्दा वा हाच्छिउँ गर्दा मुख र नाक छोप्नुहोस्।'
+                }
             },
+            // 2. Influenza (Flu)
             'flu': {
-                icon: 'fa-virus', color: 'text-red-500', name_en: 'Influenza (Flu)', name_ne: 'इन्फ्लुएन्जा',
-                en: { intro: 'Contagious respiratory illness causing fever.', causes: 'Influenza viruses spread by droplets.', aware: 'Get annual flu shots and stay home when sick.' },
-                ne: { intro: 'श्वासप्रश्वासको संक्रामक रोग।', causes: 'इन्फ्लुएन्जा भाइरस।', aware: 'फ्लूको खोप लगाउनुहोस्।' }
+                icon: 'fa-virus', color: 'text-red-500', name_en: 'Influenza (Flu)', name_ne: 'इन्फ्लुएन्जा (फ्लू)',
+                en: {
+                    intro: 'A contagious respiratory illness, more severe than a cold, causing fever, body aches, and fatigue.',
+                    causes: 'Caused by influenza viruses. It spreads mainly by droplets when infected people cough, sneeze or talk.',
+                    aware: 'Get an annual flu shot. Avoid touching your eyes, nose, and mouth. Stay home when sick to prevent spreading the virus.'
+                },
+                ne: {
+                    intro: 'रूघा भन्दा कडा श्वासप्रश्वासको संक्रामक रोग हो, जसले ज्वरो, शरीर दुख्ने र थकान महसुस गराउँछ।',
+                    causes: 'इन्फ्लुएन्जा भाइरसले गर्दा हुन्छ। यो मुख्यतया संक्रमित व्यक्तिले खोक्दा, हाच्छिउँ गर्दा वा कुरा गर्दा निस्कने थोपाहरूबाट फैलिन्छ।',
+                    aware: 'हरेक वर्ष फ्लूको खोप लगाउनुहोस्। आँखा, नाक र मुख छुनबाट जोगिनुहोस्। भाइरस फैलिनबाट रोक्न बिरामी हुँदा घरमै बस्नुहोस्।'
+                }
             },
+            // 3. Dengue Fever
             'dengue': {
                 icon: 'fa-mosquito', color: 'text-orange-500', name_en: 'Dengue Fever', name_ne: 'डेङ्गु ज्वरो',
-                en: { intro: 'Painful mosquito-borne disease.', causes: 'Dengue virus via Aedes mosquitoes.', aware: 'Eliminate standing water and use repellents.' },
-                ne: { intro: 'लामखुट्टेबाट सर्ने पीडादायक रोग।', causes: 'एडिस लामखुट्टे।', aware: 'जमेको पानी हटाउनुहोस्।' }
+                en: {
+                    intro: 'A painful, debilitating mosquito-borne disease common in tropical and subtropical regions.',
+                    causes: 'Caused by the dengue virus, transmitted through the bite of Aedes mosquitoes, especially during monsoon.',
+                    aware: 'Eliminate standing water sources around your home. Use mosquito nets and repellents. Wear long sleeves and pants during peak biting hours.'
+                },
+                ne: {
+                    intro: 'उष्णकटिबंधीय क्षेत्रहरूमा सामान्य लामखुट्टेबाट सर्ने पीडादायक र कमजोर बनाउने रोग हो।',
+                    causes: 'डेङ्गु भाइरसका कारणले हुन्छ, जुन एडिस लामखुट्टेको टोकाइबाट सर्छ, विशेषगरी मनसुनमा।',
+                    aware: 'आफ्नो घर वरपर जमेको पानी हटाउनुहोस्। लामखुट्टेको जाली र भगाउने औषधि प्रयोग गर्नुहोस्। लामखुट्टेले बढी टोक्ने समयमा लामो बाहुला र पाइन्ट लगाउनुहोस्।'
+                }
             },
-            'typhoid': { icon: 'fa-bowl-food', color: 'text-yellow-600', name_en: 'Typhoid Fever', name_ne: 'टाइफाइड', en: {intro: 'Bacterial infection affecting organs.', causes: 'Salmonella Typhi via food/water.', aware: 'Eat cooked food, drink boiled water.'}, ne: {intro: 'ब्याक्टेरियल संक्रमण।', causes: 'दूषित खाना वा पानी।', aware: 'राम्ररी पकाएको खाना खानुहोस्।'} },
-            'diabetes': { icon: 'fa-sugar-cube', color: 'text-pink-600', name_en: 'Diabetes', name_ne: 'मधुमेह', en: {intro: 'Chronic high blood sugar.', causes: 'Genetic factors and poor diet.', aware: 'Maintain healthy weight and diet.'}, ne: {intro: 'रगतमा चिनीको मात्रा बढी हुने।', causes: 'खराब आहार।', aware: 'स्वस्थ तौल कायम राख्नुहोस्।'} },
-            'hyper': { icon: 'fa-heart-pulse', color: 'text-indigo-600', name_en: 'Hypertension', name_ne: 'उच्च रक्तचाप', en: {intro: 'High blood pressure.', causes: 'High salt, lack of exercise.', aware: 'Reduce salt, exercise regularly.'}, ne: {intro: 'उच्च रक्तचाप।', causes: 'नुन बढी खानु।', aware: 'नुन कम गर्नुहोस्।'} },
-            'tb': { icon: 'fa-lungs', color: 'text-brown-500', name_en: 'Tuberculosis', name_ne: 'क्षयरोग', en: {intro: 'Infectious lung disease.', causes: 'Mycobacterium tuberculosis.', aware: 'Proper ventilation, BCG vaccine.'}, ne: {intro: 'फोक्सोको रोग।', causes: 'ब्याक्टेरिया।', aware: 'खोप लगाउनुहोस्।'} },
-            'gastritis': { icon: 'fa-stomach', color: 'text-green-600', name_en: 'Gastritis', name_ne: 'ग्यास्ट्राइटिस', en: {intro: 'Stomach lining inflammation.', causes: 'Spicy food, irregular meals.', aware: 'Avoid spicy food, eat on time.'}, ne: {intro: 'पेटको समस्या।', causes: 'पिरो खाना।', aware: 'समयमा खाना खानुहोस्।'} },
-            'copd': { icon: 'fa-smoking-ban', color: 'text-gray-800', name_en: 'COPD', name_ne: 'फोक्सोको रोग', en: {intro: 'Blocked airflow in lungs.', causes: 'Smoking, pollution.', aware: 'Quit smoking.'}, ne: {intro: 'सास फेर्न गाह्रो हुने।', causes: 'धुम्रपान।', aware: 'धुम्रपान त्याग्नुहोस्।'} },
-            'kidney': { icon: 'fa-urology', color: 'text-cyan-600', name_en: 'Kidney Stones', name_ne: 'मिर्गौलाको पत्थरी', en: {intro: 'Hard mineral deposits.', causes: 'Dehydration.', aware: 'Drink plenty of water.'}, ne: {intro: 'मिर्गौलामा पत्थरी।', causes: 'पानी कम पिउनु।', aware: 'प्रशस्त पानी पिउनुहोस्।'} },
-            'asthma': { icon: 'fa-person-running', color: 'text-purple-500', name_en: 'Asthma', name_ne: 'दम', en: {intro: 'Airway inflammation.', causes: 'Allergens, pollution.', aware: 'Avoid triggers.'}, ne: {intro: 'श्वासप्रश्वास समस्या।', causes: 'धुलो, धुवाँ।', aware: 'सचेत रहनुहोस्।'} },
-            'diarrhea': { icon: 'fa-toilet', color: 'text-brown-500', name_en: 'Diarrhea', name_ne: 'पखाला', en: {intro: 'Loose, watery stools.', causes: 'Contaminated water.', aware: 'Drink ORS, wash hands.'}, ne: {intro: 'पखाला।', causes: 'दूषित पानी।', aware: 'जीवनजल पिउनुहोस्।'} },
-            'jaundice': { icon: 'fa-tint', color: 'text-amber-500', name_en: 'Jaundice', name_ne: 'जन्डिस', en: {intro: 'Yellow skin/eyes.', causes: 'Liver infection.', aware: 'Clean water/food.'}, ne: {intro: 'कलेजोको रोग।', causes: 'फोहोर पानी।', aware: 'सफा पानी पिउनुहोस्।'} },
-            'anemia': { icon: 'fa-droplet', color: 'text-red-700', name_en: 'Anemia', name_ne: 'रक्तअल्पता', en: {intro: 'Lack of red blood cells.', causes: 'Iron deficiency.', aware: 'Eat iron-rich foods.'}, ne: {intro: 'रगतको कमी।', causes: 'आइरनको कमी।', aware: 'सागसब्जी खानुहोस्।'} },
-            'arthritis': { icon: 'fa-joint', color: 'text-teal-700', name_en: 'Arthritis', name_ne: 'जोर्नी दुखाइ', en: {intro: 'Joint inflammation.', causes: 'Aging, wear/tear.', aware: 'Exercise gently.'}, ne: {intro: 'जोर्नी दुख्ने।', causes: 'उमेर।', aware: 'व्यायाम गर्नुहोस्।'} },
-            'malaria': { icon: 'fa-bed-alt', color: 'text-lime-500', name_en: 'Malaria', name_ne: 'औलो', en: {intro: 'Mosquito-borne fever.', causes: 'Plasmodium parasite.', aware: 'Use mosquito nets.'}, ne: {intro: 'लामखुट्टेबाट सर्ने।', causes: 'परजीवी।', aware: 'झुल प्रयोग गर्नुहोस्।'} },
-            'uti': { icon: 'fa-urinal', color: 'text-purple-700', name_en: 'UTI', name_ne: 'मूत्र संक्रमण', en: {intro: 'Urinary tract infection.', causes: 'Bacteria.', aware: 'Drink water, hygiene.'}, ne: {intro: 'पिसाबको संक्रमण।', causes: 'ब्याक्टेरिया।', aware: 'पानी पिउनुहोस्।'} },
-            'backpain': { icon: 'fa-person-walking-with-cane', color: 'text-amber-700', name_en: 'Back Pain', name_ne: 'कम्मर दुखाइ', en: {intro: 'Pain in lower back.', causes: 'Poor posture.', aware: 'Correct posture.'}, ne: {intro: 'कम्मर दुख्ने।', causes: 'बसाई नमिलेर।', aware: 'सधा बस्नुहोस्।'} },
-            'mental': { icon: 'fa-brain', color: 'text-fuchsia-600', name_en: 'Depression', name_ne: 'डिप्रेसन', en: {intro: 'Mental health disorder.', causes: 'Stress, biology.', aware: 'Seek counseling.'}, ne: {intro: 'मानसिक समस्या।', causes: 'तनाव।', aware: 'परामर्श लिनुहोस्।'} },
-            'fungal': { icon: 'fa-spa', color: 'text-gray-500', name_en: 'Fungal Infection', name_ne: 'फंगल संक्रमण', en: {intro: 'Skin infection.', causes: 'Fungi in moist areas.', aware: 'Keep skin dry.'}, ne: {intro: 'छालाको संक्रमण।', causes: 'फोहोर।', aware: 'सफा रहनुहोस्।'} }
+            // 4. Typhoid Fever
+            'typhoid': {
+                icon: 'fa-bowl-food', color: 'text-yellow-600', name_en: 'Typhoid Fever', name_ne: 'टाइफाइड ज्वरो',
+                en: {
+                    intro: 'A bacterial infection that can spread throughout the body, affecting many organs. High fever is a primary symptom.',
+                    causes: 'Caused by Salmonella Typhi bacteria, spread through contaminated food or water.',
+                    aware: 'Ensure food is thoroughly cooked and served hot. Drink only boiled, purified, or bottled water. Get vaccinated if traveling to endemic areas.'
+                },
+                ne: {
+                    intro: 'यो एक ब्याक्टेरियल संक्रमण हो जुन शरीरभरि फैलिएर धेरै अंगहरूलाई असर गर्न सक्छ। उच्च ज्वरो यसको मुख्य लक्षण हो।',
+                    causes: 'साल्मोनेला टाइफी ब्याक्टेरियाको कारणले हुन्छ, जुन दूषित खाना वा पानीबाट फैलिन्छ।',
+                    aware: 'खाना राम्ररी पकाएको र तातो सेवा गरिएको सुनिश्चित गर्नुहोस्। उमालेको, शुद्ध वा बोतलको मात्र पानी पिउनुहोस्। महामारी भएको क्षेत्रमा यात्रा गर्दा खोप लगाउनुहोस्।'
+                }
+            },
+            // 5. Diabetes Mellitus (Type 2)
+            'diabetes': {
+                icon: 'fa-sugar-cube', color: 'text-pink-600', name_en: 'Diabetes (Type 2)', name_ne: 'मधुमेह (टाइप २)',
+                en: {
+                    intro: 'A chronic condition where the body does not effectively use insulin or cannot produce enough, leading to high blood sugar levels.',
+                    causes: 'A combination of genetic factors, obesity, poor diet, and lack of physical activity.',
+                    aware: 'Maintain a healthy body weight and consume a balanced diet low in processed sugars. Engage in regular physical activity (at least 30 minutes daily).'
+                },
+                ne: {
+                    intro: 'एक दीर्घकालीन अवस्था हो जहाँ शरीरले इन्सुलिनलाई प्रभावकारी रूपमा प्रयोग गर्दैन वा पर्याप्त उत्पादन गर्न सक्दैन, जसले रगतमा चिनीको मात्रा बढाउँछ।',
+                    causes: 'आनुवंशिक कारक, मोटोपना, खराब आहार र शारीरिक गतिविधिको कमीको संयोजन हो।',
+                    aware: 'स्वस्थ शरीरको तौल कायम राख्नुहोस् र प्रशोधित चिनी कम भएको सन्तुलित आहार सेवन गर्नुहोस्। नियमित शारीरिक गतिविधिमा संलग्न हुनुहोस् (दैनिक कम्तिमा ३० मिनेट)।'
+                }
+            },
+            // 6. Hypertension (High Blood Pressure)
+            'hyper': {
+                icon: 'fa-heart-pulse', color: 'text-indigo-600', name_en: 'Hypertension (High BP)', name_ne: 'उच्च रक्तचाप',
+                en: {
+                    intro: 'A condition in which the force of the blood against the artery walls is too high, leading to heart disease and stroke risks.',
+                    causes: 'Often develops over time due to unhealthy lifestyle choices, such as high salt intake, lack of exercise, and smoking.',
+                    aware: 'Reduce salt and caffeine intake. Limit alcohol consumption and quit smoking. Exercise regularly and manage stress through meditation or yoga.'
+                },
+                ne: {
+                    intro: 'धमनीका भित्ताहरू विरुद्ध रगतको बल धेरै उच्च हुने अवस्था हो, जसले हृदय रोग और स्ट्रोकको जोखिम बढाउँछ।',
+                    causes: 'प्रायः उच्च नुन सेवन, व्यायामको कमी र धूम्रपान जस्ता अस्वस्थ जीवनशैलीका कारण समयसँगै विकसित हुन्छ।',
+                    aware: 'नुन र क्याफिन सेवन कम गर्नुहोस्। मदिरा सेवन सीमित गर्नुहोस् र धूम्रपान छोड्नुहोस्। नियमित व्यायाम गर्नुहोस् और ध्यान वा योग मार्फत तनाव व्यवस्थापन गर्नुहोस्।'
+                }
+            },
+            // 7. Tuberculosis (TB)
+            'tb': {
+                icon: 'fa-lungs', color: 'text-brown-500', name_en: 'Tuberculosis (TB)', name_ne: 'क्षयरोग (टीबी)',
+                en: {
+                    intro: 'A potentially serious infectious disease that mainly affects the lungs. It is spread through the air when an infected person coughs or sneezes.',
+                    causes: 'Caused by the bacterium Mycobacterium tuberculosis.',
+                    aware: 'Ensure proper ventilation in living spaces. If diagnosed, complete the full course of medication without interruption. Get infants vaccinated with the BCG vaccine.'
+                },
+                ne: {
+                    intro: 'यो एक सम्भावित गम्भीर संक्रामक रोग हो जसले मुख्यतया फोक्सोलाई असर गर्छ। यो संक्रमित व्यक्तिले खोक्दा वा हाच्छिउँ गर्दा हावा मार्फत फैलिन्छ।',
+                    causes: 'माइकोब्याक्टेरियम ट्युबरकुलोसिस नामक ब्याक्टेरियाबाट हुन्छ।',
+                    aware: 'बस्ने ठाउँहरूमा उचित भेन्टिलेसन सुनिश्चित गर्नुहोस्। यदि निदान गरिएमा, औषधिको पूर्ण कोर्स बिना अवरोध पूरा गर्नुहोस्। शिशुहरूलाई बीसीजी खोप लगाउनुहोस्।'
+                }
+            },
+            // 8. Gastritis/Indigestion
+            'gastritis': {
+                icon: 'fa-stomach', color: 'text-green-600', name_en: 'Gastritis/Indigestion', name_ne: 'ग्यास्ट्राइटिस/अपच',
+                en: {
+                    intro: 'Inflammation of the stomach lining, often causing stomach pain, bloating, and nausea.',
+                    causes: 'Caused by regular use of pain relievers, excessive alcohol, or Helicobacter pylori (H. pylori) infection.',
+                    aware: 'Avoid spicy, oily, and highly acidic foods. Eat smaller, frequent meals. Manage stress and limit the use of non-steroidal anti-inflammatory drugs (NSAIDs).'
+                },
+                ne: {
+                    intro: 'पेटको अस्तरको सूजन हो, जसले प्रायः पेट दुख्ने, पेट फुल्ने र वाकवाकी लाग्ने गर्छ।',
+                    causes: 'दुखाइ कम गर्ने औषधिहरूको नियमित प्रयोग, अत्यधिक मदिरा वा हेलिकोब्याक्टर पाइलोरी (H. pylori) संक्रमणका कारणले हुन्छ।',
+                    aware: 'पिरो, चिल्लो र धेरै अमिलो खानेकुराबाट जोगिनुहोस्। थोरै-थोरै र बारम्बार खानुहोस्। तनाव व्यवस्थापन गर्नुहोस् र एनएसएआईडीएस (NSAIDs) को प्रयोग सीमित गर्नुहोस्।'
+                }
+            },
+            // 9. Chronic Obstructive Pulmonary Disease (COPD)
+            'copd': {
+                icon: 'fa-smoking-ban', color: 'text-gray-800', name_en: 'COPD', name_ne: 'फोक्सोको दीर्घकालीन रोग',
+                en: {
+                    intro: 'A group of lung diseases that block airflow and make it difficult to breathe, including emphysema and chronic bronchitis.',
+                    causes: 'Long-term exposure to irritating gases or particulate matter, most often from cigarette smoke or indoor pollution (e.g., biomass fuel smoke).',
+                    aware: 'Crucially, quit smoking immediately. Minimize exposure to dust, fumes, and smoke, including indoor cooking smoke. Use prescribed inhalers correctly.'
+                },
+                ne: {
+                    intro: 'फोक्सोको रोगहरूको समूह हो जसले वायु प्रवाहलाई रोक्छ र सास फेर्न गाह्रो बनाउँछ, जसमा वातस्फीति र दीर्घकालीन ब्रोंकाइटिस समावेश छन्।',
+                    causes: 'लामो समयसम्म चिढाउने ग्यास वा कण पदार्थको सम्पर्कमा रहनु, प्राय: चुरोटको धुवाँ वा घरभित्रको प्रदूषण (जस्तै: दाउराको धुवाँ) बाट।',
+                    aware: 'तत्काल धूम्रपान छोड्नुहोस्। धुलो, धुवाँ, र भित्री खाना पकाउने धुवाँ सहितको सम्पर्कलाई कम गर्नुहोस्। निर्धारित इन्हेलरहरू सही तरिकाले प्रयोग गर्नुहोस्।'
+                }
+            },
+            // 10. Kidney Stones
+            'kidney': {
+                icon: 'fa-urology', color: 'text-cyan-600', name_en: 'Kidney Stones', name_ne: 'मिर्गौलाको पत्थरी',
+                en: {
+                    intro: 'Hard deposits of minerals and salts that form inside the kidneys, often causing severe pain when passing through the urinary tract.',
+                    causes: 'Concentrated urine, often caused by dehydration, diet, and certain medical conditions.',
+                    aware: 'Drink plenty of water throughout the day (2-3 liters). Reduce sodium, sugar, and animal protein intake. Consult a doctor for dietary recommendations.'
+                },
+                ne: {
+                    intro: 'मिर्गौला भित्र बन्ने खनिज र नुनको कडा निक्षेप हो, जुन पिसाब नलीबाट जाँदा प्रायः तीव्र पीडा निम्त्याउँछ।',
+                    causes: 'प्रायः निर्जलीकरण, आहार र केही स्वास्थ्य अवस्थाहरूका कारण पिसाब गाढा हुनु।',
+                    aware: 'दिनभरि प्रशस्त पानी पिउनुहोस् (२-३ लिटर)। सोडियम, चिनी र जनावरको प्रोटिन सेवन कम गर्नुहोस्। आहारसम्बन्धी सिफारिसहरूको लागि डाक्टरसँग सल्लाह लिनुहोस्।'
+                }
+            },
+            // 11. Asthma
+            'asthma': {
+                icon: 'fa-person-running', color: 'text-purple-500', name_en: 'Asthma', name_ne: 'दम रोग',
+                en: {
+                    intro: 'A chronic disease involving airway inflammation and narrowing, leading to difficulty breathing, wheezing, and coughing.',
+                    causes: 'Triggers include air pollution, allergens (pollen, dust mites), respiratory infections, and exercise.',
+                    aware: 'Identify and avoid personal triggers. Always carry and correctly use prescribed inhalers. Monitor peak flow regularly.'
+                },
+                ne: {
+                    intro: 'श्वासमार्गको सूजन र साँघुरोपना समावेश भएको एक दीर्घकालीन रोग हो, जसले सास फेर्न कठिनाई, सुस्केरा र खोकी निम्त्याउँछ।',
+                    causes: 'प्रदूषण, एलर्जी (परागकण, धूलो), श्वासप्रश्वास संक्रमण, र व्यायामले यसलाई उत्प्रेरित गर्दछ।',
+                    aware: 'व्यक्तिगत ट्रिगरहरू पहिचान गर्नुहोस् र तिनीहरूबाट जोगिनुहोस्। निर्धारित इन्हेलरहरू सधैं बोक्नुहोस् र सही रूपमा प्रयोग गर्नुहोस्। नियमित रूपमा पीक फ्लो निगरानी गर्नुहोस्।'
+            }
+            },
+            // 12. Diarrhea
+            'diarrhea': {
+                icon: 'fa-toilet', color: 'text-brown-500', name_en: 'Diarrhea', name_ne: 'पखाला',
+                en: {
+                    intro: 'Frequent passage of loose or watery stools, leading to dehydration if not managed quickly.',
+                    causes: 'Bacterial or viral infections, parasites, or certain medications. Commonly due to consuming contaminated water/food.',
+                    aware: 'Maintain strict hand hygiene, especially before eating and after using the toilet. Drink ORS (Oral Rehydration Solution) immediately. Ensure water is safe.'
+                },
+                ne: {
+                    intro: 'पातलो वा पानी जस्तो दिसा बारम्बार हुनु, जसलाई तुरुन्तै व्यवस्थापन नगरे निर्जलीकरण हुन सक्छ।',
+                    causes: 'ब्याक्टेरिया वा भाइरल संक्रमण, परजीवी वा केही औषधिहरू। सामान्यतया दूषित पानी/खाना उपभोग गर्दा।',
+                    aware: 'शौचालय प्रयोग गरेपछि र खाना खानु अघि हातको सरसफाइमा कडाइ गर्नुहोस्। तुरुन्तै ओआरएस (जीवनजल) पिउनुहोस्। पानी सुरक्षित भएको सुनिश्चित गर्नुहोस्।'
+                }
+            },
+            // 13. Jaundice (Hepatitis)
+            'jaundice': {
+                icon: 'fa-tint', color: 'text-amber-500', name_en: 'Jaundice (Hepatitis)', name_ne: 'जन्डिस (कलेजोको रोग)',
+                en: {
+                    intro: 'A yellow discoloration of the skin and eyes caused by excess bilirubin in the blood. It often indicates a liver problem.',
+                    causes: 'Viral infections (Hepatitis A, B, C), gallstones, or excessive alcohol use.',
+                    aware: 'Get vaccinated against Hepatitis A and B. Maintain clean sanitation and hygiene. Avoid uncooked or contaminated food and water.'
+                },
+                ne: {
+                    intro: 'रगतमा बिलिरुबिनको अधिकताका कारण छाला र आँखा पहेँलो हुने अवस्था। यसले प्रायः कलेजोको समस्यालाई संकेत गर्दछ।',
+                    causes: 'भाइरल संक्रमण (हेपाटाइटिस ए, बी, सी), पित्तथैलीको पत्थरी, वा अत्यधिक मदिरा सेवन।',
+                    aware: 'हेपाटाइटिस ए र बी विरुद्ध खोप लगाउनुहोस्। सफा सरसफाइ र स्वच्छता कायम राख्नुहोस्। नपाकेको वा दूषित खाना र पानीबाट जोगिनुहोस्।'
+                }
+            },
+            // 14. Anemia
+            'anemia': {
+                icon: 'fa-droplet', color: 'text-red-700', name_en: 'Anemia', name_ne: 'रक्तअल्पता',
+                en: {
+                    intro: 'A condition where the body lacks enough healthy red blood cells to carry adequate oxygen to body tissues, causing fatigue and weakness.',
+                    causes: 'Iron deficiency, Vitamin B12 deficiency, or chronic diseases.',
+                    aware: 'Consume iron-rich foods (red meat, spinach, beans) and Vitamin C (citrus fruits) to aid iron absorption. Take prescribed iron supplements if necessary.'
+                },
+                ne: {
+                    intro: 'शरीरमा पर्याप्त अक्सिजन पुर्याउनको लागि पर्याप्त स्वस्थ रातो रक्त कोशिकाको कमी हुने अवस्था, जसले थकान र कमजोरी निम्त्याउँछ।',
+                    causes: 'आइरनको कमी, भिटामिन बी१२ को कमी, वा दीर्घकालीन रोगहरू।',
+                    aware: 'आइरन युक्त खानेकुरा (रातो मासु, पालक, सिमी) र आइरन अवशोषणमा सहयोग गर्न भिटामिन सी (सिट्रस फलफूल) सेवन गर्नुहोस्। आवश्यक भएमा निर्धारित आइरन सप्लिमेन्टहरू लिनुहोस्।'
+            }
+            },
+            // 15. Arthritis
+            'arthritis': {
+                icon: 'fa-joint', color: 'text-teal-700', name_en: 'Arthritis', name_ne: 'जोर्नीको दुखाइ',
+                en: {
+                    intro: 'Inflammation or degeneration of one or more joints, causing pain, stiffness, and reduced mobility.',
+                    causes: 'Wear-and-tear (osteoarthritis), autoimmune disorders (rheumatoid arthritis), and infections.',
+                    aware: 'Maintain a healthy weight to reduce joint stress. Engage in low-impact exercises (swimming, walking). Use heat or cold therapy for pain relief.'
+                },
+                ne: {
+                    intro: 'एक वा बढी जोर्नीहरूको सूजन वा क्षय, जसले दुखाइ, कडापन, र गतिशीलतामा कमी ल्याउँछ।',
+                    causes: 'जोर्नी खिइनु (ओस्टियोआर्थराइटिस), अटोइम्यून विकार (रूमेटोइड आर्थराइटिस), र संक्रमणहरू।',
+                    aware: 'जोर्नीको तनाव कम गर्न स्वस्थ तौल कायम राख्नुहोस्। कम प्रभाव पार्ने व्यायामहरू (पौडी खेल्ने, हिड्ने) मा संलग्न हुनुहोस्। दुखाइ कम गर्न तातो वा चिसो थेरापी प्रयोग गर्नुहोस्।'
+                }
+            },
+            // 16. Malaria
+            'malaria': {
+                icon: 'fa-bed-alt', color: 'text-lime-500', name_en: 'Malaria', name_ne: 'औलो',
+                en: {
+                    intro: 'A mosquito-borne infectious disease characterized by fever, chills, and flu-like illness.',
+                    causes: 'Caused by Plasmodium parasites, transmitted through the bite of infected female Anopheles mosquitoes.',
+                    aware: 'Use insecticide-treated bed nets. Take antimalarial prophylactic drugs if traveling to high-risk areas. Eliminate mosquito breeding sites.'
+                },
+                ne: {
+                    intro: 'ज्वरो, चिसो लाग्ने र फ्लू जस्तो बिमारी हुने लामखुट्टेबाट सर्ने संक्रामक रोग।',
+                    causes: 'संक्रमित पोथी एनोफिलिस लामखुट्टेको टोकाइबाट सर्ने प्लाज्मोडियम परजीवीका कारणले हुन्छ।',
+                    aware: 'कीटनाशकले उपचार गरिएको ओछ्यानको जाली प्रयोग गर्नुहोस्। उच्च जोखिम क्षेत्रमा यात्रा गर्दा औलो विरोधी रोकथाम औषधि लिनुहोस्। लामखुट्टेको प्रजनन स्थलहरू हटाउनुहोस्।'
+                }
+            },
+            // 17. Urinary Tract Infection (UTI)
+            'uti': {
+                icon: 'fa-urinal', color: 'text-purple-700', name_en: 'UTI', name_ne: 'मूत्र संक्रमण',
+                en: {
+                    intro: 'An infection in any part of the urinary system (kidneys, ureters, bladder, and urethra), often causing burning during urination.',
+                    causes: 'Bacteria entering the urinary tract, commonly E. coli.',
+                    aware: 'Drink plenty of water. Wipe from front to back after using the toilet. Urinate when you feel the need and after intercourse.'
+                },
+                ne: {
+                    intro: 'मूत्र प्रणाली (मिर्गौला, मूत्रवाहिनी, मूत्राशय, र मूत्रमार्ग) को कुनै पनि भागमा हुने संक्रमण, जसले प्रायः पिसाब गर्दा जलन निम्त्याउँछ।',
+                    causes: 'मूत्र नलीमा प्रवेश गर्ने ब्याक्टेरिया, सामान्यतया ई. कोलाई।',
+                    aware: 'प्रशस्त पानी पिउनुहोस्। शौचालय प्रयोग गरेपछि अगाडिबाट पछाडि पुछ्नुहोस्। पिसाब लाग्दा र यौन सम्पर्कपछि पिसाब गर्नुहोस्।'
+                }
+            },
+            // 18. Lower Back Pain
+            'backpain': {
+                icon: 'fa-person-walking-with-cane', color: 'text-amber-700', name_en: 'Lower Back Pain', name_ne: 'कम्मर दुखाइ',
+                en: {
+                    intro: 'A very common condition involving pain or discomfort in the lower back area, often acute or chronic.',
+                    causes: 'Poor posture, heavy lifting, sedentary lifestyle, muscle strains, or disc problems.',
+                    aware: 'Practice correct lifting techniques (lift with legs, not back). Maintain good posture while sitting and standing. Engage in core strengthening exercises.'
+                },
+                ne: {
+                    intro: 'कम्मरको तल्लो भागमा हुने दुखाइ वा असुविधा, जुन प्रायः तीव्र वा दीर्घकालीन हुन्छ।',
+                    causes: 'गलत आसन, भारी सामान उठाउनु, निष्क्रिय जीवनशैली, मांसपेशी तानिनु, वा डिस्क समस्याहरू।',
+                    aware: 'उचित तरिकाले उठाउने अभ्यास गर्नुहोस् (कम्मरले होइन, खुट्टाले उठाउनुहोस्)। बस्दा र उभिँदा राम्रो आसन कायम राख्नुहोस्। कोर बलियो बनाउने व्यायामहरूमा संलग्न हुनुहोस्।'
+                }
+            },
+            // 19. Depression/Anxiety
+            'mental': {
+                icon: 'fa-brain', color: 'text-fuchsia-600', name_en: 'Depression/Anxiety', name_ne: 'डिप्रेसन/चिन्ता',
+                en: {
+                    intro: 'Common mental health disorders causing persistent sadness, lack of interest, excessive worry, and physical symptoms.',
+                    causes: 'A complex interplay of genetic, biological, environmental, and psychological factors, including chronic stress and trauma.',
+                    aware: 'Prioritize sleep and nutrition. Practice mindfulness and relaxation techniques. Seek professional help (counseling/therapy) if symptoms persist. Do not ignore mental health.'
+                },
+                ne: {
+                    intro: 'सामान्य मानसिक स्वास्थ्य विकारहरू जसले निरन्तर उदासी, रुचि नहुनु, अत्यधिक चिन्ता, र शारीरिक लक्षणहरू निम्त्याउँछ।',
+                    causes: 'आनुवंशिक, जैविक, वातावरणीय, र मनोवैज्ञानिक कारकहरूको जटिल अन्तरक्रिया, जसमा दीर्घकालीन तनाव र आघात समावेश छन्।',
+                    aware: 'सुत्ने र पोषणमा प्राथमिकता दिनुहोस्। माइन्डफुलनेस र विश्राम प्रविधिहरूको अभ्यास गर्नुहोस्। यदि लक्षणहरू जारी रहन्छन् भने पेशेवर मद्दत (परामर्श/चिकित्सा) खोज्नुहोस्। मानसिक स्वास्थ्यलाई बेवास्ता नगर्नुहोस्।'
+                }
+            },
+            // 20. Skin Fungal Infections
+            'fungal': {
+                icon: 'fa-spa', color: 'text-gray-500', name_en: 'Skin Fungal Infections', name_ne: 'छालाको फंगल संक्रमण',
+                en: {
+                    intro: 'Common skin infections like ringworm and athlete\'s foot, typically causing red, itchy, and scaly patches.',
+                    causes: 'Fungi thriving in warm, moist environments, spread through contact with infected individuals or contaminated surfaces.',
+                    aware: 'Keep skin clean and dry, especially in folds (groin, armpits, toes). Wear clean, breathable clothing. Avoid sharing towels and personal items.'
+                },
+                ne: {
+                    intro: 'दाद र एथलीटको खुट्टा जस्ता सामान्य छाला संक्रमणहरू, जसले प्रायः रातो, चिलाउने र पाप्रो आउने दागहरू निम्त्याउँछ।',
+                    causes: 'न्यानो, ओसिलो वातावरणमा फंगसहरू फस्टाउँछन्, जुन संक्रमित व्यक्तिहरू वा दूषित सतहहरूसँगको सम्पर्कबाट फैलिन्छ।',
+                    aware: 'छालालाई सफा र सुख्खा राख्नुहोस्, विशेष गरी तहहरूमा (ग्रोइन, काखी, औंलाहरू)। सफा, सास फेर्ने लुगा लगाउनुहोस्। तौलिया र व्यक्तिगत सामानहरू साझा गर्नबाट जोगिनुहोस्।'
+                }
+            },
         };
         const diseaseKeys = Object.keys(nepoDiseaseData).slice(0, 20); 
 
@@ -337,7 +589,7 @@
             { title: "Housekeeping Staff (Part-Time)", company: "CleanPro Services", pay: "NPR 350/hr", location: "Lazimpat", type: "Service", icon: "fa-broom" },
             { title: "Customer Service Agent (Nepali/English)", company: "Telecom Support", pay: "NPR 25k/month", location: "Teku", type: "Call Center", icon: "fa-headset" },
             { title: "Social Media Intern", company: "Fashion Retailer", pay: "NPR 8k/month + Stipend", location: "New Road", type: "Marketing", icon: "fa-share-alt" },
-            { title: "Waiter/Waitress (Hotel Experience)", company: "Luxury Hotel Patan", pay: "NPR 15k/month + Tips", location: "Patan", type: "Hospitality", icon: "fa-bell-concierge" }
+            { title: "Waiter/Waitress (Hotel Experience)", company: "Luxury Hotel Patan", pay: "NPR 15k/month + Tips", location: "Patan", icon: "fa-bell-concierge" }
         ];
 
         const nepoWalletTransactions_full = [
@@ -358,37 +610,51 @@
         
         // This is used for the Profile and the Founder section
         const nepoProfileData = {
-            name: "Asha Lama",
+            // --- MODIFIED DATA START (Name change and icon removal retained) ---
+            name: "Rajan Oli", 
             status: "Verified Platinum User",
             phone: "+977 98XXXXXXXX",
-            email: "asha.lama@example.com",
+            email: "rajan.oli@example.com",
             address: "Boudha, Kathmandu",
             memberSince: "May 2023",
             nepoPoints: 1250, 
             securityStatus: "High (2FA Enabled)",
-            // EXPANDED RECENT ACTIVITY (20 items for scrolling test)
+            // EXTENDED recentActivity to 30 entries
             recentActivity: [
-                { type: "Ride", details: "Thamel to Airport (Completed)", date: "Oct 30", status: "Completed", icon: "fa-car" },
-                { type: "Shopping", details: "Dhaka Topi Purchase (Delivered)", date: "Oct 28", status: "Delivered", icon: "fa-bag-shopping" },
-                { type: "SecondHand", details: "Bought iPhone 12 (45,000 NPR)", date: "Oct 26", status: "Completed", icon: "fa-mobile-screen-button" },
-                { type: "Donation", details: "Flood Relief Fund (5,000 NPR)", date: "Oct 25", status: "Success", icon: "fa-hand-holding-heart" },
-                { type: "Job", details: "Applied: Cafe Assistant", date: "Oct 24", status: "Pending", icon: "fa-briefcase" },
-                { type: "Wallet", details: "Electricity Bill Payment (2,850 NPR)", date: "Oct 22", status: "Completed", icon: "fa-plug" },
-                { type: "Care", details: "Booked Home Nurse Visit", date: "Oct 20", status: "Scheduled", icon: "fa-user-nurse" },
-                { type: "Ride", details: "Patan to Baneshwor (Completed)", date: "Oct 20", status: "Completed", icon: "fa-car" },
-                { type: "Visa", details: "AU Student Check (Processing)", date: "Oct 18", status: "Processing", icon: "fa-passport" },
-                { type: "Wallet", details: "Received Freelance Pay (15,000 NPR)", date: "Oct 15", status: "Success", icon: "fa-arrow-down" },
-                { type: "RoomRent", details: "Viewed Kirtipur Listing", date: "Oct 10", status: "Viewed", icon: "fa-house-chimney" },
-                { type: "Shopping", details: "Nepali Coffee Beans (Delivered)", date: "Oct 08", status: "Delivered", icon: "fa-mug-saucer" },
-                { type: "Explore", details: "Visited Swayambhunath Stupa", date: "Oct 01", status: "Completed", icon: "fa-temple" },
-                { type: "Job", details: "Interviewed: Content Writer", date: "Sept 28", status: "Pending", icon: "fa-file-alt" },
-                { type: "SecondHand", details: "Listed DSLR Camera", date: "Sept 25", status: "Active", icon: "fa-camera" },
-                { type: "Wallet", details: "ATM Withdrawal (5,000 NPR)", date: "Sept 20", status: "Completed", icon: "fa-money-bill-transfer" },
-                { type: "Ride", details: "Bhaktapur to Sanga Hill (Completed)", date: "Sept 18", status: "Completed", icon: "fa-car" },
-                { type: "Care", details: "Canceled: Physiotherapy", date: "Sept 15", status: "Cancelled", icon: "fa-stethoscope" },
-                { type: "Donation", details: "Animal Shelter (1,000 NPR)", date: "Sept 10", status: "Success", icon: "fa-paw" },
-                { type: "Shopping", details: "Smartwatch Purchase (Shipped)", date: "Sept 5", status: "Shipped", icon: "fa-clock" },
+                { type: "Ride", details: "Thamel to Airport (Completed)", date: "Oct 30", status: "Completed" },
+                { type: "Shopping", details: "Dhaka Topi Purchase (Delivered)", date: "Oct 28", status: "Delivered" },
+                { type: "SecondHand", details: "Bought iPhone 12 (45,000 NPR)", date: "Oct 26", status: "Completed" },
+                { type: "Donation", details: "Flood Relief Fund (5,000 NPR)", date: "Oct 25", status: "Success" },
+                { type: "Job", details: "Applied: Cafe Assistant", date: "Oct 24", status: "Pending" },
+                { type: "Wallet", details: "Electricity Bill Payment (2,850 NPR)", date: "Oct 22", status: "Completed" },
+                { type: "Care", details: "Booked Home Nurse Visit", date: "Oct 20", status: "Scheduled" },
+                { type: "Ride", details: "Patan to Baneshwor (Completed)", date: "Oct 20", status: "Completed" },
+                { type: "Visa", details: "AU Student Check (Processing)", date: "Oct 18", status: "Processing" },
+                { type: "Wallet", details: "Received Freelance Pay (15,000 NPR)", date: "Oct 15", status: "Success" },
+                { type: "RoomRent", details: "Viewed Kirtipur Listing", date: "Oct 10", status: "Viewed" },
+                { type: "Shopping", details: "Nepali Coffee Beans (Delivered)", date: "Oct 08", status: "Delivered" },
+                { type: "Explore", details: "Visited Swayambhunath Stupa", date: "Oct 01", status: "Completed" },
+                { type: "Job", details: "Interviewed: Content Writer", date: "Sept 28", status: "Pending" },
+                { type: "SecondHand", details: "Listed DSLR Camera", date: "Sept 25", status: "Active" },
+                { type: "Wallet", details: "ATM Withdrawal (5,000 NPR)", date: "Sept 20", status: "Completed" },
+                { type: "Ride", details: "Bhaktapur to Sanga Hill (Completed)", date: "Sept 18", status: "Completed" },
+                { type: "Care", details: "Canceled: Physiotherapy", date: "Sept 15", status: "Cancelled" },
+                { type: "Donation", details: "Animal Shelter (1,000 NPR)", date: "Sept 10", status: "Success" },
+                { type: "Shopping", details: "Smartwatch Purchase (Shipped)", date: "Sept 5", status: "Shipped" },
+                
+                // Added 10 new history entries for testing scrolling
+                { type: "Explore", details: "Booked Hiking Trip", date: "Sept 1", status: "Scheduled" },
+                { type: "Visa", details: "UK Skilled Worker Check", date: "Aug 28", status: "Approved" },
+                { type: "Wallet", details: "Received E-Sewa Transfer", date: "Aug 25", status: "Success" },
+                { type: "RoomRent", details: "Paid Advance for New Flat", date: "Aug 20", status: "Completed" },
+                { type: "Job", details: "Accepted Job Offer: BPO", date: "Aug 15", status: "Hired" },
+                { type: "Ride", details: "Gongabu to Baneshwor", date: "Aug 10", status: "Completed" },
+                { type: "Shopping", details: "Purchased Winter Boots", date: "Aug 5", status: "Delivered" },
+                { type: "Donation", details: "Disaster Relief Fund", date: "Aug 1", status: "Success" },
+                { type: "SecondHand", details: "Sold Old Phone (7,000 NPR)", date: "July 28", status: "Completed" },
+                { type: "Care", details: "Annual Health Checkup", date: "July 25", status: "Completed" },
             ],
+            // --- MODIFIED DATA END ---
             founder: {
                 name: "Bipin Hamal",
                 title: "Student, IoT at Baekseok University",
@@ -982,12 +1248,160 @@
             modalContentEl.innerHTML = html;
         }
 
+        // ----------------------------------------------
+        // NEW FUNCTIONS FOR PROFILE INTERACTION START
+        // ----------------------------------------------
+
+        // Renders the combined Contact Details and Recent Activity view (expanded view)
+        function showDetails() {
+            const profile = nepoProfileData;
+            
+            // Set modal title to only display "Recent Nepo Activity"
+            document.getElementById('modal-title').textContent = "Recent Nepo Activity";
+
+            // --- START MODIFIED HTML (REMOVED MEMBERSHIP DETAILS and fixed scrolling) ---
+            const contactActivityHtml = `<div class="p-4">
+                <div class="text-center mb-4 sticky top-0 bg-white z-10 pt-2 pb-2 border-b border-gray-200">
+                    <button onclick="renderProfileContent('full')" class="text-indigo-600 hover:text-indigo-800 font-semibold mb-2 flex items-center mx-auto">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Profile Summary
+                    </button>
+                    <h3 class="text-xl font-bold text-gray-900">Activity Timeline</h3>
+                </div>
+
+                <div id="activity-list-container-anchor"></div> 
+                
+                <div class="mt-4">
+                    <h4 class="text-lg font-bold text-gray-800 mb-3">All Recent Actions (${profile.recentActivity.length})</h4>
+                    
+                    <!-- SCROLLING FIX APPLIED HERE: Added max-h-[70vh] and scrollable-content -->
+                    <div class="space-y-4 pb-4 max-h-[70vh] scrollable-content overflow-y-auto">
+                        ${profile.recentActivity.map(activity => `
+                            <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
+                                <div class="flex items-center">
+                                    <div class="w-1 mr-3"></div> 
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${activity.type}: ${activity.details}</p>
+                                        <p class="text-xs text-gray-400">${activity.date}</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-semibold flex-shrink-0 ml-1 ${activity.status === 'Completed' || activity.status === 'Delivered' || activity.status === 'Success' || activity.status === 'Active' || activity.status === 'Hired' ? 'text-green-600' : activity.status === 'Pending' || activity.status === 'Scheduled' || activity.status === 'Processing' ? 'text-orange-600' : 'text-gray-500'}">${activity.status}</span>
+                            </div>
+                        `).join('')}
+                        <div class="text-center p-4 text-gray-400 text-sm">-- End of activity --</div>
+                    </div>
+                </div>
+                
+            </div>`;
+            // --- END MODIFIED HTML (REMOVED MEMBERSHIP DETAILS and fixed scrolling) ---
+            modalContentEl.innerHTML = contactActivityHtml;
+            // Ensure the main scrollable container scrolls to top
+            document.getElementById('modal-content').scrollTop = 0;
+        }
+        window.showDetails = showDetails; // Expose to window
+
+        // Renders the main Profile view (initial state)
+        function renderProfileContent(viewState) {
+            const profile = nepoProfileData;
+
+            // Reset title if coming back from detailed view
+            if (viewState === 'full') {
+                 document.getElementById('modal-title').textContent = "My Profile";
+            }
+            
+            let html = `<div class="p-4">
+                <div class="flex flex-col items-center p-4 bg-gray-50 rounded-xl shadow-inner mb-6">
+                    <!-- RESIZED PROFILE ICON: Smaller (w-16 h-16) and smaller font (text-2xl) -->
+                    <div class="w-16 h-16 rounded-full bg-indigo-500 text-white flex items-center justify-center text-2xl font-bold mb-2 border-4 border-white shadow-lg">
+                        ${profile.name[0]}
+                    </div>
+                    <p class="text-xl font-bold text-gray-900">${profile.name}</p>
+                    <p class="text-sm font-medium ${profile.status.includes('Platinum') ? 'text-amber-600' : 'text-green-600'}">${profile.status}</p>
+
+                    <div class="mt-3 p-2 bg-amber-100 rounded-lg w-full text-center">
+                        <p class="text-sm font-semibold text-amber-700">
+                            <i class="fas fa-medal mr-1"></i> Nepo Points: ${profile.nepoPoints.toLocaleString()}
+                        </p>
+                    </div>
+                </div>
+
+                <div onclick="showDetails()" class="cursor-pointer mb-6 p-4 rounded-xl transition hover:bg-gray-100 border border-gray-200 shadow-md">
+                    
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-lg font-semibold text-gray-800">Contact & Membership</h3>
+                        <i class="fas fa-chevron-right text-sm text-indigo-500"></i>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-phone-alt text-sm text-center text-indigo-500 mr-2 w-3"></i>
+                            <span class="text-sm">${profile.phone}</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-envelope text-sm text-center text-indigo-500 mr-2 w-3"></i>
+                            <span class="text-sm">${profile.email}</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-700">
+                            <i class="fas fa-map-marker-alt text-sm text-center text-indigo-500 mr-2 w-3"></i>
+                            <span class="text-sm">${profile.address}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                </div>`;
+            modalContentEl.innerHTML = html;
+        }
+        window.renderProfileContent = renderProfileContent; // Expose to window
+
+        // --- NEW FUNCTION TO RENDER PAST RIDES ---
+        function openPastRidesModal() {
+            document.getElementById('modal-title').textContent = "Past Rides History";
+            
+            const pastRidesHtml = `<div class="p-4">
+                <div class="text-center mb-4 sticky top-0 bg-white z-10 pt-2 pb-2 border-b border-gray-200">
+                    <button onclick="renderModalContent('driving')" class="text-indigo-600 hover:text-indigo-800 font-semibold mb-2 flex items-center mx-auto">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Ride Request
+                    </button>
+                    <h3 class="text-xl font-bold text-gray-900">Completed Journeys (${nepoDrivingPastExamples.length})</h3>
+                </div>
+
+                <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                    ${nepoDrivingPastExamples.map(ride => `
+                        <div class="p-3 bg-white border border-gray-200 rounded-lg flex justify-between items-center shadow-sm">
+                            <div>
+                                <p class="font-medium text-sm text-gray-800">${ride.pickup} <i class="fas fa-arrow-right mx-1 text-xs"></i> ${ride.dropoff}</p>
+                                <p class="text-xs text-gray-500">${ride.type}</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm font-bold text-green-600">NPR ${ride.cost.toLocaleString()}</span>
+                                <p class="text-xs text-gray-400">${ride.status}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div class="text-center p-4 text-gray-400 text-sm">-- End of history --</div>
+                </div>
+            </div>`;
+
+            modalContentEl.innerHTML = pastRidesHtml;
+            document.getElementById('modal-content').scrollTop = 0;
+        }
+        window.openPastRidesModal = openPastRidesModal;
+        // --- END NEW FUNCTION ---
+
 
         function renderModalContent(serviceKey) {
+            // Re-render the full modal content based on the selected service
+            
+            if (serviceKey === 'profile') {
+                 // **FIX:** Directly call the initial full profile renderer
+                 renderProfileContent('full'); 
+                 return; 
+            }
+            
             const data = serviceData[serviceKey] || [];
             const service = serviceMap[serviceKey];
-            let html = `<div class="p-4">`;
+            let html = ``;
             const color = service ? service.color : 'bg-gray-600'; 
+
 
             if (serviceKey === 'driving') {
                 // Functional service for demo: Nepo Driving
@@ -1001,10 +1415,20 @@
                 // Show the current user ID for multi-user collaboration visibility
                 const userIdDisplay = isAuthReady ? `<p class="text-xs text-gray-500 mb-2">Your User ID: <span class="font-mono text-indigo-600">${userId}</span></p>` : '';
 
-                html += `
+                html = `<div class="p-4">
                     ${demoWarning}
+                    
+                    <div class="flex justify-between items-center mb-4 sticky top-0 bg-white z-10 pt-1 pb-3">
+                        <h3 class="text-xl font-semibold text-gray-800">Request a Ride (Ride-hailing)</h3>
+                        
+                        <!-- PAST RIDES BUTTON ADDED HERE -->
+                        <button onclick="openPastRidesModal()" class="flex items-center text-xs font-semibold text-indigo-600 bg-indigo-100 px-3 py-1.5 rounded-full hover:bg-indigo-200 transition duration-150">
+                            <i class="fas fa-history text-sm mr-1.5"></i> History
+                        </button>
+                        <!-- END BUTTON -->
+                    </div>
+
                     ${userIdDisplay}
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Request a Ride (Ride-hailing)</h3>
                     <form id="driving-form" class="space-y-4 mb-8">
                         <input type="text" id="driving-pickup" placeholder="Pickup Location (GPS)" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
                         <input type="text" id="driving-dropoff" placeholder="Destination" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
@@ -1035,25 +1459,9 @@
                         }
                     </div>
                     
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Recent Ride History (Examples)</h3>
-                    <div class="space-y-3 max-h-64 scrollable-content overflow-y-auto pb-4">
-                        ${nepoDrivingPastExamples.map(ride => `
-                            <div class="p-3 bg-gray-50 border border-gray-200 rounded-lg flex justify-between items-center">
-                                <div>
-                                    <p class="font-medium text-sm text-gray-800">${ride.pickup} <i class="fas fa-arrow-right mx-1 text-xs"></i> ${ride.dropoff}</p>
-                                    <p class="text-xs text-gray-500">${ride.type} • ${ride.date}</p>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-sm font-bold text-green-600">NPR ${ride.cost.toLocaleString()}</span>
-                                    <p class="text-xs text-gray-400">${ride.status}</p>
-                                </div>
-                            </div>
-                        `).join('')}
-                        <div class="text-center p-4 text-gray-400 text-sm">-- End of completed ride examples --</div>
-                    </div>
-                `;
+                    <div class="text-center p-4 text-gray-400 text-sm">-- End of active requests --</div>
+                </div>`;
             } else if (serviceKey === 'care') {
-                // Nepo Care - Disease Awareness and Pharmacy Feature
                 const defaultDiseaseKey = diseaseKeys[0]; 
 
                 html = `
@@ -1158,10 +1566,9 @@
                          switchCareTab('pharmacy'); 
                     }
                 }, 50); 
-
             } else if (serviceKey === 'news') {
-                 // Nepo News - UPDATED TO INCLUDE HYPERLINKS TO EXTERNAL SOURCES AND REALISTIC HEADLINES
-                html += `
+                 // Nepo News 
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Personalized News Feed (${nepoNewsExamples_full.length})</h3>
                     <p class="text-sm text-gray-500 mb-4">Clicking a headline will redirect to the original source portal.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
@@ -1181,10 +1588,10 @@
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of news feed examples --</div>
                     </div>
-                `;
+                </div>`;
             } else if (serviceKey === 'calendar') {
                 // Nepo Calendar
-                html += `
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Upcoming Events (Bikram Sambat: ${nepoCalendarExamples_full.length})</h3>
                     <p class="text-sm text-gray-500 mb-4">Nepali dates, festivals, and personal reminders.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
@@ -1202,10 +1609,10 @@
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of calendar examples --</div>
                     </div>
-                `;
+                </div>`;
             } else if (serviceKey === 'secondhand') {
                 // Nepo Second-Hand Market
-                html += `
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Featured Second-Hand Listings (${nepoSecondHandExamples_full.length})</h3>
                     <p class="text-sm text-gray-500 mb-4">Buy and sell verified used goods locally.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
@@ -1223,10 +1630,10 @@
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of market examples --</div>
                     </div>
-                `;
+                </div>`;
             } else if (serviceKey === 'shopping') {
                 // Nepo Online Shopping
-                html += `
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Your Recent Shopping Orders (${nepoShoppingExamples_full.length})</h3>
                     <p class="text-sm text-gray-500 mb-4">Tracking digital marketplace purchases.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
@@ -1247,10 +1654,10 @@
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of shopping examples --</div>
                     </div>
-                `;
+                </div>`;
             } else if (serviceKey === 'visa') {
                 // Nepo Visa Check
-                html += `
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Visa/Immigration Status Checks (${nepoVisaExamples_full.length})</h3>
                     <p class="text-sm text-gray-500 mb-4">API-based status verification for citizens abroad.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
@@ -1271,10 +1678,10 @@
                         }).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of visa check examples --</div>
                     </div>
-                `;
+                </div>`;
             } else if (serviceKey === 'donation') {
                 // Nepo Donation
-                html += `
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Your Donation History (${nepoDonationExamples_full.length})</h3>
                     <p class="text-sm text-gray-500 mb-4">Secure platform to donate and track organizations.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
@@ -1295,10 +1702,10 @@
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of donation examples --</div>
                     </div>
-                `;
+                </div>`;
             } else if (serviceKey === 'roomrent') {
                 // Nepo Room Rent
-                html += `
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Featured Rental Listings (${nepoRoomRentExamples_full.length})</h3>
                     <p class="text-sm text-gray-500 mb-4">Search or list rooms, flats, and houses.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
@@ -1316,10 +1723,10 @@
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of rental examples --</div>
                     </div>
-                `;
+                </div>`;
             } else if (serviceKey === 'jobs') {
                 // Nepo Part-Time Job
-                html += `
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Local Part-Time Opportunities (${nepoJobsExamples_full.length})</h3>
                     <p class="text-sm text-gray-500 mb-4">Job board for students and freelance workers.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
@@ -1337,10 +1744,10 @@
                         `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of job examples --</div>
                     </div>
-                `;
+                </div>`;
             } else if (serviceKey === 'wallet') {
                 // My Wallet
-                html += `<div class="p-4">
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">My Nepo Wallet</h3>
                     
                     <div class="header-gradient p-6 rounded-xl shadow-lg mb-6 text-white">
@@ -1383,7 +1790,7 @@
                 </div>`;
             } else if (serviceKey === 'explore') {
                 // Explore Destinations
-                html += `<div class="p-4">
+                html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Explore: Local Destinations</h3>
                     <p class="text-sm text-gray-500 mb-4">Discover popular local events, sites, and activities near you.</p>
 
@@ -1408,83 +1815,24 @@
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of explore examples --</div>
                     </div>
                 </div>`;
-            } else if (serviceKey === 'profile') {
-                // User Profile (FIXED SCROLLING: Increased max-h to 45vh)
-                const profile = nepoProfileData;
-                html += `<div class="p-4">
-                    <div class="flex flex-col items-center p-6 bg-gray-50 rounded-xl shadow-inner mb-6">
-                        <div class="w-24 h-24 rounded-full bg-indigo-500 text-white flex items-center justify-center text-4xl font-bold mb-3 border-4 border-white shadow-lg">
-                            ${profile.name[0]}
-                        </div>
-                        <p class="text-xl font-bold text-gray-900">${profile.name}</p>
-                        <p class="text-sm font-medium ${profile.status.includes('Platinum') ? 'text-amber-600' : 'text-green-600'}">${profile.status}</p>
-
-                        <div class="mt-4 p-2 bg-amber-100 rounded-lg w-full text-center">
-                            <p class="text-sm font-semibold text-amber-700">
-                                <i class="fas fa-medal mr-1"></i> Nepo Points: ${profile.nepoPoints.toLocaleString()}
-                            </p>
-                        </div>
-                    </div>
-
-                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Contact & Membership</h3>
-                    <div class="space-y-2 mb-6">
-                        <div class="flex items-center text-sm text-gray-700">
-                            <i class="fas fa-phone-alt w-5 text-center text-indigo-500 mr-2"></i>
-                            <span>${profile.phone}</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-700">
-                            <i class="fas fa-envelope w-5 text-center text-indigo-500 mr-2"></i>
-                            <span>${profile.email}</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-700">
-                            <i class="fas fa-map-marker-alt w-5 text-center text-indigo-500 mr-2"></i>
-                            <span>${profile.address}</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-700">
-                            <i class="fas fa-calendar-alt w-5 text-center text-indigo-500 mr-2"></i>
-                            <span>Member Since: ${profile.memberSince}</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-700">
-                            <i class="fas fa-shield-alt w-5 text-center text-green-500 mr-2"></i>
-                            <span>Security: <span class="font-medium text-green-600">${profile.securityStatus}</span></span>
-                        </div>
-                    </div>
-
-                    <h3 class="text-lg font-semibold mb-3 text-gray-800 mt-6">Recent Nepo Activity (${profile.recentActivity.length})</h3>
-                    <div class="space-y-3 max-h-[45vh] scrollable-content overflow-y-auto pb-4">
-                        ${profile.recentActivity.map(activity => `
-                            <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
-                                <div class="flex items-center">
-                                    <i class="fas ${activity.icon} text-lg text-gray-500 mr-3"></i>
-                                    <div>
-                                        <p class="font-medium text-sm text-gray-800">${activity.type}: ${activity.details}</p>
-                                        <p class="text-xs text-gray-400">${activity.date}</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs font-semibold ${activity.status === 'Completed' || activity.status === 'Delivered' || activity.status === 'Success' ? 'text-green-600' : 'text-gray-500'}">${activity.status}</span>
-                            </div>
-                        `).join('')}
-                        <div class="text-center p-4 text-gray-400 text-sm">-- End of activity --</div>
-                    </div>
-                </div>`;
-
             } else {
                 // Generic content for the other services
-                html += `
+                html = `<div class="p-4">
                     <p class="text-center text-gray-500 pt-8 text-lg font-medium">
                         Welcome to the <span class="text-gray-800 font-bold">${service.name}</span> service!
                     </p>
                     <div class="text-center p-8">
                         <i class="fas ${service.icon} text-6xl text-gray-300 mb-4"></i>
-                        <p class="text-gray-400 mt-2">This feature is coming soon and will include its core functions: ${service.name} is about ${service.name === 'Nepo News' ? 'real-time local updates and personalized feeds.' : service.name === 'Nepo Calendar' ? 'Bikram Sambat dates, festivals, and event reminders.' : service.name === 'Nepo Care' ? 'online health bookings and remote consultations.' : service.name === 'Nepo Second-Hand Market' ? 'verified listings to buy and sell used goods safely.' : service.name === 'Nepo Online Shopping' ? 'a digital marketplace with fast local delivery.' : service.name === 'Nepo Visa Check' ? 'API-based visa and immigration status verification.' : service.name === 'Nepo Donation' ? 'a secure platform to donate to local charities and causes.' : service.name === 'Nepo Room Rent' ? 'an online service connecting landlords and tenants for housing.' : 'a local job board for part-time and freelance opportunities.'}</p>
+                        <p class="text-gray-400 mt-2">This feature is coming soon and will include its core functions: ${service.name} is about ${service.name === 'Nepo News' ? 'real-time local updates and personalized feeds.' : service.name === 'Nepo Calendar' ? 'Bikram Sambat dates, festivals, and event reminders.' : service.name === 'Nepo Care' ? 'online health bookings and remote consultations.' : service.name === 'Nepo Second-Hand Market' ? 'verified listings to buy and sell used goods safely.' : service.name === 'Nepo Online Shopping' ? 'a digital marketplace with fast local delivery.' : service.name === 'Nepo Visa Check' ? 'API-based visa and immigration status verification.' : service.name === 'Nepo Donation' ? 'a secure platform to donate to local charities and causes.' : service.name === 'Nepo Room Rent' ? 'an online service connecting landlords and tenants and housing.' : 'a local job board for part-time and freelance opportunities.'}</p>
                     </div>
-                `;
+                </div>`;
             }
 
-            html += `</div>`;
             modalContentEl.innerHTML = html;
             attachFormListeners(serviceKey);
         }
+        
+        // --- End of renderModalContent ---
 
         // Attach listeners to newly rendered forms
         function attachFormListeners(serviceKey) {
@@ -1756,3 +2104,4 @@
 
 </body>
 </html>
+
