@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nepo Super App</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Updated Font Awesome to include a wider range of icons, though specific flags may not be in the free tier -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         :root {
             --primary-color: #2563eb; /* Blue 600 */
@@ -178,55 +179,9 @@
             { pickup: "Bhaktapur", dropoff: "Sanga Hill", status: "Completed", type: "Car", cost: 720 }
         ];
 
-        // --- UPDATED: 10 News Examples (First one replaced with the full Nepali article) ---
-        const nepoNewsFullArticle = `
-            <div class="space-y-4 text-gray-800">
-                <p class="text-xs text-gray-500 font-medium">Published: 1 hr ago | Source: प्रविधि विश्लेषकहरू</p>
-                <h3 class="text-3xl font-extrabold text-red-600">📰 'नेपो सुपर एप' को भविष्यः डिजिटल नेपालको एकीकरणतर्फ एक क्रान्तिकारी फड्को</h3>
-                
-                <p class="text-lg font-medium border-l-4 border-red-400 pl-3">काठमाडौँ – नेपालको डिजिटल बजारमा ठूलो परिवर्तन ल्याउन सक्ने सम्भाव्यता बोकेको 'नेपो सुपर एप' (Nepo Super App) को प्रोटोटाइपले प्रविधि विश्लेषकहरू र उद्यमीहरूको ध्यान खिचेको छ। बीपीन हमालको नेतृत्वमा विकसित भइरहेको यो एप यदि पूर्ण रूपमा निर्माण भई सन् २०२८ को अन्त्यसम्ममा बजारमा आयो भने यसले नेपालीहरूको दैनिक जीवनलाई सरल र डिजिटल अर्थतन्त्रलाई व्यापक बनाउने देखिएको छ।</p>
-
-                <p class="text-sm">विज्ञहरूका अनुसार, ११ भन्दा बढी अत्यावश्यक सेवाहरूलाई एकै प्लेटफर्ममा समेट्ने नेपो एपको यो एकीकृत अवधारणा (Unified Ecosystem) नेपालको डिजिटल इकोसिस्टमका लागि गेम-चेन्जर साबित हुन सक्छ।</p>
-
-                <h4 class="text-xl font-bold text-gray-900 pt-2 border-t border-gray-200">डिजिटल रूपान्तरणका मुख्य आधारहरू</h4>
-
-                <h5 class="text-lg font-semibold text-red-700">१. वित्तीय पहुँच र डिजिटल कारोबारमा क्रान्ति 💸</h5>
-                <p class="text-sm"> 'माइ वालेट' (My Wallet) सुविधाले नेपालमा वित्तीय समावेशितालाई तीव्र पार्नेछ। राइड-हेलिङ, अनलाइन किनमेल, र युटिलिटी भुक्तानीजस्ता सेवाहरू वालेटसँगै जोडिएर आउँदा भुक्तानी प्रक्रिया निकै सरल हुनेछ।</p>
-                <ul class="list-disc pl-5 text-sm space-y-1 ml-2">
-                    <li><span class="font-medium text-indigo-600">नगदविहीन अर्थतन्त्रलाई बढावा:</span> एकीकृत डिजिटल वालेटले ग्रामीण तथा सहरी दुवै क्षेत्रमा नगदमाथिको निर्भरता कम गरी डिजिटल भुक्तानीको प्रचलनलाई व्यापक बनाउनेछ।</li>
-                    <li><span class="font-medium text-indigo-600">ई-कमर्सको विस्तार:</span> 'नेपो अनलाइन सपिङ' र 'सेकेन्ड-ह्यान्ड मार्केट' जस्ता सुविधाले साना र स्थानीय व्यवसायहरूलाई ठूलो ग्राहक आधारमा पुग्न मद्दत गर्नेछ, जसले नेपालको ई-कमर्स बजारको तीव्र वृद्धिलाई सहयोग पुर्‍याउनेछ।</li>
-                </ul>
-
-                <h5 class="text-lg font-semibold text-red-700">२. यातायात, रोजगारी र सहरी विकासमा सुधार 🛵</h5>
-                <p class="text-sm"> 'नेपो ड्राइभिङ' (Nepo Driving) सेवाको सफल कार्यान्वयनले उपभोक्तालाई भरपर्दो र सुरक्षित यातायातको विकल्प दिनेछ।</p>
-                <ul class="list-disc pl-5 text-sm space-y-1 ml-2">
-                    <li><span class="font-medium text-indigo-600">सुलभता र रोजगारी:</span> यसले राइडरहरूका लागि ठूलो संख्यामा रोजगारीका अवसरहरू सिर्जना गर्नेछ, जुन एपमा रहेको 'पार्ट-टाइम जब' (Part-Time Job) बोर्डसँग मिलेर काम खोज्नेहरूलाई थप सुविधा पुग्नेछ।</li>
-                    <li><span class="font-medium text-indigo-600">यातायात व्यवस्थापन:</span> एकीकृत राइड-हेलिङ प्रणालीले सहरी क्षेत्रको यातायात व्यवस्थापनमा सुधार ल्याउनुका साथै यात्रुहरूलाई सही समयमा सेवा उपलब्ध गराउन मद्दत गर्नेछ।</li>
-                </ul>
-
-                <h5 class="text-lg font-semibold text-red-700">३. स्वास्थ्य, सचेतना र सामाजिक उत्तरदायित्व ❤️</h5>
-                <p class="text-sm">स्वास्थ्य सेवा र सामाजिक कल्याणसँग सम्बन्धित सेवाहरूले सामाजिक स्तरमा सकारात्मक प्रभाव पार्नेछ।</p>
-                <ul class="list-disc pl-5 text-sm space-y-1 ml-2">
-                    <li><span class="font-medium text-indigo-600">स्वास्थ्य सूचनामा पहुँच:</span> 'नेपो केयर' (Nepo Care) भित्रको रोग सचेतना सुविधाले नेपाली र अंग्रेजी दुवै भाषामा २० भन्दा बढी सामान्य रोगहरूको रोकथाम र उपचारबारे जानकारी दिनेछ। फार्मेसी स्टक र मूल्यको खोजी गर्ने सुविधाले औषधिको उपलब्धता सहज बनाउनेछ।</li>
-                    <li><span class="font-medium text-indigo-600">पारदर्शी दान:</span> 'नेपो डोनेसन' (Nepo Donation) सुविधाले प्रयोगकर्ताहरूलाई विश्वसनीय र पारदर्शी माध्यमबाट स्थानीय परोपकारी कार्यहरूमा योगदान गर्न प्रोत्साहित गर्नेछ, जसले समुदायमा कल्याणकारी कार्यहरूलाई बलियो बनाउनेछ।</li>
-                </ul>
-
-                <h4 class="text-xl font-bold text-gray-900 pt-2 border-t border-gray-200">निष्कर्ष र आगामी चुनौतीहरू</h4>
-                <p class="text-sm">नेपो सुपर एपको परिकल्पना निकै महत्वाकांक्षी छ, तर यसलाई सफल बनाउन केही जटिलताहरू पार गर्नुपर्नेछ। राइड-हेलिङ र वालेट जस्ता सेवाहरूका लागि आवश्यक नियमनकारी मापदण्डहरू र उच्च-सुरक्षित पूर्वाधारको निर्माण (जसलाई विकासकर्ताले २०२८ को लक्ष्यमा राखेका छन्) मा सफलता प्राप्त गर्नुपर्नेछ।</p>
-                <p class="text-sm font-bold mt-3 p-3 bg-red-50 border-l-4 border-red-400">यदि यो एप आफ्ना सबै ११ सेवाहरूलाई एकै ठाउँमा एकीकृत गर्न सफल भयो भने, नेपो सुपर एप नेपालको डिजिटल क्रान्तिको एउटा महत्त्वपूर्ण औजार बन्ने निश्चित छ। यसले नेपाली बजारमा एकाधिकार कायम नगरे पनि, आम नागरिकको दैनिक आवश्यकताहरू पूरा गर्ने अपरिहार्य डिजिटल प्लेटफर्म को रूपमा स्थापित हुने प्रचुर सम्भावना बोकेको छ।</p>
-            </div>
-        `;
-        
-        // Define a map to hold full news content (only one article for now)
-        const nepoNewsFullContent = {
-            'nepo-super-app-future': nepoNewsFullArticle
-        };
-
-
+        // --- UPDATED: 10 News Examples ---
         const nepoNewsExamples_full = [
-            // The new full article is the first example
-            { title: "📰 'नेपो सुपर एप' को भविष्यः डिजिटल नेपालको एकीकरणतर्फ एक क्रान्तिकारी फड्को", source: "प्रविधि विश्लेषकहरू", time: "1 hr ago", category: "Technology", color: "bg-blue-500", url: 'nepo-super-app-future', isFullArticle: true },
-            // Remaining original examples (excluding the original first one)
+            { title: "Nepal's Ride-Hailing Industry Set to Reach $74 Million Revenue in 2025", source: "Gurkha Technology", time: "1 hr ago", category: "Technology", color: "bg-blue-500", url: getRandomSourceUrl() },
             { title: "Pakhribas Emerging as a Popular New Tourist Destination with View Tower", source: "The Rising Nepal", time: "3 hrs ago", category: "Tourism", color: "bg-green-500", url: getRandomSourceUrl() },
             { title: "International Arrivals Recover to 98% of Pre-Pandemic Levels in 2025", source: "Travel & Tour World", time: "5 hrs ago", category: "Tourism", color: "bg-orange-500", url: getRandomSourceUrl() },
             { title: "NEPSE Posts Double-Digit Gain; All Sectors Close in Green", source: "The Himalayan Times", time: "Yesterday", category: "Business", color: "bg-red-500", url: getRandomSourceUrl() },
@@ -239,6 +194,7 @@
             { title: "Government Launches Digital Literacy Campaign in Rural Provinces", source: "The Himalayan Times", time: "6 days ago", category: "Technology", color: "bg-purple-700", url: getRandomSourceUrl() }
         ];
 
+        // --- UPDATED: 10 Calendar Examples ---
         const nepoCalendarExamples_full = [
             { name: "Dashain (Mahanavami)", date: "Aswin 24, 2082 B.S.", type: "National Festival", color: "bg-red-600", icon: "fa-champagne-glasses" },
             { name: "Tihar (Laxmi Puja)", date: "Kartik 10, 2082 B.S.", type: "National Festival", color: "bg-orange-600", icon: "fa-lightbulb" },
@@ -253,7 +209,9 @@
             { name: "Scheduled Medical Checkup", date: "Poush 10, 2082 B.S.", type: "Personal Reminder", color: "bg-cyan-600", icon: "fa-user-nurse" }
         ];
 
+        // --- 20 Common Disease Data (English & Nepali) - Unchanged for brevity ---
         const nepoDiseaseData = {
+            // 1. Common Cold
             'cold': {
                 icon: 'fa-head-side-cough', color: 'text-blue-500', name_en: 'Common Cold', name_ne: 'सामान्य रुघा',
                 en: {
@@ -267,6 +225,7 @@
                     aware: 'सफा रहनुहोस्, बारम्बार हात धुनुहोस्, र संक्रमित व्यक्तिहरूसँगको नजिकको सम्पर्कबाट जोगिनुहोस्। खोक्दा वा हाच्छिउँ गर्दा मुख र नाक छोप्नुहोस्।'
                 }
             },
+            // 2. Influenza (Flu)
             'flu': {
                 icon: 'fa-virus', color: 'text-red-500', name_en: 'Influenza (Flu)', name_ne: 'इन्फ्लुएन्जा (फ्लू)',
                 en: {
@@ -280,6 +239,7 @@
                     aware: 'हरेक वर्ष फ्लूको खोप लगाउनुहोस्। आँखा, नाक र मुख छुनबाट जोगिनुहोस्। भाइरस फैलिनबाट रोक्न बिरामी हुँदा घरमै बस्नुहोस्।'
                 }
             },
+            // 3. Dengue Fever
             'dengue': {
                 icon: 'fa-mosquito', color: 'text-orange-500', name_en: 'Dengue Fever', name_ne: 'डेङ्गु ज्वरो',
                 en: {
@@ -293,6 +253,7 @@
                     aware: 'आफ्नो घर वरपर जमेको पानी हटाउनुहोस्। लामखुट्टेको जाली र भगाउने औषधि प्रयोग गर्नुहोस्। लामखुट्टेले बढी टोक्ने समयमा लामो बाहुला र पाइन्ट लगाउनुहोस्।'
                 }
             },
+            // 4. Typhoid Fever
             'typhoid': {
                 icon: 'fa-bowl-food', color: 'text-yellow-600', name_en: 'Typhoid Fever', name_ne: 'टाइफाइड ज्वरो',
                 en: {
@@ -306,6 +267,7 @@
                     aware: 'खाना राम्ररी पकाएको र तातो सेवा गरिएको सुनिश्चित गर्नुहोस्। उमालेको, शुद्ध वा बोतलको मात्र पानी पिउनुहोस्। महामारी भएको क्षेत्रमा यात्रा गर्दा खोप लगाउनुहोस्।'
                 }
             },
+            // 5. Diabetes Mellitus (Type 2)
             'diabetes': {
                 icon: 'fa-sugar-cube', color: 'text-pink-600', name_en: 'Diabetes (Type 2)', name_ne: 'मधुमेह (टाइप २)',
                 en: {
@@ -319,6 +281,7 @@
                     aware: 'स्वस्थ शरीरको तौल कायम राख्नुहोस् र प्रशोधित चिनी कम भएको सन्तुलित आहार सेवन गर्नुहोस्। नियमित शारीरिक गतिविधिमा संलग्न हुनुहोस् (दैनिक कम्तिमा ३० मिनेट)।'
                 }
             },
+            // 6. Hypertension (High Blood Pressure)
             'hyper': {
                 icon: 'fa-heart-pulse', color: 'text-indigo-600', name_en: 'Hypertension (High BP)', name_ne: 'उच्च रक्तचाप',
                 en: {
@@ -332,6 +295,7 @@
                     aware: 'नुन र क्याफिन सेवन कम गर्नुहोस्। मदिरा सेवन सीमित गर्नुहोस् र धूम्रपान छोड्नुहोस्। नियमित व्यायाम गर्नुहोस् और ध्यान वा योग मार्फत तनाव व्यवस्थापन गर्नुहोस्।'
                 }
             },
+            // 7. Tuberculosis (TB)
             'tb': {
                 icon: 'fa-lungs', color: 'text-brown-500', name_en: 'Tuberculosis (TB)', name_ne: 'क्षयरोग (टीबी)',
                 en: {
@@ -345,6 +309,7 @@
                     aware: 'बस्ने ठाउँहरूमा उचित भेन्टिलेसन सुनिश्चित गर्नुहोस्। यदि निदान गरिएमा, औषधिको पूर्ण कोर्स बिना अवरोध पूरा गर्नुहोस्। शिशुहरूलाई बीसीजी खोप लगाउनुहोस्।'
                 }
             },
+            // 8. Gastritis/Indigestion
             'gastritis': {
                 icon: 'fa-stomach', color: 'text-green-600', name_en: 'Gastritis/Indigestion', name_ne: 'ग्यास्ट्राइटिस/अपच',
                 en: {
@@ -358,6 +323,7 @@
                     aware: 'पिरो, चिल्लो र धेरै अमिलो खानेकुराबाट जोगिनुहोस्। थोरै-थोरै र बारम्बार खानुहोस्। तनाव व्यवस्थापन गर्नुहोस् र एनएसएआईडीएस (NSAIDs) को प्रयोग सीमित गर्नुहोस्।'
                 }
             },
+            // 9. Chronic Obstructive Pulmonary Disease (COPD)
             'copd': {
                 icon: 'fa-smoking-ban', color: 'text-gray-800', name_en: 'COPD', name_ne: 'फोक्सोको दीर्घकालीन रोग',
                 en: {
@@ -371,6 +337,7 @@
                     aware: 'तत्काल धूम्रपान छोड्नुहोस्। धुलो, धुवाँ, र भित्री खाना पकाउने धुवाँ सहितको सम्पर्कलाई कम गर्नुहोस्। निर्धारित इन्हेलरहरू सही तरिकाले प्रयोग गर्नुहोस्।'
                 }
             },
+            // 10. Kidney Stones
             'kidney': {
                 icon: 'fa-urology', color: 'text-cyan-600', name_en: 'Kidney Stones', name_ne: 'मिर्गौलाको पत्थरी',
                 en: {
@@ -384,6 +351,7 @@
                     aware: 'दिनभरि प्रशस्त पानी पिउनुहोस् (२-३ लिटर)। सोडियम, चिनी र जनावरको प्रोटिन सेवन कम गर्नुहोस्। आहारसम्बन्धी सिफारिसहरूको लागि डाक्टरसँग सल्लाह लिनुहोस्।'
                 }
             },
+            // 11. Asthma
             'asthma': {
                 icon: 'fa-person-running', color: 'text-purple-500', name_en: 'Asthma', name_ne: 'दम रोग',
                 en: {
@@ -397,6 +365,7 @@
                     aware: 'व्यक्तिगत ट्रिगरहरू पहिचान गर्नुहोस् र तिनीहरूबाट जोगिनुहोस्। निर्धारित इन्हेलरहरू सधैं बोक्नुहोस् र सही रूपमा प्रयोग गर्नुहोस्। नियमित रूपमा पीक फ्लो निगरानी गर्नुहोस्।'
             }
             },
+            // 12. Diarrhea
             'diarrhea': {
                 icon: 'fa-toilet', color: 'text-brown-500', name_en: 'Diarrhea', name_ne: 'पखाला',
                 en: {
@@ -410,6 +379,7 @@
                     aware: 'शौचालय प्रयोग गरेपछि र खाना खानु अघि हातको सरसफाइमा कडाइ गर्नुहोस्। तुरुन्तै ओआरएस (जीवनजल) पिउनुहोस्। पानी सुरक्षित भएको सुनिश्चित गर्नुहोस्।'
                 }
             },
+            // 13. Jaundice (Hepatitis)
             'jaundice': {
                 icon: 'fa-tint', color: 'text-amber-500', name_en: 'Jaundice (Hepatitis)', name_ne: 'जन्डिस (कलेजोको रोग)',
                 en: {
@@ -423,6 +393,7 @@
                     aware: 'हेपाटाइटिस ए र बी विरुद्ध खोप लगाउनुहोस्। सफा सरसफाइ र स्वच्छता कायम राख्नुहोस्। नपाकेको वा दूषित खाना र पानीबाट जोगिनुहोस्।'
                 }
             },
+            // 14. Anemia
             'anemia': {
                 icon: 'fa-droplet', color: 'text-red-700', name_en: 'Anemia', name_ne: 'रक्तअल्पता',
                 en: {
@@ -436,6 +407,7 @@
                     aware: 'आइरन युक्त खानेकुरा (रातो मासु, पालक, सिमी) र आइरन अवशोषणमा सहयोग गर्न भिटामिन सी (सिट्रस फलफूल) सेवन गर्नुहोस्। आवश्यक भएमा निर्धारित आइरन सप्लिमेन्टहरू लिनुहोस्।'
             }
             },
+            // 15. Arthritis
             'arthritis': {
                 icon: 'fa-joint', color: 'text-teal-700', name_en: 'Arthritis', name_ne: 'जोर्नीको दुखाइ',
                 en: {
@@ -449,6 +421,7 @@
                     aware: 'जोर्नीको तनाव कम गर्न स्वस्थ तौल कायम राख्नुहोस्। कम प्रभाव पार्ने व्यायामहरू (पौडी खेल्ने, हिड्ने) मा संलग्न हुनुहोस्। दुखाइ कम गर्न तातो वा चिसो थेरापी प्रयोग गर्नुहोस्।'
                 }
             },
+            // 16. Malaria
             'malaria': {
                 icon: 'fa-bed-alt', color: 'text-lime-500', name_en: 'Malaria', name_ne: 'औलो',
                 en: {
@@ -462,6 +435,7 @@
                     aware: 'कीटनाशकले उपचार गरिएको ओछ्यानको जाली प्रयोग गर्नुहोस्। उच्च जोखिम क्षेत्रमा यात्रा गर्दा औलो विरोधी रोकथाम औषधि लिनुहोस्। लामखुट्टेको प्रजनन स्थलहरू हटाउनुहोस्।'
                 }
             },
+            // 17. Urinary Tract Infection (UTI)
             'uti': {
                 icon: 'fa-urinal', color: 'text-purple-700', name_en: 'UTI', name_ne: 'मूत्र संक्रमण',
                 en: {
@@ -475,6 +449,7 @@
                     aware: 'प्रशस्त पानी पिउनुहोस्। शौचालय प्रयोग गरेपछि अगाडिबाट पछाडि पुछ्नुहोस्। पिसाब लाग्दा र यौन सम्पर्कपछि पिसाब गर्नुहोस्।'
                 }
             },
+            // 18. Lower Back Pain
             'backpain': {
                 icon: 'fa-person-walking-with-cane', color: 'text-amber-700', name_en: 'Lower Back Pain', name_ne: 'कम्मर दुखाइ',
                 en: {
@@ -488,6 +463,7 @@
                     aware: 'उचित तरिकाले उठाउने अभ्यास गर्नुहोस् (कम्मरले होइन, खुट्टाले उठाउनुहोस्)। बस्दा र उभिँदा राम्रो आसन कायम राख्नुहोस्। कोर बलियो बनाउने व्यायामहरूमा संलग्न हुनुहोस्।'
                 }
             },
+            // 19. Depression/Anxiety
             'mental': {
                 icon: 'fa-brain', color: 'text-fuchsia-600', name_en: 'Depression/Anxiety', name_ne: 'डिप्रेसन/चिन्ता',
                 en: {
@@ -501,6 +477,7 @@
                     aware: 'सुत्ने र पोषणमा प्राथमिकता दिनुहोस्। माइन्डफुलनेस र विश्राम प्रविधिहरूको अभ्यास गर्नुहोस्। यदि लक्षणहरू जारी रहन्छन् भने पेशेवर मद्दत (परामर्श/चिकित्सा) खोज्नुहोस्। मानसिक स्वास्थ्यलाई बेवास्ता नगर्नुहोस्।'
                 }
             },
+            // 20. Skin Fungal Infections
             'fungal': {
                 icon: 'fa-spa', color: 'text-gray-500', name_en: 'Skin Fungal Infections', name_ne: 'छालाको फंगल संक्रमण',
                 en: {
@@ -512,7 +489,7 @@
                     intro: 'दाद र एथलीटको खुट्टा जस्ता सामान्य छाला संक्रमणहरू, जसले प्रायः रातो, चिलाउने र पाप्रो आउने दागहरू निम्त्याउँछ।',
                     causes: 'न्यानो, ओसिलो वातावरणमा फंगसहरू फस्टाउँछन्, जुन संक्रमित व्यक्तिहरू वा दूषित सतहहरूसँगको सम्पर्कबाट फैलिन्छ।',
                     aware: 'छालालाई सफा र सुख्खा राख्नुहोस्, विशेष गरी तहहरूमा (ग्रोइन, काखी, औंलाहरू)। सफा, सास फेर्ने लुगा लगाउनुहोस्। तौलिया र व्यक्तिगत सामानहरू साझा गर्नबाट जोगिनुहोस्।'
-                },
+                }
             },
         };
         const diseaseKeys = Object.keys(nepoDiseaseData).slice(0, 20); 
@@ -526,6 +503,7 @@
             { service: "Mental Health Session", provider: "Counselor S. Thapa", date: "Scheduled", cost: 2500, icon: "fa-brain" }
         ];
         
+        // --- UPDATED: 10 Second-Hand Examples ---
         const nepoSecondHandExamples_full = [
             { item: "iPhone 12 (128GB)", price: 45000, condition: "Excellent", location: "Pokhara", icon: "fa-mobile-screen-button" },
             { item: "Wooden Dining Table (6-seater)", price: 18000, condition: "Good", location: "Baneshwor", icon: "fa-couch" },
@@ -540,6 +518,7 @@
             { item: "Office Desk and Chair Set", price: 9000, condition: "Good", location: "Kirtipur", icon: "fa-chair" }
         ];
 
+        // --- UPDATED: 10 Shopping Examples ---
         const nepoShoppingExamples_full = [
             { item: "Traditional Dhaka Topi", price: 850, vendor: "Himalaya Weavers", status: "Shipped", icon: "fa-hat-cowboy" },
             { item: "Basmati Rice (25kg)", price: 2800, vendor: "Local Grocer", status: "Delivered", icon: "fa-wheat-awn" },
@@ -554,13 +533,171 @@
             { item: "Portable Bluetooth Speaker", price: 2100, vendor: "Audio World", status: "Pending", icon: "fa-volume-up" }
         ];
 
+        // --- UPDATED: Visa Country Data Structure with Emojis ---
+        const visaCountries = [
+            { 
+                name: "Australia", 
+                flagEmoji: "🇦🇺",
+                flagIcon: "fa-globe-asia", // Retain FA icon as fallback/theme element
+                links: [
+                    { name: "Visa Status Check", url: "https://online.immi.gov.au/evo/firstParty?actionType=query" }
+                ]
+            },
+            { 
+                name: "Indonesia", 
+                flagEmoji: "🇮🇩",
+                flagIcon: "fa-passport",
+                links: [
+                    { name: "Visa Check", url: "https://evisa.imigrasi.go.id/web/find-data" },
+                    { name: "Work Permit Check", url: "https://evisa.imigrasi.go.id/web/find-data" }
+                ]
+            },
+            { 
+                name: "Albania", 
+                flagEmoji: "🇦🇱",
+                flagIcon: "fa-globe-europe",
+                links: [
+                    { name: "Visa Track", url: "https://e-visa.al/track" }
+                ]
+            },
+            { 
+                name: "Israel", 
+                flagEmoji: "🇮🇱",
+                flagIcon: "fa-passport",
+                links: [
+                    { name: "Passport Detail Check", url: "https://dofe.gov.np/PassportDetail.aspx" } 
+                ]
+            },
+            { 
+                name: "Kuwait", 
+                flagEmoji: "🇰🇼",
+                flagIcon: "fa-globe-asia",
+                links: [
+                    { name: "Visa Status", url: "https://rnt.moi.gov.kw/esrv/VisaStat.do?lang=eng#mobSec" }
+                ]
+            },
+            { 
+                name: "Maldives", 
+                flagEmoji: "🇲🇻",
+                flagIcon: "fa-umbrella-beach",
+                links: [
+                    { name: "Work Permit Check", url: "https://xpat.egov.mv/" }
+                ]
+            },
+            { 
+                name: "Malta", 
+                flagEmoji: "🇲🇹",
+                flagIcon: "fa-globe-europe",
+                links: [
+                    { name: "Visa Status Check", url: "https://identita.gov.mt/" }
+                ]
+            },
+            { 
+                name: "Oman", 
+                flagEmoji: "🇴🇲",
+                flagIcon: "fa-globe-asia",
+                links: [
+                    { name: "Visa Track", url: "https://evisa.rop.gov.om/en/track-your-application" }
+                ]
+            },
+            { 
+                name: "Romania", 
+                flagEmoji: "🇷🇴",
+                flagIcon: "fa-globe-europe",
+                links: [
+                    { name: "Passport Detail Check", url: "https://dofe.gov.np/PassportDetail.aspx" } 
+                ]
+            },
+            { 
+                name: "Serbia", 
+                flagEmoji: "🇷🇸",
+                flagIcon: "fa-globe-europe",
+                links: [
+                    { name: "e-Visa Status", url: "https://evisa.welcometoserbia.gov.rs/" }
+                ]
+            },
+            { 
+                name: "Republic of South Korea", 
+                flagEmoji: "🇰🇷",
+                flagIcon: "fa-globe-asia",
+                links: [
+                    { name: "Visa Status Check", url: "https://www.visa.go.kr/openPage.do?MENU_ID=10207" }
+                ]
+            },
+            { 
+                name: "Azerbaijan", 
+                flagEmoji: "🇦🇿",
+                flagIcon: "fa-globe-asia",
+                links: [
+                    { name: "e-Visa Status Check", url: "https://evisa.gov.az/en/check-status" }
+                ]
+            },
+            { 
+                name: "Bahrain", 
+                flagEmoji: "🇧🇭",
+                flagIcon: "fa-passport",
+                links: [
+                    { name: "Residency Status Check", url: "https://lmra.gov.bh/en/eligibilityrc" }
+                ]
+            },
+            { 
+                name: "Kyrgyzstan", 
+                flagEmoji: "🇰🇬",
+                flagIcon: "fa-globe-asia",
+                links: [
+                    { name: "e-Visa Status Check", url: "https://www.evisa.e-gov.kg/check_status.php" }
+                ]
+            },
+            { 
+                name: "Malaysia", 
+                flagEmoji: "🇲🇾",
+                flagIcon: "fa-passport",
+                links: [
+                    { name: "e-Visa Status Check", url: "https://malaysiavisa.imi.gov.my/evisa/vlno_checkstatus.jsp" }
+                ]
+            },
+            { 
+                name: "Poland", 
+                flagEmoji: "🇵🇱",
+                flagIcon: "fa-globe-europe",
+                links: [
+                    { name: "VFS Tracking", url: "https://www.vfsvisaonline.com/Global-Passporttracking/Track/Index?q=shSA0YnE4pLF9Xzwon/x/ASnHZRMROGDyz5YljrTPrmD7weWKDzHm/9+x4kyou3T7EbygDK+7ECJT8O+dWpxGw==" }
+                ]
+            },
+            { 
+                name: "Qatar", 
+                flagEmoji: "🇶🇦",
+                flagIcon: "fa-globe-asia",
+                links: [
+                    { name: "Visa Inquiry", url: "https://portal.moi.gov.qa/wps/portal/MOIInternet/services/inquiries/visaservices/enquiryandprinting" }
+                ]
+            },
+            { 
+                name: "Saudi Arabia", 
+                flagEmoji: "🇸🇦",
+                flagIcon: "fa-passport",
+                links: [
+                    { name: "Applicant Data Check", url: "https://visa.mofa.gov.sa/VisaPerson/GetApplicantData" }
+                ]
+            },
+            { 
+                name: "United Arab Emirates", 
+                flagEmoji: "🇦🇪",
+                flagIcon: "fa-building",
+                links: [
+                    { name: "Visa Inquiry (GDRFA)", url: "https://gdrfad.gov.ae/en/unified-number-inquiry-service" },
+                    { name: "Work Permit Check (MOHRE)", url: "https://inquiry.mohre.gov.ae/" }
+                ]
+            },
+        ];
+
+        // This list is no longer used for the main Visa Check content, but retained for the history mock.
         const nepoVisaExamples_full = [
             { country: "Australia (Student Visa)", applicant: "Ramesh P.", status: "Processing", date: "Applied Mar '25", icon: "fa-graduation-cap" },
             { country: "USA (H1B Renewal)", applicant: "Sita G.", status: "Approved", date: "Expires Dec '26", icon: "fa-briefcase" },
             { country: "Canada (Visitor Visa)", applicant: "Prakash T.", status: "Denied", date: "Updated Today", icon: "fa-plane-up" },
             { country: "UK (Skilled Worker)", applicant: "Asha M.", status: "Interview Scheduled", date: "Oct 20, 2025", icon: "fa-hospital" },
             { country: "Japan (Training Visa)", applicant: "Dev K.", status: "Documents Submitted", date: "Next Update: 7 days", icon: "fa-wrench" },
-            // Added 5 more
             { country: "Germany (Family Reunion)", applicant: "Laxmi B.", status: "Approved", date: "Issued Jan '26", icon: "fa-house-user" },
             { country: "South Korea (E-9)", applicant: "Manoj R.", status: "Processing", date: "Applied Sept '25", icon: "fa-factory" },
             { country: "Portugal (Golden Visa)", applicant: "Hari N.", status: "Document Review", date: "Updated 3 days ago", icon: "fa-euro-sign" },
@@ -568,6 +705,7 @@
             { country: "India (Business Visa)", applicant: "Samir J.", status: "Approved", date: "Issued Dec '25", icon: "fa-business-time" }
         ];
 
+        // --- UPDATED: 10 Donation Examples ---
         const nepoDonationExamples_full = [
             { cause: "Nepal Flood Relief Fund", amount: 5000, recipient: "National Disaster Authority", date: "Sept 1, 2025", type: "Disaster Relief", icon: "fa-house-tsunami" },
             { cause: "Community School Books Drive", amount: 1500, recipient: "Rural Education NGO", date: "Aug 20, 2025", type: "Education", icon: "fa-book" },
@@ -582,6 +720,7 @@
             { cause: "Blind School Braille Books", amount: 2500, recipient: "Blind Welfare Trust", date: "Dec 12, 2025", type: "Education", icon: "fa-braille" }
         ];
 
+        // --- UPDATED: 10 Room Rent Examples ---
         const nepoRoomRentExamples_full = [
             { title: "Single Room near TU (Male/Student)", rent: 6000, deposit: 1, location: "Kirtipur", type: "Room", icon: "fa-door-open" },
             { title: "2BHK Apartment (Family Friendly)", rent: 25000, deposit: 2, location: "Boudha", type: "Apartment", icon: "fa-building" },
@@ -596,6 +735,7 @@
             { title: "Modern 3BHK Penthouse", rent: 60000, deposit: 3, location: "Baluwatar", type: "Apartment", icon: "fa-city" }
         ];
 
+        // --- UPDATED: 10 Jobs Examples ---
         const nepoJobsExamples_full = [
             { title: "Weekend Cafe Assistant", company: "Himalayan Brews", pay: "NPR 500/hr", location: "Thamel", type: "Hospitality", icon: "fa-mug-hot" },
             { title: "Freelance Graphic Designer", company: "Digital Solutions Co.", pay: "Project Based", location: "Remote", type: "Creative", icon: "fa-pen-nib" },
@@ -626,7 +766,9 @@
             { name: "Sundarijal Waterfall Trek", type: "Nature & Outdoors", distance: "15 km", rating: 4.7, icon: "fa-mountain-sun", color: 'text-blue-600' },
         ];
         
+        // This is used for the Profile and the Founder section
         const nepoProfileData = {
+            // --- MODIFIED DATA START (Name change and icon removal retained) ---
             name: "Rajan Oli", 
             status: "Verified Platinum User",
             phone: "+977 98XXXXXXXX",
@@ -635,6 +777,7 @@
             memberSince: "May 2023",
             nepoPoints: 1250, 
             securityStatus: "High (2FA Enabled)",
+            // EXTENDED recentActivity to 30 entries
             recentActivity: [
                 { type: "Ride", details: "Thamel to Airport (Completed)", date: "Oct 30", status: "Completed" },
                 { type: "Shopping", details: "Dhaka Topi Purchase (Delivered)", date: "Oct 28", status: "Delivered" },
@@ -656,6 +799,8 @@
                 { type: "Care", details: "Canceled: Physiotherapy", date: "Sept 15", status: "Cancelled" },
                 { type: "Donation", details: "Animal Shelter (1,000 NPR)", date: "Sept 10", status: "Success" },
                 { type: "Shopping", details: "Smartwatch Purchase (Shipped)", date: "Sept 5", status: "Shipped" },
+                
+                // Added 10 new history entries for testing scrolling
                 { type: "Explore", details: "Booked Hiking Trip", date: "Sept 1", status: "Scheduled" },
                 { type: "Visa", details: "UK Skilled Worker Check", date: "Aug 28", status: "Approved" },
                 { type: "Wallet", details: "Received E-Sewa Transfer", date: "Aug 25", status: "Success" },
@@ -667,14 +812,18 @@
                 { type: "SecondHand", details: "Sold Old Phone (7,000 NPR)", date: "July 28", status: "Completed" },
                 { type: "Care", details: "Annual Health Checkup", date: "July 25", status: "Completed" },
             ],
+            // --- MODIFIED DATA END ---
+            // --- UPDATED FOUNDER DATA START ---
             founder: {
                 name: "Bipin Hamal",
-                title: "Student, IoT at Baekseok University",
-                contact: "01067083312",
+                title: "IoT Student (3rd Semester) at Baekseok University, South Korea", // Updated title
+                contact: "010-6708-3312",
                 email: "bipinhamal2025@gmail.com"
             }
+            // --- UPDATED FOUNDER DATA END ---
         };
 
+        // --- Mock Pharmacy Data (New) - Unchanged for brevity ---
         const nepoPharmacyData = [
             {
                 name: "Janata Pharmacy, Thamel",
@@ -827,6 +976,7 @@
                 ]
             }
         ];
+        // --- End Mock Pharmacy Data ---
         
         // Global state for language
         let currentLang = 'en'; 
@@ -853,9 +1003,66 @@
             }
         }
 
+        /**
+         * Renders the dynamic content for the App Info Modal (Founder Contact) in a formatted box.
+         */
+        function renderAppInfoContent() {
+            const founderContainer = document.getElementById('founder-contact-container');
+            const founderData = nepoProfileData.founder;
+            
+            if (founderContainer) {
+                // Ensure phone number is cleaned for tel: link and displayed with dashes
+                const cleanContact = founderData.contact.replace(/-/g, '');
+
+                const contactHtml = `
+                    <div class="bg-indigo-100 p-4 rounded-xl shadow-inner border border-indigo-300">
+                        <h4 class="font-bold text-base text-indigo-800 mb-2 border-b border-indigo-300 pb-1">
+                            <i class="fas fa-code-branch mr-2"></i> Founder/Developer Contact
+                        </h4>
+                        <div class="space-y-1 text-sm text-gray-800">
+                            <!-- Name and Title -->
+                            <div class="flex">
+                                <span class="font-bold w-1/3 min-w-[70px] text-gray-600">Name:</span>
+                                <span class="flex-1">${founderData.name}</span>
+                            </div>
+                            <div class="flex">
+                                <span class="font-bold w-1/3 min-w-[70px] text-gray-600">Role:</span>
+                                <span class="flex-1 text-xs">${founderData.title}</span>
+                            </div>
+                            
+                            <hr class="border-indigo-200 my-2">
+                            
+                            <!-- Email Link -->
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope mr-2 text-indigo-600 w-4 text-center"></i>
+                                <span class="font-bold text-gray-600 mr-2">Email:</span>
+                                <a href="mailto:${founderData.email}" class="text-indigo-600 hover:underline flex-1 truncate">${founderData.email}</a>
+                            </div>
+                            
+                            <!-- Contact/WhatsApp Link -->
+                            <div class="flex items-center">
+                                <i class="fas fa-phone-alt mr-2 text-indigo-600 w-4 text-center"></i>
+                                <span class="font-bold text-gray-600 mr-2">Contact:</span>
+                                <a href="tel:${cleanContact}" class="text-indigo-600 hover:underline">${founderData.contact}</a> 
+                                <span class="text-xs text-gray-500 ml-2 flex-shrink-0">(Call/WhatsApp)</span>
+                            </div>
+                            
+                            <div class="text-xs italic pt-2 text-indigo-700 text-center border-t border-indigo-200 mt-2">
+                                <i class="fas fa-lightbulb mr-1"></i> Suggestions are always welcome via mail!
+                            </div>
+                        </div>
+                    </div>
+                `;
+                founderContainer.innerHTML = contactHtml;
+            }
+        }
+
+
         function openAppInfoModal() {
             const infoModal = document.getElementById('app-info-modal');
             if (infoModal) {
+                // RENDER FIX: Dynamically inject founder data just before opening the modal
+                renderAppInfoContent(); 
                 infoModal.classList.remove('hidden');
             }
         }
@@ -1173,7 +1380,7 @@
             serviceData[serviceKey] = items;
             // Only re-render the modal if it's the currently open service
             if (currentService === serviceKey) {
-                renderDrivingView('request'); // Re-render the driving view to update active requests
+                renderModalContent(serviceKey);
             }
         }
 
@@ -1259,113 +1466,8 @@
         }
 
         // ----------------------------------------------
-        // DRIVING VIEW TOGGLE FUNCTION (NEW/MODIFIED)
+        // NEW FUNCTIONS FOR PROFILE INTERACTION START
         // ----------------------------------------------
-        
-        // New Function to render the Driving sub-views (Request Form or History)
-        function renderDrivingView(viewState) {
-            const serviceKey = 'driving';
-            const data = serviceData[serviceKey] || [];
-            const service = serviceMap[serviceKey];
-            const color = service ? service.color : 'bg-gray-600'; 
-            let html = ``;
-
-            // Add warning if Firebase is inactive
-            const demoWarning = !isFirebaseActive ? `
-                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-3 mb-4 rounded-lg text-sm font-medium">
-                    <i class="fas fa-exclamation-triangle mr-2"></i> Real-time features are disabled (DEMO MODE).
-                </div>` : '';
-
-            // Show the current user ID for multi-user collaboration visibility
-            const userIdDisplay = isAuthReady ? `<p class="text-xs text-gray-500 mb-2">Your User ID: <span class="font-mono text-indigo-600">${userId}</span></p>` : '';
-            
-            // --- View Toggle Buttons (Sticky Header) ---
-            const toggleButtons = `
-                <div class="sticky top-0 bg-white pt-1 pb-4 z-20 border-b border-gray-200">
-                    <div class="flex justify-around space-x-2">
-                        <button onclick="renderDrivingView('request')" 
-                            class="w-full px-4 py-2 text-sm font-semibold rounded-lg transition shadow-md ${viewState === 'request' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">
-                            <i class="fas fa-car-side mr-1"></i> Request Ride
-                        </button>
-                        <button onclick="renderDrivingView('history')" 
-                            class="w-full px-4 py-2 text-sm font-semibold rounded-lg transition shadow-md ${viewState === 'history' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">
-                            <i class="fas fa-history mr-1"></i> Ride History
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            if (viewState === 'request') {
-                html = `<div class="p-4">
-                    ${demoWarning}
-                    ${userIdDisplay}
-                    ${toggleButtons}
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800 pt-4">Book Your Next Ride</h3>
-                    <form id="driving-form" class="space-y-4 mb-8">
-                        <input type="text" id="driving-pickup" placeholder="Pickup Location (GPS)" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
-                        <input type="text" id="driving-dropoff" placeholder="Destination" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
-                        <select id="driving-car-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
-                            <option value="Standard">Standard Car</option>
-                            <option value="Carpool">Carpool (Save money)</option>
-                            <option value="Premium">Premium SUV</option>
-                        </select>
-                        <button type="submit" class="w-full py-3 ${color} text-white font-bold rounded-lg hover:opacity-90 transition duration-150">Find Driver</button>
-                    </form>
-
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Active Ride Requests (${data.length})</h3>
-                    <div class="space-y-3 mb-6 max-h-48 scrollable-content overflow-y-auto">
-                        ${data.length === 0
-                            ? '<p class="text-gray-500 text-sm p-3 bg-gray-50 rounded-lg text-center">No active ride requests found. Request one above!</p>'
-                            : data.map(ride => {
-                                const isMine = ride.createdBy === userId;
-                                return `
-                                <div class="p-3 bg-white border border-gray-200 rounded-lg shadow-sm flex justify-between items-center ${isMine ? 'border-indigo-500 bg-indigo-50' : ''}">
-                                    <div>
-                                        <p class="font-medium text-sm text-gray-800">${ride.pickupLocation} <i class="fas fa-arrow-right mx-1 text-xs"></i> ${ride.dropoffLocation}</p>
-                                        <p class="text-xs text-gray-500">${ride.carType} - Requested by ${isMine ? 'You' : ride.createdBy.substring(0, 8) + '...'}</p>
-                                    </div>
-                                    <span class="text-sm font-bold text-indigo-600">Searching...</span>
-                                </div>
-                                `;
-                            }).join('')
-                        }
-                    </div>
-                </div>`;
-            } else if (viewState === 'history') {
-                // --- History View Content ---
-                html = `<div class="p-4">
-                    ${toggleButtons}
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800 pt-4">Your Completed Ride History (${nepoDrivingPastExamples.length})</h3>
-                    <div class="space-y-3 max-h-[60vh] scrollable-content overflow-y-auto pb-4">
-                        ${nepoDrivingPastExamples.map((ride, index) => `
-                            <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex justify-between items-center hover:bg-gray-50 transition">
-                                <div>
-                                    <p class="font-medium text-sm text-gray-800">${ride.pickup} <i class="fas fa-arrow-right mx-1 text-xs"></i> ${ride.dropoff}</p>
-                                    <p class="text-xs text-gray-500">${ride.type}</p>
-                                </div>
-                                <div class="text-right">
-                                    <span class="text-sm font-bold text-green-600">NPR ${ride.cost.toLocaleString()}</span>
-                                    <p class="text-xs text-gray-400">${ride.status}</p>
-                                </div>
-                            </div>
-                        `).join('')}
-                        <div class="text-center p-4 text-gray-400 text-sm">-- End of history --</div>
-                    </div>
-                </div>`;
-            }
-
-            modalContentEl.innerHTML = html;
-            // Re-attach form listener only if it's the request view
-            if (viewState === 'request') {
-                attachFormListeners(serviceKey);
-            }
-        }
-        window.renderDrivingView = renderDrivingView; // Expose the new function
-
-        // ----------------------------------------------
-        // END DRIVING VIEW TOGGLE FUNCTION
-        // ----------------------------------------------
-
 
         // Renders the combined Contact Details and Recent Activity view (expanded view)
         function showDetails() {
@@ -1374,6 +1476,7 @@
             // Set modal title to only display "Recent Nepo Activity"
             document.getElementById('modal-title').textContent = "Recent Nepo Activity";
 
+            // --- START MODIFIED HTML (REMOVED MEMBERSHIP DETAILS and fixed scrolling) ---
             const contactActivityHtml = `<div class="p-4">
                 <div class="text-center mb-4 sticky top-0 bg-white z-10 pt-2 pb-2 border-b border-gray-200">
                     <button onclick="renderProfileContent('full')" class="text-indigo-600 hover:text-indigo-800 font-semibold mb-2 flex items-center mx-auto">
@@ -1387,6 +1490,7 @@
                 <div class="mt-4">
                     <h4 class="text-lg font-bold text-gray-800 mb-3">All Recent Actions (${profile.recentActivity.length})</h4>
                     
+                    <!-- SCROLLING FIX APPLIED HERE: Added max-h-[70vh] and scrollable-content -->
                     <div class="space-y-4 pb-4 max-h-[70vh] scrollable-content overflow-y-auto">
                         ${profile.recentActivity.map(activity => `
                             <div class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-xl shadow-sm">
@@ -1405,6 +1509,7 @@
                 </div>
                 
             </div>`;
+            // --- END MODIFIED HTML (REMOVED MEMBERSHIP DETAILS and fixed scrolling) ---
             modalContentEl.innerHTML = contactActivityHtml;
             // Ensure the main scrollable container scrolls to top
             document.getElementById('modal-content').scrollTop = 0;
@@ -1422,6 +1527,7 @@
             
             let html = `<div class="p-4">
                 <div class="flex flex-col items-center p-4 bg-gray-50 rounded-xl shadow-inner mb-6">
+                    <!-- RESIZED PROFILE ICON: Smaller (w-16 h-16) and smaller font (text-2xl) -->
                     <div class="w-16 h-16 rounded-full bg-indigo-500 text-white flex items-center justify-center text-2xl font-bold mb-2 border-4 border-white shadow-lg">
                         ${profile.name[0]}
                     </div>
@@ -1463,28 +1569,91 @@
         }
         window.renderProfileContent = renderProfileContent; // Expose to window
         
-        // NEW FUNCTION: Renders the full news article in the modal
-        function renderFullNewsArticle(articleId) {
-            const htmlContent = nepoNewsFullContent[articleId];
-            
-            if (!htmlContent) {
-                modalContentEl.innerHTML = '<div class="p-8 text-center text-red-500">Error: Full article content not found.</div>';
-                return;
+        // ----------------------------------------------
+        // NEW FUNCTIONS FOR VISA CHECK SERVICE START
+        // ----------------------------------------------
+        
+        /**
+         * Renders the main list of countries for the Visa Check service.
+         */
+        function renderVisaCheckList() {
+            modalTitleEl.textContent = 'Visa & Work Permit Status Check';
+
+            const html = `<div class="p-4">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Select a Country/Region (${visaCountries.length})</h3>
+                <p class="text-sm text-gray-500 mb-4">Official portals to check visa, permit, or residency application status.</p>
+                <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
+                    ${visaCountries.map((country, index) => `
+                        <button onclick="openCountryLinksModal(${index})" 
+                            class="w-full text-left p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex items-center justify-between hover:bg-gray-50 transition duration-150">
+                            <div class="flex items-center">
+                                <!-- Flag Emoji for visual distinctiveness -->
+                                <span class="text-xl mr-3 w-5 text-center">${country.flagEmoji}</span>
+                                <span class="font-medium text-base text-gray-800">${country.name}</span>
+                            </div>
+                            <!-- Show a badge if multiple links exist -->
+                            ${country.links.length > 1 ? `
+                                <span class="text-xs font-bold text-white bg-red-500 rounded-full px-2 py-0.5 ml-2">${country.links.length} Options</span>
+                            ` : ''}
+                            <i class="fas fa-chevron-right text-sm text-gray-400"></i>
+                        </button>
+                    `).join('')}
+                    <div class="text-center p-4 text-gray-400 text-sm">-- End of country list --</div>
+                </div>
+            </div>`;
+
+            modalContentEl.innerHTML = html;
+        }
+        window.renderVisaCheckList = renderVisaCheckList; // Expose to window
+
+        /**
+         * Opens a sub-modal to show the specific link buttons for a selected country.
+         */
+        function openCountryLinksModal(countryIndex) {
+            const country = visaCountries[countryIndex];
+            if (!country) return;
+
+            // If there is only one link, open it directly in a new browser tab.
+            if (country.links.length === 1) {
+                // Use _blank to open in a new tab/browser window (Standard HTML behavior)
+                window.open(country.links[0].url, '_blank');
+                // Display a message that the external link was opened
+                displayMessage(`Opening ${country.name} - ${country.links[0].name} in new browser tab...`, 'info');
+                return; 
             }
 
-            modalTitleEl.textContent = 'Full Article View';
+            // If there are multiple links, render the sub-menu in the modal.
+            modalTitleEl.textContent = `${country.name} - Select Check Type`;
             
-            const fullNewsHtml = `
-                <div class="p-4 max-h-[75vh] scrollable-content overflow-y-auto pb-4">
-                    <button onclick="openModal('news')" class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold mb-4 flex items-center">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to News Feed
-                    </button>
-                    ${htmlContent}
+            const linksHtml = `<div class="p-4">
+                <button onclick="renderVisaCheckList()" class="text-indigo-600 hover:text-indigo-800 font-semibold mb-6 flex items-center">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Country List
+                </button>
+
+                <h3 class="text-xl font-semibold mb-4 text-gray-800">Check Options for ${country.name}</h3>
+                <p class="text-sm text-gray-500 mb-6">Tap the link to open the official portal in your device's browser.</p>
+                
+                <div class="space-y-4">
+                    ${country.links.map(link => `
+                        <!-- External browser opening, using target="_blank" -->
+                        <a href="${link.url}" target="_blank" onclick="displayMessage('Opening ${country.name} - ${link.name} in new browser tab...', 'info')" class="block">
+                            <div class="w-full py-4 px-6 bg-indigo-100 border border-indigo-300 text-indigo-800 font-bold rounded-xl shadow-md flex items-center justify-between hover:bg-indigo-200 transition">
+                                <!-- Dynamic inside-buttons -->
+                                <span><i class="fas fa-external-link-alt text-sm mr-2"></i> ${link.name}</span>
+                                <i class="fas fa-angle-right"></i>
+                            </div>
+                        </a>
+                    `).join('')}
                 </div>
-            `;
-            modalContentEl.innerHTML = fullNewsHtml;
+            </div>`;
+
+            modalContentEl.innerHTML = linksHtml;
         }
-        window.renderFullNewsArticle = renderFullNewsArticle; // Expose to window
+        window.openCountryLinksModal = openCountryLinksModal; // Expose to window
+        
+        // ----------------------------------------------
+        // NEW FUNCTIONS FOR VISA CHECK SERVICE END
+        // ----------------------------------------------
 
 
         function renderModalContent(serviceKey) {
@@ -1504,8 +1673,83 @@
 
             if (serviceKey === 'driving') {
                 // Functional service for demo: Nepo Driving
-                renderDrivingView('request'); // Default to the 'request' view
-                return; 
+                
+                // Add warning if Firebase is inactive
+                const demoWarning = !isFirebaseActive ? `
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-3 mb-4 rounded-lg text-sm font-medium">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> Real-time features are disabled (DEMO MODE).
+                    </div>` : '';
+                
+                // Show the current user ID for multi-user collaboration visibility
+                const userIdDisplay = isAuthReady ? `<p class="text-xs text-gray-500 mb-2">Your User ID: <span class="font-mono text-indigo-600">${userId}</span></p>` : '';
+
+                // --- MODIFIED HTML START: Added History Button and Collapsible History Section ---
+                html = `<div class="p-4">
+                    ${demoWarning}
+                    ${userIdDisplay}
+                    
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold text-gray-800">Request a Ride (Ride-hailing)</h3>
+                        <!-- NEW HISTORY BUTTON -->
+                        <button onclick="document.getElementById('driving-history').classList.toggle('hidden')" 
+                            class="py-1 px-3 bg-gray-100 text-sm font-semibold text-indigo-600 rounded-full border border-gray-300 hover:bg-gray-200 transition">
+                            <i class="fas fa-history mr-1"></i> History
+                        </button>
+                    </div>
+                    
+                    <!-- NEW COLLAPSIBLE HISTORY SECTION -->
+                    <div id="driving-history" class="p-4 mb-6 bg-gray-50 rounded-xl border border-gray-200 hidden">
+                         <h4 class="text-lg font-bold text-gray-800 mb-3 border-b pb-1">Past 10 Rides</h4>
+                         <div class="space-y-3 max-h-56 scrollable-content overflow-y-auto">
+                            ${nepoDrivingPastExamples.map(ride => `
+                                <div class="p-2 bg-white border border-gray-100 rounded-lg flex justify-between items-center shadow-sm">
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${ride.pickup} <i class="fas fa-arrow-right mx-1 text-xs text-gray-400"></i> ${ride.dropoff}</p>
+                                        <p class="text-xs text-gray-500">${ride.type}</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-sm font-bold text-green-600">NPR ${ride.cost.toLocaleString()}</span>
+                                        <p class="text-xs text-gray-400">${ride.status}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                            <div class="text-center p-2 text-gray-400 text-xs">-- End of history --</div>
+                         </div>
+                    </div>
+                    <!-- END NEW COLLAPSIBLE HISTORY SECTION -->
+
+
+                    <form id="driving-form" class="space-y-4 mb-8">
+                        <input type="text" id="driving-pickup" placeholder="Pickup Location (GPS)" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <input type="text" id="driving-dropoff" placeholder="Destination" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <select id="driving-car-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="Standard">Standard Car</option>
+                            <option value="Carpool">Carpool (Save money)</option>
+                            <option value="Premium">Premium SUV</option>
+                        </select>
+                        <button type="submit" class="w-full py-3 ${color} text-white font-bold rounded-lg hover:opacity-90 transition duration-150">Find Driver</button>
+                    </form>
+
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Active Ride Requests (${data.length})</h3>
+                    <div class="space-y-3 mb-6">
+                        ${data.length === 0
+                            ? '<p class="text-gray-500 text-sm">No active ride requests found. Request one above!</p>'
+                            : data.map(ride => {
+                                const isMine = ride.createdBy === userId;
+                                return `
+                                <div class="p-3 bg-white border border-gray-200 rounded-lg shadow-sm flex justify-between items-center ${isMine ? 'border-indigo-500 bg-indigo-50' : ''}">
+                                    <div>
+                                        <p class="font-medium text-sm text-gray-800">${ride.pickupLocation} <i class="fas fa-arrow-right mx-1 text-xs"></i> ${ride.dropoffLocation}</p>
+                                        <p class="text-xs text-gray-500">${ride.carType} - Requested by ${isMine ? 'You' : ride.createdBy.substring(0, 8) + '...'}</p>
+                                    </div>
+                                    <span class="text-sm font-bold text-indigo-600">Searching...</span>
+                                </div>
+                                `;
+                            }).join('')
+                        }
+                    </div>
+                </div>`;
+                // --- MODIFIED HTML END ---
             } else if (serviceKey === 'care') {
                 const defaultDiseaseKey = diseaseKeys[0]; 
 
@@ -1615,35 +1859,22 @@
                  // Nepo News 
                 html = `<div class="p-4">
                     <h3 class="text-xl font-semibold mb-4 text-gray-800">Personalized News Feed (${nepoNewsExamples_full.length})</h3>
-                    <p class="text-sm text-gray-500 mb-4">Click a headline to read the full article or visit the source portal.</p>
+                    <p class="text-sm text-gray-500 mb-4">Clicking a headline will redirect to the original source portal.</p>
                     <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
-                        ${nepoNewsExamples_full.map(news => {
-                            // Determine the action based on whether it's a full article (isFullArticle: true) or a normal external link
-                            const clickAction = news.isFullArticle 
-                                ? `onclick="renderFullNewsArticle('${news.url}')"` // Use the new function for internal articles
-                                : `onclick="window.open('${news.url}', '_blank')"`; // Standard action for external links
-                            
-                            // Determine the click cursor and visual hint
-                            const cursorClass = news.isFullArticle ? 'cursor-pointer' : 'cursor-pointer'; 
-
-                            return `
-                            <div ${clickAction} class="block">
-                                <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-150 ${cursorClass}">
+                        ${nepoNewsExamples_full.map(news => `
+                            <a href="${news.url}" target="_blank" class="block">
+                                <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-150 cursor-pointer">
                                     <div class="flex items-center mb-1">
                                         <span class="text-xs font-semibold px-2 py-0.5 rounded-full text-white ${news.color}">${news.category}</span>
                                     </div>
                                     <p class="font-medium text-base text-gray-800 leading-snug">${news.title}</p>
                                     <div class="flex justify-between items-center text-xs mt-1 text-gray-500">
                                         <span>${news.source}</span>
-                                        <div class="flex items-center">
-                                            ${news.isFullArticle ? '<i class="fas fa-file-alt mr-1"></i>' : '<i class="fas fa-external-link-alt mr-1"></i>'}
-                                            <span>${news.time}</span>
-                                        </div>
+                                        <span><i class="fas fa-clock mr-1"></i>${news.time}</span>
                                     </div>
                                 </div>
-                            </div>
-                        `;
-                        }).join('')}
+                            </a>
+                        `).join('')}
                         <div class="text-center p-4 text-gray-400 text-sm">-- End of news feed examples --</div>
                     </div>
                 </div>`;
@@ -1715,28 +1946,9 @@
                 </div>`;
             } else if (serviceKey === 'visa') {
                 // Nepo Visa Check
-                html = `<div class="p-4">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Visa/Immigration Status Checks (${nepoVisaExamples_full.length})</h3>
-                    <p class="text-sm text-gray-500 mb-4">API-based status verification for citizens abroad.</p>
-                    <div class="space-y-3 max-h-[70vh] scrollable-content overflow-y-auto pb-4">
-                        ${nepoVisaExamples_full.map(item => {
-                            const statusColor = item.status === 'Approved' ? 'text-green-600' : item.status === 'Denied' ? 'text-red-600' : 'text-orange-600';
-                            return `
-                                <div class="p-3 bg-white border border-gray-200 rounded-xl shadow-sm flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <i class="fas ${item.icon} text-xl text-blue-600 mr-3"></i>
-                                        <div>
-                                            <p class="font-medium text-sm text-gray-800">${item.country}</p>
-                                            <p class="text-xs text-gray-500">Applicant: ${item.applicant} | ${item.date}</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-sm font-bold ${statusColor}">${item.status}</span>
-                                </div>
-                            `;
-                        }).join('')}
-                        <div class="text-center p-4 text-gray-400 text-sm">-- End of visa check examples --</div>
-                    </div>
-                </div>`;
+                // **UPDATED: Call the dedicated render function**
+                renderVisaCheckList(); 
+                return; // Exit to prevent the default HTML from rendering
             } else if (serviceKey === 'donation') {
                 // Nepo Donation
                 html = `<div class="p-4">
@@ -1920,7 +2132,6 @@
                     if (success) {
                         form.reset();
                         displayMessage(`${serviceMap[serviceKey].name} request successful! Looking for a match!`, 'success');
-                        // No need to manually re-render; onSnapshot will trigger updateServiceView which calls renderDrivingView
                     }
                 });
             }
@@ -2031,9 +2242,10 @@
                         <i class="fas fa-newspaper text-xl mb-1"></i>
                         <p class="text-xs font-medium">News</p>
                     </div>
-                    <div onclick="openModal('calendar')" class="bg-orange-100 text-orange-800 p-3 rounded-xl text-center transition hover:bg-orange-200 cursor-pointer shadow-md">
-                        <i class="fas fa-calendar-days text-xl mb-1"></i>
-                        <p class="text-xs font-medium">Calendar</p>
+                    <!-- MODIFIED: Replaced 'calendar' with 'visa' check -->
+                    <div onclick="openModal('visa')" class="bg-blue-100 text-blue-800 p-3 rounded-xl text-center transition hover:bg-blue-200 cursor-pointer shadow-md">
+                        <i class="fas fa-passport text-xl mb-1"></i>
+                        <p class="text-xs font-medium">Visa Check</p>
                     </div>
                     <div onclick="openModal('driving')" class="bg-indigo-100 text-indigo-800 p-3 rounded-xl text-center transition hover:bg-indigo-200 cursor-pointer shadow-md">
                         <i class="fas fa-car-side text-xl mb-1"></i>
@@ -2081,7 +2293,7 @@
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
-            <div id="modal-content" class="flex-grow overflow-y-auto">
+            <div id="modal-content" class="flex-grow">
                 <div class="p-8 text-center text-gray-400">Loading content...</div>
             </div>
         </div>
@@ -2129,38 +2341,23 @@
             <h3 class="font-bold text-base text-gray-800 mb-2 text-left">3-Year Roadmap Rationale</h3>
             <div class="space-y-2 mb-6 text-sm text-left p-3 bg-red-50 rounded-xl border border-red-200">
                 <p class="text-gray-700"><i class="fas fa-shield-alt mr-1 text-red-600"></i> **Security & Scalability:** Building robust infrastructure for mass adoption and financial regulatory compliance.</p>
-                <p class="text-gray-700"><i class="fas fa-rocket mr-1 text-red-600"></i> **Real-Time Compliance:** Finalizing complex backend for secure instant transactions and driver matching (e.g., Nepo Driving, My Wallet).</p>
-                <p class="text-gray-700"><i class="fas fa-user-check mr-1 text-red-600"></i> **Feature Maturity & UX:** Ensuring all 11 services are fully functional, interconnected, and simple for users of all digital literacy levels.</p>
+                <p class="text-gray-700"><i class="fas fa-rocket mr-1 text-red-600"></i> **Feature Rollout:** Prioritizing critical services (Driving, Wallet, Care) first, followed by utility features.</p>
             </div>
 
-            <div class="text-gray-900 space-y-2 mb-4 p-4 bg-gray-100 rounded-xl shadow-inner text-left">
-                <p class="text-lg font-bold text-center">Bipin Hamal</p>
-                <p class="text-sm font-medium text-green-600 text-center mb-3">Visionary & IoT Student</p>
-                
-                <div class="text-xs space-y-1 text-gray-700 pt-2 border-t border-gray-200">
-                    <p class="font-semibold mb-1">Academic Background:</p>
-                    <p class="ml-2">Baekseok University, South Korea</p>
-                    <p class="ml-2">Major: Internet of Things (IoT)</p>
-                </div>
-
-                <div class="text-xs space-y-1 text-gray-700 pt-2 border-t border-gray-200">
-                    <p class="font-semibold mb-1">Contact:</p>
-                    <p class="ml-2">bipinhamal2025@gmail.com</p>
-                    <p class="ml-2">+82 10-6708-3312</p>
-                </div>
+            <!-- DYNAMIC FOUNDER CONTACT SECTION - Content is injected by renderAppInfoContent() -->
+            <div id="founder-contact-container" class="text-sm font-semibold text-gray-700 mt-4 border-t pt-4">
+                <!-- Placeholder content before JS injection -->
+                <p class="text-xs text-gray-500 mb-1">Loading founder contact...</p>
             </div>
-            <a href="mailto:bipinhamal2025@gmail.com?subject=Suggestion%20for%20Nepo%20Super%20App" class="mt-4 w-full py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md flex items-center justify-center">
-                <i class="fas fa-envelope mr-2"></i> Send Suggestion Email
-            </a>
             
-            <button onclick="document.getElementById('app-info-modal').classList.add('hidden')" class="mt-2 w-full py-3 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition duration-150 shadow-md">
-                Close
+            <button onclick="document.getElementById('app-info-modal').classList.add('hidden')" class="mt-6 w-full py-3 bg-gray-200 text-gray-800 font-bold rounded-lg hover:bg-gray-300 transition duration-150 shadow-md">
+                Close Info
             </button>
         </div>
     </div>
-
-    <div id="message-box" class="fixed top-4 right-4 p-3 rounded-xl shadow-xl z-50 transition duration-300 opacity-0 pointer-events-none"></div>
+    
+    <!-- This box is used for temporary status messages like "Success" or "Error" -->
+    <div id="message-box" class="fixed top-4 right-4 p-3 rounded-xl shadow-xl z-50 opacity-0 transition duration-300 pointer-events-none"></div>
 
 </body>
 </html>
-
