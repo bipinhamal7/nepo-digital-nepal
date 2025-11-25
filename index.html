@@ -143,7 +143,7 @@
         // Function to get a random news source URL
         const getRandomSourceUrl = () => newsSources[Math.floor(Math.random() * newsSources.length)];
 
-        // --- Mock Data ---
+        // --- Mock Data (Retained for other services) ---
         const forecastMessages = [
             { icon: 'fa-cloud-showers-heavy', message: 'Heavy Rain Alert: Use your umbrella!', color: 'text-blue-300' },
             { icon: 'fa-sun', message: 'Hot & Sunny: Stay hydrated today!', color: 'text-yellow-300' },
@@ -164,14 +164,13 @@
             { day: "Mon", condition: "Light Wind", temp: "20° / 12° C", wind: "7 km/h", icon: "fa-wind" }
         ];
 
-        // --- UPDATED: 10 Driving Examples ---
+        // --- Driving Examples (Unchanged) ---
         const nepoDrivingPastExamples = [
             { pickup: "Thamel", dropoff: "Tribhuvan Airport", status: "Completed", type: "Car", cost: 850 },
             { pickup: "Lalitpur", dropoff: "Boudhanath Stupa", status: "Completed", type: "Bike", cost: 250 },
             { pickup: "Baneshwor", dropoff: "Patan Durbar Square", status: "Completed", type: "Carpool", cost: 320 },
             { pickup: "Gongabu", dropoff: "New Road", status: "Completed", type: "Car", cost: 480 },
             { pickup: "Teku", dropoff: "Kirtipur Hill", status: "Completed", type: "Premium", cost: 1100 },
-            // Added 5 more
             { pickup: "Pokhara Lakeside", dropoff: "Pokhara Airport", status: "Completed", type: "Car", cost: 950 },
             { pickup: "Dharan Buspark", dropoff: "Bhedetar", status: "Completed", type: "Bike", cost: 300 },
             { pickup: "Buddhanagar", dropoff: "Maitidevi", status: "Completed", type: "Carpool", cost: 210 },
@@ -179,14 +178,13 @@
             { pickup: "Bhaktapur", dropoff: "Sanga Hill", status: "Completed", type: "Car", cost: 720 }
         ];
 
-        // --- UPDATED: 10 News Examples ---
+        // --- News Examples (Unchanged) ---
         const nepoNewsExamples_full = [
             { title: "Nepal's Ride-Hailing Industry Set to Reach $74 Million Revenue in 2025", source: "Gurkha Technology", time: "1 hr ago", category: "Technology", color: "bg-blue-500", url: getRandomSourceUrl() },
             { title: "Pakhribas Emerging as a Popular New Tourist Destination with View Tower", source: "The Rising Nepal", time: "3 hrs ago", category: "Tourism", color: "bg-green-500", url: getRandomSourceUrl() },
             { title: "International Arrivals Recover to 98% of Pre-Pandemic Levels in 2025", source: "Travel & Tour World", time: "5 hrs ago", category: "Tourism", color: "bg-orange-500", url: getRandomSourceUrl() },
             { title: "NEPSE Posts Double-Digit Gain; All Sectors Close in Green", source: "The Himalayan Times", time: "Yesterday", category: "Business", color: "bg-red-500", url: getRandomSourceUrl() },
             { title: "FDI Commitment Soars, Led by Information and Communication Technology", source: "Xinhua", time: "1 day ago", category: "Economy", color: "bg-purple-500", url: getRandomSourceUrl() },
-            // Added 5 more original examples
             { title: "Kathmandu Valley Air Quality Improves Slightly After Monsoon Rainfall", source: "Online Khabar", time: "2 days ago", category: "Environment", color: "bg-blue-600", url: getRandomSourceUrl() },
             { title: "New Foreign Investment Policy Aims to Boost Technology Sector", source: "MyRepublica", time: "3 days ago", category: "Business", color: "bg-green-700", url: getRandomSourceUrl() },
             { title: "Historic Bhaktapur Durbar Square Restoration Enters Final Phase", source: "The Kathmandu Post", time: "4 days ago", category: "Culture", color: "bg-orange-700", url: getRandomSourceUrl() },
@@ -194,14 +192,13 @@
             { title: "Government Launches Digital Literacy Campaign in Rural Provinces", source: "The Himalayan Times", time: "6 days ago", category: "Technology", color: "bg-purple-700", url: getRandomSourceUrl() }
         ];
 
-        // --- UPDATED: 10 Calendar Examples ---
+        // --- Calendar Examples (Unchanged) ---
         const nepoCalendarExamples_full = [
             { name: "Dashain (Mahanavami)", date: "Aswin 24, 2082 B.S.", type: "National Festival", color: "bg-red-600", icon: "fa-champagne-glasses" },
             { name: "Tihar (Laxmi Puja)", date: "Kartik 10, 2082 B.S.", type: "National Festival", color: "bg-orange-600", icon: "fa-lightbulb" },
             { name: "Lhosar", date: "Magh 25, 2082 B.S.", type: "Community Event", color: "bg-blue-600", icon: "fa-dragon" },
             { name: "My Friend's Birthday", date: "Bhadra 5, 2082 B.S.", type: "Personal Reminder", color: "bg-purple-600", icon: "fa-cake-candles" },
             { name: "Full Moon (Purnima)", date: "Upcoming: Jestha 1, 2083 B.S.", type: "Lunar Cycle", color: "bg-teal-600", icon: "fa-moon" },
-            // Added 5 more
             { name: "Republic Day", date: "Jestha 15, 2083 B.S.", type: "National Holiday", color: "bg-green-600", icon: "fa-flag" },
             { name: "Teej Festival", date: "Bhadra 1, 2082 B.S.", type: "National Festival", color: "bg-pink-600", icon: "fa-person-dress" },
             { name: "Nepal Sambat New Year", date: "Kartik 11, 2082 B.S.", type: "Cultural Event", color: "bg-red-700", icon: "fa-gopuram" },
@@ -209,7 +206,7 @@
             { name: "Scheduled Medical Checkup", date: "Poush 10, 2082 B.S.", type: "Personal Reminder", color: "bg-cyan-600", icon: "fa-user-nurse" }
         ];
 
-        // --- 20 Common Disease Data (English & Nepali) - Unchanged for brevity ---
+        // --- Disease Data (Unchanged) ---
         const nepoDiseaseData = {
             // 1. Common Cold
             'cold': {
@@ -292,7 +289,7 @@
                 ne: {
                     intro: 'धमनीका भित्ताहरू विरुद्ध रगतको बल धेरै उच्च हुने अवस्था हो, जसले हृदय रोग और स्ट्रोकको जोखिम बढाउँछ।',
                     causes: 'प्रायः उच्च नुन सेवन, व्यायामको कमी र धूम्रपान जस्ता अस्वस्थ जीवनशैलीका कारण समयसँगै विकसित हुन्छ।',
-                    aware: 'नुन र क्याफिन सेवन कम गर्नुहोस्। मदिरा सेवन सीमित गर्नुहोस् र धूम्रपान छोड्नुहोस्। नियमित व्यायाम गर्नुहोस् और ध्यान वा योग मार्फत तनाव व्यवस्थापन गर्नुहोस्।'
+                    aware: 'नुन र क्याफिन सेवन कम गर्नुहोस्। मदिरा सेवन सीमित गर्नुहोस् और धूम्रपान छोड्नुहोस्। नियमित व्यायाम गर्नुहोस् और ध्यान वा योग मार्फत तनाव व्यवस्थापन गर्नुहोस्।'
                 }
             },
             // 7. Tuberculosis (TB)
@@ -494,281 +491,117 @@
         };
         const diseaseKeys = Object.keys(nepoDiseaseData).slice(0, 20); 
 
+        // --- Hospital Data (NEWLY ADDED) ---
+        const hospitalData = [
+            // I. Kathmandu Valley & Bagmati Province      
+            { name: "Tribhuvan University Teaching Hospital (TUTH)", location: "Maharajgunj, Kathmandu", contact: "+977 1-4412303", province: "Kathmandu Valley & Bagmati" },
+            { name: "Bir Hospital / National Academy of Medical Sciences (NAMS)", location: "Kanti Path, Kathmandu", contact: "+977 1-4221988", province: "Kathmandu Valley & Bagmati" },
+            { name: "Patan Hospital (PAHS)", location: "Lagankhel, Lalitpur", contact: "+977 1-5522278", province: "Kathmandu Valley & Bagmati" },
+            { name: "Nepal Mediciti Hospital", location: "Nakhu, Lalitpur", contact: "+977 1-4217766", province: "Kathmandu Valley & Bagmati" },
+            { name: "Norvic International Hospital", location: "Thapathali, Kathmandu", contact: "+977 1-4258554", province: "Kathmandu Valley & Bagmati" },
+            { name: "Grande International Hospital", location: "Dhapasi, Kathmandu", contact: "+977 1-4381047", province: "Kathmandu Valley & Bagmati" },
+            { name: "B & B Hospital", location: "Gwarko, Lalitpur", contact: "+977 1-5531933", province: "Kathmandu Valley & Bagmati" },
+            { name: "Shahid Gangalal National Heart Centre", location: "Bansbari, Kathmandu", contact: "+977 1-4371322", province: "Kathmandu Valley & Bagmati" },
+            { name: "Kanti Children's Hospital", location: "Maharajgunj, Kathmandu", contact: "+977 1-4414798", province: "Kathmandu Valley & Bagmati" },
+            { name: "Civil Service Hospital of Nepal", location: "New Baneshwor, Kathmandu", contact: "+977 1-4107000", province: "Kathmandu Valley & Bagmati" },
+            { name: "Paropakar Maternity and Women's Hospital", location: "Thapathali, Kathmandu", contact: "+977 1-4261363", province: "Kathmandu Valley & Bagmati" },
+            { name: "Nepal Orthopedic Hospital", location: "Jorpati, Kathmandu", contact: "+977 1-4911725", province: "Kathmandu Valley & Bagmati" },
+            { name: "Tilganga Institute of Ophthalmology", location: "Gaushala, Kathmandu", contact: "+977 1-4493773", province: "Kathmandu Valley & Bagmati" },
+            { name: "Manmohan Cardiothoracic & Vascular Hospital", location: "Maharajgunj, Kathmandu", contact: "+977 1-4427494", province: "Kathmandu Valley & Bagmati" },
+            { name: "Nepal Cancer Hospital and Research Center", location: "Harisiddhi, Lalitpur", contact: "+977 1-5201000", province: "Kathmandu Valley & Bagmati" },
+            { name: "Bhaktapur Cancer Hospital", location: "Bhaktapur", contact: "+977 1-6610676", province: "Kathmandu Valley & Bagmati" },
+            { name: "Om Hospital & Research Centre", location: "Chabahil, Kathmandu", contact: "+977 1-4476225", province: "Kathmandu Valley & Bagmati" },
+            { name: "Sukraraj Tropical and Infectious Disease Hospital", location: "Teku, Kathmandu", contact: "+977 1-4253396", province: "Kathmandu Valley & Bagmati" },
+            { name: "Dhulikhel Hospital", location: "Dhulikhel, Kavrepalanchok", contact: "+977 11-490497", province: "Kathmandu Valley & Bagmati" },
+            { name: "National Trauma Center", location: "Mahankal, Kathmandu", contact: "+977 1-4229656", province: "Kathmandu Valley & Bagmati" },
+            { name: "Nepal Medical College Teaching Hospital", location: "Jorpati, Kathmandu", contact: "+977 1-4911008", province: "Kathmandu Valley & Bagmati" },
+            { name: "KIST Medical College and Teaching Hospital", location: "Imadol, Lalitpur", contact: "+977 1-5201496", province: "Kathmandu Valley & Bagmati" },
+            { name: "Kathmandu Medical College (KMC)", location: "Sinamangal, Kathmandu", contact: "+977 1-4476152", province: "Kathmandu Valley & Bagmati" },
+            { name: "Nepal Police Hospital", location: "Maharajgunj, Kathmandu", contact: "+977 1-4412430", province: "Kathmandu Valley & Bagmati" },
+            { name: "Nepal Armed Police Force Hospital", location: "Balambu, Kathmandu", contact: "+977 1-4311020", province: "Kathmandu Valley & Bagmati" },
+            { name: "Shree Birendra Hospital (Army Hospital)", location: "Chhauni, Kathmandu", contact: "+977 1-4271941", province: "Kathmandu Valley & Bagmati" },
+            { name: "Human Organ Transplant Centre (HOTC)", location: "Bhaktapur", contact: "+977 1-6610660", province: "Kathmandu Valley & Bagmati" },
+            { name: "Patan Mental Hospital", location: "Lagankhel, Lalitpur", contact: "+977 1-5521612", province: "Kathmandu Valley & Bagmati" },
+            { name: "Bharatpur Hospital", location: "Bharatpur, Chitwan", contact: "+977 56-520286", province: "Kathmandu Valley & Bagmati" },
+            { name: "B.P. Koirala Memorial Cancer Hospital", location: "Bharatpur, Chitwan", contact: "+977 56-520138", province: "Kathmandu Valley & Bagmati" },
+            { name: "College of Medical Sciences (COMS)", location: "Bharatpur, Chitwan", contact: "+977 56-530994", province: "Kathmandu Valley & Bagmati" },
+            { name: "Chitwan Medical College Teaching Hospital", location: "Bharatpur, Chitwan", contact: "+977 56-532889", province: "Kathmandu Valley & Bagmati" },
+            { name: "Sumeru Community Hospital", location: "Dhambahi, Lalitpur", contact: "+977 1-5522770", province: "Kathmandu Valley & Bagmati" },
+            { name: "Blue Cross Hospital Pvt. Ltd.", location: "Tripureshwor, Kathmandu", contact: "+977 1-4262027", province: "Kathmandu Valley & Bagmati" },
+            { name: "Himal Hospital Pvt. Ltd.", location: "Hattisar, Kathmandu", contact: "+977 1-4412030", province: "Kathmandu Valley & Bagmati" },
+            { name: "Medicare National Hospital", location: "Chabahil, Kathmandu", contact: "+977 1-4467067", province: "Kathmandu Valley & Bagmati" },
+            { name: "Nepal-Bharat Maitri Hospital", location: "Balaju, Kathmandu", contact: "+977 1-4380126", province: "Kathmandu Valley & Bagmati" },
+            { name: "Alka Hospital Pvt. Ltd.", location: "Lalitpur", contact: "+977 1-5533967", province: "Kathmandu Valley & Bagmati" },
+            { name: "Upendra Devkota Memorial National Institute of Neuro", location: "Bansbari, Kathmandu", contact: "+977 1-4370044", province: "Kathmandu Valley & Bagmati" },
+            { name: "National Tuberculosis Control Centre (NTCC)", location: "Thimi, Bhaktapur", contact: "+977 1-6630048", province: "Kathmandu Valley & Bagmati" },
+            { name: "Vayodha Hospitals", location: "Balkhu, Kathmandu", contact: "+977 1-4281666", province: "Kathmandu Valley & Bagmati" },
+            { name: "Annapurna Neuro Hospital", location: "Maitighar Mandala, Kathmandu", contact: "+977 1-4256656", province: "Kathmandu Valley & Bagmati" },
+            { name: "Capital Hospital", location: "Bagh Durbar, Kathmandu", contact: "+977 1-4168222", province: "Kathmandu Valley & Bagmati" },
+            { name: "Kathmandu Model Hospital", location: "Bagh Durbar Marg, Kathmandu", contact: "+977 1-4240805", province: "Kathmandu Valley & Bagmati" },
+            { name: "CIWEC Hospital Pvt. Ltd.", location: "Lazimpat, Kathmandu", contact: "+977 1-4435232", province: "Kathmandu Valley & Bagmati" },
+            { name: "Nepal Eye Hospital", location: "Tripureshwor, Kathmandu", contact: "+977 1-4260813", province: "Kathmandu Valley & Bagmati" },
+            { name: "Dhulikhel Hospital", location: "Dhulikhel, Kavre", contact: "+977 11-490497", province: "Kathmandu Valley & Bagmati" },
+            { name: "Dhaulagiri Zonal Hospital", location: "Baglung", contact: "+977 68-520245", province: "Kathmandu Valley & Bagmati" },
+            { name: "Gorkha Hospital", location: "Gorkha", contact: "+977 64-420121", province: "Kathmandu Valley & Bagmati" },
+            { name: "Dhading District Hospital", location: "Dhading Besi, Dhading", contact: "+977 10-520124", province: "Kathmandu Valley & Bagmati" },
+            // II. Koshi, Madhesh, Gandaki, Lumbini, Karnali, and Sudurpashchim Provinces      
+            { name: "B.P. Koirala Institute of Health Sciences (BPKIHS)", location: "Dharan, Sunsari", contact: "+977 25-525555", province: "Other Provinces" },
+            { name: "Nobel Medical College Teaching Hospital", location: "Biratnagar, Morang", contact: "+977 21-460742", province: "Other Provinces" },
+            { name: "Koshi Hospital", location: "Biratnagar, Morang", contact: "+977 21-522144", province: "Other Provinces" },
+            { name: "Mechi Hospital", location: "Bhadrapur, Jhapa", contact: "+977 23-520330", province: "Other Provinces" },
+            { name: "Narayani Hospital", location: "Birgunj, Parsa", contact: "+977 51-520306", province: "Other Provinces" },
+            { name: "Janakpur Provincial Hospital", location: "Janakpur, Dhanusha", contact: "+977 41-520117", province: "Other Provinces" },
+            { name: "Pokhara Academy of Health Sciences (PoAHS)", location: "Pokhara, Kaski", contact: "+977 61-521160", province: "Other Provinces" },
+            { name: "Manipal Teaching Hospital", location: "Pokhara, Kaski", contact: "+977 61-572771", province: "Other Provinces" },
+            { name: "Gandaki Medical College Teaching Hospital", location: "Pokhara, Kaski", contact: "+977 61-503450", province: "Other Provinces" },
+            { name: "Bheri Hospital", location: "Nepalgunj, Banke", contact: "+977 81-521141", province: "Other Provinces" },
+            { name: "Nepalgunj Medical College Teaching Hospital", location: "Chisapani, Banke", contact: "+977 81-560200", province: "Other Provinces" },
+            { name: "Lumbini Provincial Hospital", location: "Butwal, Rupandehi", contact: "+977 71-540130", province: "Other Provinces" },
+            { name: "Rapti Academy of Health Sciences (RAHS)", location: "Ghorahi, Dang", contact: "+977 82-560411", province: "Other Provinces" },
+            { name: "Karnali Academy of Health Sciences (KAHS)", location: "Jumla", contact: "+977 87-520002", province: "Other Provinces" },
+            { name: "Seti Provincial Hospital", location: "Dhangadhi, Kailali", contact: "+977 91-521151", province: "Other Provinces" },
+            { name: "Mahakali Provincial Hospital", location: "Mahendranagar, Kanchanpur", contact: "+977 99-521102", province: "Other Provinces" },
+            { name: "Sushil Koirala Prakhar Cancer Hospital", location: "Khajura, Banke", contact: "+977 81-560601", province: "Other Provinces" },
+            { name: "Gajendra Narayan Singh Hospital", location: "Rajbiraj, Saptari", contact: "+977 31-562016", province: "Other Provinces" },
+            { name: "Birat Medical College Teaching Hospital", location: "Biratnagar, Morang", contact: "+977 21-530999", province: "Other Provinces" },
+            { name: "Ilam District Hospital", location: "Ilam", contact: "+977 27-520120", province: "Other Provinces" },
+            { name: "Ramechhap District Hospital", location: "Ramechhap", contact: "+977 48-540106", province: "Other Provinces" },
+            { name: "Siraha District Hospital", location: "Siraha", contact: "+977 33-560126", province: "Other Provinces" },
+            { name: "Damauli Hospital", location: "Tanahun", contact: "+977 65-560002", province: "Other Provinces" },
+            { name: "Rolpa District Hospital", location: "Rolpa", contact: "+977 86-440126", province: "Other Provinces" },
+            { name: "Taulihawa Hospital", location: "Kapilvastu", contact: "+977 76-520130", province: "Other Provinces" },
+            { name: "Rapti Zonal Hospital", location: "Tulsipur, Dang", contact: "+977 82-520121", province: "Other Provinces" },
+            { name: "Nepalgunj Bheri Hospital", location: "Nepalgunj, Banke", contact: "+977 81-521141", province: "Other Provinces" },
+            { name: "Charak Memorial Hospital", location: "Pokhara, Kaski", contact: "+977 61-536966", province: "Other Provinces" },
+            { name: "Crimson Hospital", location: "Butwal, Rupandehi", contact: "+977 71-546000", province: "Other Provinces" },
+            { name: "Universal College of Medical Sciences", location: "Bhairahawa, Rupandehi", contact: "+977 71-570415", province: "Other Provinces" },
+            { name: "Lahan Eye Hospital", location: "Lahan, Siraha", contact: "+977 33-560117", province: "Other Provinces" },
+            { name: "Mechi Eye Hospital", location: "Birtamod, Jhapa", contact: "+977 23-543166", province: "Other Provinces" },
+            { name: "Pokhara Eye Hospital", location: "Pokhara, Kaski", contact: "+977 61-520808", province: "Other Provinces" },
+            { name: "Fateh-Bal Gopal Eye Hospital", location: "Nepalgunj, Banke", contact: "+977 81-520600", province: "Other Provinces" },
+            { name: "Pokhara Model Hospital", location: "Pokhara, Kaski", contact: "+977 61-537446", province: "Other Provinces" },
+            { name: "Janakpur Zonal Hospital", location: "Janakpur, Dhanusha", contact: "+977 41-520117", province: "Other Provinces" },
+            { name: "Koshi Zonal Hospital", location: "Biratnagar, Morang", contact: "+977 21-522144", province: "Other Provinces" },
+            { name: "Birat City Hospital", location: "Biratnagar, Morang", contact: "+977 21-464001", province: "Other Provinces" },
+            { name: "Lumbini Eye Institute", location: "Butwal, Rupandehi", contact: "+977 71-542155", province: "Other Provinces" },
+            { name: "Butwal AMDA Hospital", location: "Butwal, Rupandehi", contact: "+977 71-540097", province: "Other Provinces" },
+            { name: "Rapti Health Sciences Academy", location: "Ghorahi, Dang", contact: "+977 82-560411", province: "Other Provinces" },
+            { name: "Sudurpashchim Provincial Hospital", location: "Dhangadhi, Kailali", contact: "+977 91-521151", province: "Other Provinces" },
+            { name: "Mahakali Zonal Hospital", location: "Mahendranagar, Kanchanpur", contact: "+977 99-521102", province: "Other Provinces" },
+            { name: "Dadeldhura Hospital", location: "Dadeldhura", contact: "+977 91-580101", province: "Other Provinces" },
+            { name: "Patan Mental Hospital", location: "Lagankhel, Lalitpur", contact: "+977 1-5521612", province: "Other Provinces" },
+            { name: "Kathmandu Model Hospital", location: "Bagh Durbar, Kathmandu", contact: "+977 1-4240805", province: "Other Provinces" },
+            { name: "Neuro Hospital", location: "Biratnagar, Morang", contact: "+977 21-463000", province: "Other Provinces" },
+            { name: "Chhinnamasta Hospital", location: "Rajbiraj, Saptari", contact: "+977 31-520008", province: "Other Provinces" },
+            { name: "G.P. Koirala National Center for Respiratory Disease", location: "Shuklagandaki, Tanahun", contact: "+977 65-570025", province: "Other Provinces" },
+            { name: "National Academy of Medical Sciences (NAMS)", location: "Kathmandu (Bir Hospital Complex)", contact: "+977 1-4221988", province: "Other Provinces" },
+        ];
+        // --- End Hospital Data ---
 
-        const nepoCareExamples_full = [
-            { service: "Home Nurse Visit (Post-Op Care)", provider: "Shanti Health Services", date: "Sept 15, 2025", cost: 3500, icon: "fa-user-nurse" },
-            { service: "Pediatric Tele-Consultation", provider: "Dr. R. Sharma", date: "Tomorrow, 10:00 AM", cost: 1200, icon: "fa-user-md" },
-            { service: "Physiotherapy Session", provider: "KTM Rehab Center", date: "Scheduled", cost: 1800, icon: "fa-stethoscope" },
-            { service: "Eldercare Giver (4 hours)", provider: "Community Help Group", date: "Oct 1, 2025", cost: 2000, icon: "fa-hand-holding-heart" },
-            { service: "Mental Health Session", provider: "Counselor S. Thapa", date: "Scheduled", cost: 2500, icon: "fa-brain" }
-        ];
-        
-        // --- UPDATED: 10 Second-Hand Examples ---
-        const nepoSecondHandExamples_full = [
-            { item: "iPhone 12 (128GB)", price: 45000, condition: "Excellent", location: "Pokhara", icon: "fa-mobile-screen-button" },
-            { item: "Wooden Dining Table (6-seater)", price: 18000, condition: "Good", location: "Baneshwor", icon: "fa-couch" },
-            { item: "Canon DSLR Camera (Used)", price: 32000, condition: "Fair", location: "Lalitpur", icon: "fa-camera" },
-            { item: "Electric Scooter (2023 Model)", price: 75000, condition: "Like New", location: "Kathmandu", icon: "fa-motorcycle" },
-            { item: "Old Nepali Coin Collection", price: 5000, condition: "Collectible", location: "Bhaktapur", icon: "fa-coins" },
-            // Added 5 more
-            { item: "Electric Guitar (Yamaha)", price: 12000, condition: "Good", location: "Thamel", icon: "fa-guitar" },
-            { item: "Hiking Backpack (50L)", price: 3500, condition: "Excellent", location: "Godawari", icon: "fa-mountain" },
-            { item: "Used Samsung Galaxy A50", price: 10000, condition: "Fair", location: "New Road", icon: "fa-mobile-alt" },
-            { item: "Set of Clay Pots (Artisan)", price: 4000, condition: "New", location: "Patan", icon: "fa-bowl-food" },
-            { item: "Office Desk and Chair Set", price: 9000, condition: "Good", location: "Kirtipur", icon: "fa-chair" }
-        ];
 
-        // --- UPDATED: 10 Shopping Examples ---
-        const nepoShoppingExamples_full = [
-            { item: "Traditional Dhaka Topi", price: 850, vendor: "Himalaya Weavers", status: "Shipped", icon: "fa-hat-cowboy" },
-            { item: "Basmati Rice (25kg)", price: 2800, vendor: "Local Grocer", status: "Delivered", icon: "fa-wheat-awn" },
-            { item: "Men's Jacket (Winter)", price: 4500, vendor: "Kathmandu Fashion", status: "Processing", icon: "fa-shirt" },
-            { item: "Nepali Coffee Beans (500g)", price: 1200, vendor: "Organic Farms", status: "Delivered", icon: "fa-mug-saucer" },
-            { item: "Set of Clay Pots", price: 1500, vendor: "Artisan Crafts", status: "Pending", icon: "fa-bowl-food" },
-            // Added 5 more
-            { item: "Smartwatch (Generic)", price: 3500, vendor: "Tech Nepal", status: "Shipped", icon: "fa-clock" },
-            { item: "Electric Kettle (1.5L)", price: 1800, vendor: "Home Appliances", status: "Delivered", icon: "fa-blender" },
-            { item: "Baby Diapers (Bulk)", price: 3200, vendor: "Mama & Baby Store", status: "Processing", icon: "fa-baby" },
-            { item: "Set of Cooking Spices", price: 750, vendor: "Spicy Route", status: "Delivered", icon: "fa-pepper-hot" },
-            { item: "Portable Bluetooth Speaker", price: 2100, vendor: "Audio World", status: "Pending", icon: "fa-volume-up" }
-        ];
-
-        // --- UPDATED: Visa Country Data Structure with Emojis ---
-        const visaCountries = [
-            { 
-                name: "Australia", 
-                flagEmoji: "🇦🇺",
-                flagIcon: "fa-globe-asia", // Retain FA icon as fallback/theme element
-                links: [
-                    { name: "Visa Status Check", url: "https://online.immi.gov.au/evo/firstParty?actionType=query" }
-                ]
-            },
-            { 
-                name: "Indonesia", 
-                flagEmoji: "🇮🇩",
-                flagIcon: "fa-passport",
-                links: [
-                    { name: "Visa Check", url: "https://evisa.imigrasi.go.id/web/find-data" },
-                    { name: "Work Permit Check", url: "https://evisa.imigrasi.go.id/web/find-data" }
-                ]
-            },
-            { 
-                name: "Albania", 
-                flagEmoji: "🇦🇱",
-                flagIcon: "fa-globe-europe",
-                links: [
-                    { name: "Visa Track", url: "https://e-visa.al/track" }
-                ]
-            },
-            { 
-                name: "Israel", 
-                flagEmoji: "🇮🇱",
-                flagIcon: "fa-passport",
-                links: [
-                    { name: "Passport Detail Check", url: "https://dofe.gov.np/PassportDetail.aspx" } 
-                ]
-            },
-            { 
-                name: "Kuwait", 
-                flagEmoji: "🇰🇼",
-                flagIcon: "fa-globe-asia",
-                links: [
-                    { name: "Visa Status", url: "https://rnt.moi.gov.kw/esrv/VisaStat.do?lang=eng#mobSec" }
-                ]
-            },
-            { 
-                name: "Maldives", 
-                flagEmoji: "🇲🇻",
-                flagIcon: "fa-umbrella-beach",
-                links: [
-                    { name: "Work Permit Check", url: "https://xpat.egov.mv/" }
-                ]
-            },
-            { 
-                name: "Malta", 
-                flagEmoji: "🇲🇹",
-                flagIcon: "fa-globe-europe",
-                links: [
-                    { name: "Visa Status Check", url: "https://identita.gov.mt/" }
-                ]
-            },
-            { 
-                name: "Oman", 
-                flagEmoji: "🇴🇲",
-                flagIcon: "fa-globe-asia",
-                links: [
-                    { name: "Visa Track", url: "https://evisa.rop.gov.om/en/track-your-application" }
-                ]
-            },
-            { 
-                name: "Romania", 
-                flagEmoji: "🇷🇴",
-                flagIcon: "fa-globe-europe",
-                links: [
-                    { name: "Passport Detail Check", url: "https://dofe.gov.np/PassportDetail.aspx" } 
-                ]
-            },
-            { 
-                name: "Serbia", 
-                flagEmoji: "🇷🇸",
-                flagIcon: "fa-globe-europe",
-                links: [
-                    { name: "e-Visa Status", url: "https://evisa.welcometoserbia.gov.rs/" }
-                ]
-            },
-            { 
-                name: "Republic of South Korea", 
-                flagEmoji: "🇰🇷",
-                flagIcon: "fa-globe-asia",
-                links: [
-                    { name: "Visa Status Check", url: "https://www.visa.go.kr/openPage.do?MENU_ID=10207" }
-                ]
-            },
-            { 
-                name: "Azerbaijan", 
-                flagEmoji: "🇦🇿",
-                flagIcon: "fa-globe-asia",
-                links: [
-                    { name: "e-Visa Status Check", url: "https://evisa.gov.az/en/check-status" }
-                ]
-            },
-            { 
-                name: "Bahrain", 
-                flagEmoji: "🇧🇭",
-                flagIcon: "fa-passport",
-                links: [
-                    { name: "Residency Status Check", url: "https://lmra.gov.bh/en/eligibilityrc" }
-                ]
-            },
-            { 
-                name: "Kyrgyzstan", 
-                flagEmoji: "🇰🇬",
-                flagIcon: "fa-globe-asia",
-                links: [
-                    { name: "e-Visa Status Check", url: "https://www.evisa.e-gov.kg/check_status.php" }
-                ]
-            },
-            { 
-                name: "Malaysia", 
-                flagEmoji: "🇲🇾",
-                flagIcon: "fa-passport",
-                links: [
-                    { name: "e-Visa Status Check", url: "https://malaysiavisa.imi.gov.my/evisa/vlno_checkstatus.jsp" }
-                ]
-            },
-            { 
-                name: "Poland", 
-                flagEmoji: "🇵🇱",
-                flagIcon: "fa-globe-europe",
-                links: [
-                    { name: "VFS Tracking", url: "https://www.vfsvisaonline.com/Global-Passporttracking/Track/Index?q=shSA0YnE4pLF9Xzwon/x/ASnHZRMROGDyz5YljrTPrmD7weWKDzHm/9+x4kyou3T7EbygDK+7ECJT8O+dWpxGw==" }
-                ]
-            },
-            { 
-                name: "Qatar", 
-                flagEmoji: "🇶🇦",
-                flagIcon: "fa-globe-asia",
-                links: [
-                    { name: "Visa Inquiry", url: "https://portal.moi.gov.qa/wps/portal/MOIInternet/services/inquiries/visaservices/enquiryandprinting" }
-                ]
-            },
-            { 
-                name: "Saudi Arabia", 
-                flagEmoji: "🇸🇦",
-                flagIcon: "fa-passport",
-                links: [
-                    { name: "Applicant Data Check", url: "https://visa.mofa.gov.sa/VisaPerson/GetApplicantData" }
-                ]
-            },
-            { 
-                name: "United Arab Emirates", 
-                flagEmoji: "🇦🇪",
-                flagIcon: "fa-building",
-                links: [
-                    { name: "Visa Inquiry (GDRFA)", url: "https://gdrfad.gov.ae/en/unified-number-inquiry-service" },
-                    { name: "Work Permit Check (MOHRE)", url: "https://inquiry.mohre.gov.ae/" }
-                ]
-            },
-        ];
-
-        // This list is no longer used for the main Visa Check content, but retained for the history mock.
-        const nepoVisaExamples_full = [
-            { country: "Australia (Student Visa)", applicant: "Ramesh P.", status: "Processing", date: "Applied Mar '25", icon: "fa-graduation-cap" },
-            { country: "USA (H1B Renewal)", applicant: "Sita G.", status: "Approved", date: "Expires Dec '26", icon: "fa-briefcase" },
-            { country: "Canada (Visitor Visa)", applicant: "Prakash T.", status: "Denied", date: "Updated Today", icon: "fa-plane-up" },
-            { country: "UK (Skilled Worker)", applicant: "Asha M.", status: "Interview Scheduled", date: "Oct 20, 2025", icon: "fa-hospital" },
-            { country: "Japan (Training Visa)", applicant: "Dev K.", status: "Documents Submitted", date: "Next Update: 7 days", icon: "fa-wrench" },
-            { country: "Germany (Family Reunion)", applicant: "Laxmi B.", status: "Approved", date: "Issued Jan '26", icon: "fa-house-user" },
-            { country: "South Korea (E-9)", applicant: "Manoj R.", status: "Processing", date: "Applied Sept '25", icon: "fa-factory" },
-            { country: "Portugal (Golden Visa)", applicant: "Hari N.", status: "Document Review", date: "Updated 3 days ago", icon: "fa-euro-sign" },
-            { country: "UAE (Employment Visa)", applicant: "Kajal Y.", status: "Medical Clearance Pending", date: "Next Update: 14 days", icon: "fa-building-o" },
-            { country: "India (Business Visa)", applicant: "Samir J.", status: "Approved", date: "Issued Dec '25", icon: "fa-business-time" }
-        ];
-
-        // --- UPDATED: 10 Donation Examples ---
-        const nepoDonationExamples_full = [
-            { cause: "Nepal Flood Relief Fund", amount: 5000, recipient: "National Disaster Authority", date: "Sept 1, 2025", type: "Disaster Relief", icon: "fa-house-tsunami" },
-            { cause: "Community School Books Drive", amount: 1500, recipient: "Rural Education NGO", date: "Aug 20, 2025", type: "Education", icon: "fa-book" },
-            { cause: "Animal Shelter Renovation", amount: 1000, recipient: "KTM Animal Welfare", date: "Pending", type: "Animal Care", icon: "fa-paw" },
-            { cause: "Eldercare Food Program", amount: 2000, recipient: "Elderly Home Patan", date: "Monthly Recurring", type: "Social Welfare", icon: "fa-shield-heart" },
-            { cause: "Local Temple Preservation", amount: 800, recipient: "Temple Committee", date: "Sept 5, 2025", type: "Culture", icon: "fa-gopuram" },
-            // Added 5 more
-            { cause: "COVID-19 Oxygen Supply", amount: 3000, recipient: "Private Hospital Fund", date: "April 10, 2024", type: "Health", icon: "fa-lungs-virus" },
-            { cause: "Support Orphan Children", amount: 1200, recipient: "Nepal Children's Home", date: "July 7, 2025", type: "Social Welfare", icon: "fa-child" },
-            { cause: "Digital Literacy Training", amount: 750, recipient: "Tech For All NGO", date: "Oct 15, 2025", type: "Education", icon: "fa-laptop" },
-            { cause: "Environmental Cleanup Drive", amount: 500, recipient: "Eco-Friendly Nepal", date: "Nov 1, 2025", type: "Environment", icon: "fa-recycle" },
-            { cause: "Blind School Braille Books", amount: 2500, recipient: "Blind Welfare Trust", date: "Dec 12, 2025", type: "Education", icon: "fa-braille" }
-        ];
-
-        // --- UPDATED: 10 Room Rent Examples ---
-        const nepoRoomRentExamples_full = [
-            { title: "Single Room near TU (Male/Student)", rent: 6000, deposit: 1, location: "Kirtipur", type: "Room", icon: "fa-door-open" },
-            { title: "2BHK Apartment (Family Friendly)", rent: 25000, deposit: 2, location: "Boudha", type: "Apartment", icon: "fa-building" },
-            { title: "Shared Flat for Females (Professional)", rent: 4500, deposit: 1, location: "New Baneshwor", type: "Shared", icon: "fa-users" },
-            { title: "Ground Floor Shop/Studio Space", rent: 15000, deposit: 3, location: "Thamel", type: "Commercial", icon: "fa-shop" },
-            { title: "Small House for Rent (Garden)", rent: 18000, deposit: 2, location: "Godawari", type: "House", icon: "fa-house" },
-            // Added 5 more
-            { title: "Hostel Bed (Clean & Safe)", rent: 3500, deposit: 1, location: "Lazimpat", type: "Shared", icon: "fa-bed" },
-            { title: "1BHK Flat (Couple/Working Pro)", rent: 12000, deposit: 2, location: "Patan Dhoka", type: "Apartment", icon: "fa-building" },
-            { title: "Large Godown for Storage/Light Industry", rent: 35000, deposit: 4, location: "Kalanki", type: "Commercial", icon: "fa-warehouse" },
-            { title: "Room with Balcony (Female Pro)", rent: 7500, deposit: 1, location: "Chabahil", type: "Room", icon: "fa-door-open" },
-            { title: "Modern 3BHK Penthouse", rent: 60000, deposit: 3, location: "Baluwatar", type: "Apartment", icon: "fa-city" }
-        ];
-
-        // --- UPDATED: 10 Jobs Examples ---
-        const nepoJobsExamples_full = [
-            { title: "Weekend Cafe Assistant", company: "Himalayan Brews", pay: "NPR 500/hr", location: "Thamel", type: "Hospitality", icon: "fa-mug-hot" },
-            { title: "Freelance Graphic Designer", company: "Digital Solutions Co.", pay: "Project Based", location: "Remote", type: "Creative", icon: "fa-pen-nib" },
-            { title: "After School Tutor (Maths/Science)", company: "Private Client", pay: "NPR 1000/session", location: "Lalitpur", type: "Education", icon: "fa-chalkboard-user" },
-            { title: "Data Entry Specialist (Evening Shift)", company: "BPO Center", pay: "NPR 20k/month", location: "Baneshwor", type: "Admin", icon: "fa-keyboard" },
-            { title: "Delivery Rider (Own Bike Required)", company: "Local Logistics", pay: "Per Delivery + Bonus", location: "KTM Area", type: "Logistics", icon: "fa-biking" },
-            // Added 5 more
-            { title: "Content Writer (Tech Niche)", company: "TechMedia Nepal", pay: "NPR 18k/month", location: "Remote", type: "Creative", icon: "fa-file-alt" },
-            { title: "Housekeeping Staff (Part-Time)", company: "CleanPro Services", pay: "NPR 350/hr", location: "Lazimpat", type: "Service", icon: "fa-broom" },
-            { title: "Customer Service Agent (Nepali/English)", company: "Telecom Support", pay: "NPR 25k/month", location: "Teku", type: "Call Center", icon: "fa-headset" },
-            { title: "Social Media Intern", company: "Fashion Retailer", pay: "NPR 8k/month + Stipend", location: "New Road", type: "Marketing", icon: "fa-share-alt" },
-            { title: "Waiter/Waitress (Hotel Experience)", company: "Luxury Hotel Patan", pay: "NPR 15k/month + Tips", location: "Patan", icon: "fa-bell-concierge" }
-        ];
-
-        const nepoWalletTransactions_full = [
-            { type: "Payment Received", amount: 15000, source: "Freelance Client", date: "Oct 25, 2025", category: "Income", icon: "fa-arrow-down", color: "text-green-600" },
-            { type: "Electricity Bill", amount: -2850, source: "Nepal Electricity", date: "Oct 24, 2025", category: "Utility", icon: "fa-plug", color: "text-red-600" },
-            { type: "Mobile Top-up", amount: -500, source: "NTC", date: "Oct 24, 2025", category: "Communication", icon: "fa-mobile-alt", color: "text-red-600" },
-            { type: "Mutual Fund Investment", amount: -10000, source: "Nepo Invest", date: "Oct 23, 2025", category: "Savings", icon: "fa-chart-line", color: "text-blue-600" },
-            { type: "ATM Withdrawal", amount: -5000, source: "Bank Name", date: "Oct 22, 2025", category: "Cash", icon: "fa-money-bill-transfer", color: "text-gray-600" },
-        ];
-
-        const nepoExploreExamples_full = [
-            { name: "Swayambhunath Stupa (Monkey Temple)", type: "Historic Site", distance: "4.5 km", rating: 4.8, icon: "fa-temple", color: 'text-amber-600' },
-            { name: "Farmers Market at Patan", type: "Local Event", distance: "2.1 km", rating: 4.9, icon: "fa-seedling", color: 'text-green-600' },
-            { name: "New Road Shopping Complex", type: "Shopping", distance: "7.0 km", rating: 4.3, icon: "fa-bag-shopping", color: 'text-purple-600' },
-            { name: "Kathmandu Contemporary Art Center", type: "Culture & Arts", distance: "3.2 km", rating: 4.6, icon: "fa-palette", color: 'text-pink-600' },
-            { name: "Sundarijal Waterfall Trek", type: "Nature & Outdoors", distance: "15 km", rating: 4.7, icon: "fa-mountain-sun", color: 'text-blue-600' },
-        ];
-        
-        // This is used for the Profile and the Founder section
+        // --- Mock Data (Retained for other services) ---
+        // Profile Data (Used by Profile tab and App Info modal)
         const nepoProfileData = {
-            // --- MODIFIED DATA START (Name change and icon removal retained) ---
             name: "Rajan Oli", 
             status: "Verified Platinum User",
             phone: "+977 98XXXXXXXX",
@@ -777,7 +610,6 @@
             memberSince: "May 2023",
             nepoPoints: 1250, 
             securityStatus: "High (2FA Enabled)",
-            // EXTENDED recentActivity to 30 entries
             recentActivity: [
                 { type: "Ride", details: "Thamel to Airport (Completed)", date: "Oct 30", status: "Completed" },
                 { type: "Shopping", details: "Dhaka Topi Purchase (Delivered)", date: "Oct 28", status: "Delivered" },
@@ -799,8 +631,6 @@
                 { type: "Care", details: "Canceled: Physiotherapy", date: "Sept 15", status: "Cancelled" },
                 { type: "Donation", details: "Animal Shelter (1,000 NPR)", date: "Sept 10", status: "Success" },
                 { type: "Shopping", details: "Smartwatch Purchase (Shipped)", date: "Sept 5", status: "Shipped" },
-                
-                // Added 10 new history entries for testing scrolling
                 { type: "Explore", details: "Booked Hiking Trip", date: "Sept 1", status: "Scheduled" },
                 { type: "Visa", details: "UK Skilled Worker Check", date: "Aug 28", status: "Approved" },
                 { type: "Wallet", details: "Received E-Sewa Transfer", date: "Aug 25", status: "Success" },
@@ -812,18 +642,96 @@
                 { type: "SecondHand", details: "Sold Old Phone (7,000 NPR)", date: "July 28", status: "Completed" },
                 { type: "Care", details: "Annual Health Checkup", date: "July 25", status: "Completed" },
             ],
-            // --- MODIFIED DATA END ---
-            // --- UPDATED FOUNDER DATA START ---
             founder: {
                 name: "Bipin Hamal",
-                title: "IoT Student (3rd Semester) at Baekseok University, South Korea", // Updated title
+                title: "IoT Student (3rd Semester) at Baekseok University, South Korea", 
                 contact: "010-6708-3312",
                 email: "bipinhamal2025@gmail.com"
             }
-            // --- UPDATED FOUNDER DATA END ---
         };
 
-        // --- Mock Pharmacy Data (New) - Unchanged for brevity ---
+        const nepoSecondHandExamples_full = [
+            { item: "iPhone 12 (128GB)", price: 45000, condition: "Excellent", location: "Pokhara", icon: "fa-mobile-screen-button" },
+            { item: "Wooden Dining Table (6-seater)", price: 18000, condition: "Good", location: "Baneshwor", icon: "fa-couch" },
+            { item: "Canon DSLR Camera (Used)", price: 32000, condition: "Fair", location: "Lalitpur", icon: "fa-camera" },
+            { item: "Electric Scooter (2023 Model)", price: 75000, condition: "Like New", location: "Kathmandu", icon: "fa-motorcycle" },
+            { item: "Old Nepali Coin Collection", price: 5000, condition: "Collectible", location: "Bhaktapur", icon: "fa-coins" },
+            { item: "Electric Guitar (Yamaha)", price: 12000, condition: "Good", location: "Thamel", icon: "fa-guitar" },
+            { item: "Hiking Backpack (50L)", price: 3500, condition: "Excellent", location: "Godawari", icon: "fa-mountain" },
+            { item: "Used Samsung Galaxy A50", price: 10000, condition: "Fair", location: "New Road", icon: "fa-mobile-alt" },
+            { item: "Set of Clay Pots (Artisan)", price: 4000, condition: "New", location: "Patan", icon: "fa-bowl-food" },
+            { item: "Office Desk and Chair Set", price: 9000, condition: "Good", location: "Kirtipur", icon: "fa-chair" }
+        ];
+
+        const nepoShoppingExamples_full = [
+            { item: "Traditional Dhaka Topi", price: 850, vendor: "Himalaya Weavers", status: "Shipped", icon: "fa-hat-cowboy" },
+            { item: "Basmati Rice (25kg)", price: 2800, vendor: "Local Grocer", status: "Delivered", icon: "fa-wheat-awn" },
+            { item: "Men's Jacket (Winter)", price: 4500, vendor: "Kathmandu Fashion", status: "Processing", icon: "fa-shirt" },
+            { item: "Nepali Coffee Beans (500g)", price: 1200, vendor: "Organic Farms", status: "Delivered", icon: "fa-mug-saucer" },
+            { item: "Set of Clay Pots", price: 1500, vendor: "Artisan Crafts", status: "Pending", icon: "fa-bowl-food" },
+            { item: "Smartwatch (Generic)", price: 3500, vendor: "Tech Nepal", status: "Shipped", icon: "fa-clock" },
+            { item: "Electric Kettle (1.5L)", price: 1800, vendor: "Home Appliances", status: "Delivered", icon: "fa-blender" },
+            { item: "Baby Diapers (Bulk)", price: 3200, vendor: "Mama & Baby Store", status: "Processing", icon: "fa-baby" },
+            { item: "Set of Cooking Spices", price: 750, vendor: "Spicy Route", status: "Delivered", icon: "fa-pepper-hot" },
+            { item: "Portable Bluetooth Speaker", price: 2100, vendor: "Audio World", status: "Pending", icon: "fa-volume-up" }
+        ];
+        
+        const nepoWalletTransactions_full = [
+            { type: "Payment Received", amount: 15000, source: "Freelance Client", date: "Oct 25, 2025", category: "Income", icon: "fa-arrow-down", color: "text-green-600" },
+            { type: "Electricity Bill", amount: -2850, source: "Nepal Electricity", date: "Oct 24, 2025", category: "Utility", icon: "fa-plug", color: "text-red-600" },
+            { type: "Mobile Top-up", amount: -500, source: "NTC", date: "Oct 24, 2025", category: "Communication", icon: "fa-mobile-alt", color: "text-red-600" },
+            { type: "Mutual Fund Investment", amount: -10000, source: "Nepo Invest", date: "Oct 23, 2025", category: "Savings", icon: "fa-chart-line", color: "text-blue-600" },
+            { type: "ATM Withdrawal", amount: -5000, source: "Bank Name", date: "Oct 22, 2025", category: "Cash", icon: "fa-money-bill-transfer", color: "text-gray-600" },
+        ];
+
+        const nepoExploreExamples_full = [
+            { name: "Swayambhunath Stupa (Monkey Temple)", type: "Historic Site", distance: "4.5 km", rating: 4.8, icon: "fa-temple", color: 'text-amber-600' },
+            { name: "Farmers Market at Patan", type: "Local Event", distance: "2.1 km", rating: 4.9, icon: "fa-seedling", color: 'text-green-600' },
+            { name: "New Road Shopping Complex", type: "Shopping", distance: "7.0 km", rating: 4.3, icon: "fa-bag-shopping", color: 'text-purple-600' },
+            { name: "Kathmandu Contemporary Art Center", type: "Culture & Arts", distance: "3.2 km", rating: 4.6, icon: "fa-palette", color: 'text-pink-600' },
+            { name: "Sundarijal Waterfall Trek", type: "Nature & Outdoors", distance: "15 km", rating: 4.7, icon: "fa-mountain-sun", color: 'text-blue-600' },
+        ];
+        
+        const nepoDonationExamples_full = [
+            { cause: "Nepal Flood Relief Fund", amount: 5000, recipient: "National Disaster Authority", date: "Sept 1, 2025", type: "Disaster Relief", icon: "fa-house-tsunami" },
+            { cause: "Community School Books Drive", amount: 1500, recipient: "Rural Education NGO", date: "Aug 20, 2025", type: "Education", icon: "fa-book" },
+            { cause: "Animal Shelter Renovation", amount: 1000, recipient: "KTM Animal Welfare", date: "Pending", type: "Animal Care", icon: "fa-paw" },
+            { cause: "Eldercare Food Program", amount: 2000, recipient: "Elderly Home Patan", date: "Monthly Recurring", type: "Social Welfare", icon: "fa-shield-heart" },
+            { cause: "Local Temple Preservation", amount: 800, recipient: "Temple Committee", date: "Sept 5, 2025", type: "Culture", icon: "fa-gopuram" },
+            { cause: "COVID-19 Oxygen Supply", amount: 3000, recipient: "Private Hospital Fund", date: "April 10, 2024", type: "Health", icon: "fa-lungs-virus" },
+            { cause: "Support Orphan Children", amount: 1200, recipient: "Nepal Children's Home", date: "July 7, 2025", type: "Social Welfare", icon: "fa-child" },
+            { cause: "Digital Literacy Training", amount: 750, recipient: "Tech For All NGO", date: "Oct 15, 2025", type: "Education", icon: "fa-laptop" },
+            { cause: "Environmental Cleanup Drive", amount: 500, recipient: "Eco-Friendly Nepal", date: "Nov 1, 2025", type: "Environment", icon: "fa-recycle" },
+            { cause: "Blind School Braille Books", amount: 2500, recipient: "Blind Welfare Trust", date: "Dec 12, 2025", type: "Education", icon: "fa-braille" }
+        ];
+
+        const nepoRoomRentExamples_full = [
+            { title: "Single Room near TU (Male/Student)", rent: 6000, deposit: 1, location: "Kirtipur", type: "Room", icon: "fa-door-open" },
+            { title: "2BHK Apartment (Family Friendly)", rent: 25000, deposit: 2, location: "Boudha", type: "Apartment", icon: "fa-building" },
+            { title: "Shared Flat for Females (Professional)", rent: 4500, deposit: 1, location: "New Baneshwor", type: "Shared", icon: "fa-users" },
+            { title: "Ground Floor Shop/Studio Space", rent: 15000, deposit: 3, location: "Thamel", type: "Commercial", icon: "fa-shop" },
+            { title: "Small House for Rent (Garden)", rent: 18000, deposit: 2, location: "Godawari", type: "House", icon: "fa-house" },
+            { title: "Hostel Bed (Clean & Safe)", rent: 3500, deposit: 1, location: "Lazimpat", type: "Shared", icon: "fa-bed" },
+            { title: "1BHK Flat (Couple/Working Pro)", rent: 12000, deposit: 2, location: "Patan Dhoka", type: "Apartment", icon: "fa-building" },
+            { title: "Large Godown for Storage/Light Industry", rent: 35000, deposit: 4, location: "Kalanki", type: "Commercial", icon: "fa-warehouse" },
+            { title: "Room with Balcony (Female Pro)", rent: 7500, deposit: 1, location: "Chabahil", type: "Room", icon: "fa-door-open" },
+            { title: "Modern 3BHK Penthouse", rent: 60000, deposit: 3, location: "Baluwatar", type: "Apartment", icon: "fa-city" }
+        ];
+
+        const nepoJobsExamples_full = [
+            { title: "Weekend Cafe Assistant", company: "Himalayan Brews", pay: "NPR 500/hr", location: "Thamel", type: "Hospitality", icon: "fa-mug-hot" },
+            { title: "Freelance Graphic Designer", company: "Digital Solutions Co.", pay: "Project Based", location: "Remote", type: "Creative", icon: "fa-pen-nib" },
+            { title: "After School Tutor (Maths/Science)", company: "Private Client", pay: "NPR 1000/session", location: "Lalitpur", type: "Education", icon: "fa-chalkboard-user" },
+            { title: "Data Entry Specialist (Evening Shift)", company: "BPO Center", pay: "NPR 20k/month", location: "Baneshwor", type: "Admin", icon: "fa-keyboard" },
+            { title: "Delivery Rider (Own Bike Required)", company: "Local Logistics", pay: "Per Delivery + Bonus", location: "KTM Area", type: "Logistics", icon: "fa-biking" },
+            { title: "Content Writer (Tech Niche)", company: "TechMedia Nepal", pay: "NPR 18k/month", location: "Remote", type: "Creative", icon: "fa-file-alt" },
+            { title: "Housekeeping Staff (Part-Time)", company: "CleanPro Services", pay: "NPR 350/hr", location: "Lazimpat", type: "Service", icon: "fa-broom" },
+            { title: "Customer Service Agent (Nepali/English)", company: "Telecom Support", pay: "NPR 25k/month", location: "Teku", type: "Call Center", icon: "fa-headset" },
+            { title: "Social Media Intern", company: "Fashion Retailer", pay: "NPR 8k/month + Stipend", location: "New Road", type: "Marketing", icon: "fa-share-alt" },
+            { title: "Waiter/Waitress (Hotel Experience)", company: "Luxury Hotel Patan", pay: "NPR 15k/month + Tips", location: "Patan", icon: "fa-bell-concierge" }
+        ];
+
+        // --- Mock Pharmacy Data (Unchanged) ---
         const nepoPharmacyData = [
             {
                 name: "Janata Pharmacy, Thamel",
@@ -980,8 +888,8 @@
         
         // Global state for language
         let currentLang = 'en'; 
-        // Global state for the active tab (either 'awareness' or 'pharmacy')
-        let currentCareTab = 'awareness'; 
+        // Global state for the active care tab (awareness, pharmacy, or hospital)
+        let currentCareTab = 'hospital'; // Default to hospital tab for better visibility of the new feature
 
         // --- Core Functions ---
 
@@ -1208,14 +1116,14 @@
             const langNeBtn = document.getElementById('lang-ne');
             
             if (langEnBtn && langNeBtn) {
-                langEnBtn.classList.remove('bg-indigo-600', 'text-white', 'bg-gray-200', 'text-gray-700');
-                langNeBtn.classList.remove('bg-indigo-600', 'text-white', 'bg-gray-200', 'text-gray-700');
+                langEnBtn.classList.remove('bg-teal-600', 'text-white', 'bg-gray-200', 'text-gray-700');
+                langNeBtn.classList.remove('bg-teal-600', 'text-white', 'bg-gray-200', 'text-gray-700');
                 
                 if (lang === 'en') {
-                    langEnBtn.classList.add('bg-indigo-600', 'text-white');
+                    langEnBtn.classList.add('bg-teal-600', 'text-white');
                     langNeBtn.classList.add('bg-gray-200', 'text-gray-700');
                 } else {
-                    langNeBtn.classList.add('bg-indigo-600', 'text-white');
+                    langNeBtn.classList.add('bg-teal-600', 'text-white');
                     langEnBtn.classList.add('bg-gray-200', 'text-gray-700');
                 }
             }
@@ -1228,8 +1136,8 @@
             document.querySelectorAll('.footer-ne').forEach(el => el.classList.toggle('hidden', lang !== 'ne'));
             
             // 3. Re-render the details section with the new language
-            // Find the currently selected disease button (highlighted with bg-indigo-200)
-            const currentSelectedButton = document.querySelector('#disease-list-buttons button.bg-indigo-200');
+            // Find the currently selected disease button (highlighted with bg-teal-200)
+            const currentSelectedButton = document.querySelector('#disease-list-buttons button.bg-teal-200');
             // Use the key from the selected button, or default to the first disease if none is selected
             const diseaseKey = currentSelectedButton ? currentSelectedButton.getAttribute('data-disease-key') : diseaseKeys[0]; 
             
@@ -1256,13 +1164,13 @@
 
             // Update button active state
             document.querySelectorAll('#disease-list-buttons button').forEach(btn => {
-                btn.classList.remove('bg-indigo-200', 'font-bold');
+                btn.classList.remove('bg-teal-200', 'font-bold');
                 btn.classList.add('bg-white', 'font-normal');
             });
             const activeBtn = document.querySelector(`button[data-disease-key="${diseaseKey}"]`);
             if(activeBtn) {
                  activeBtn.classList.remove('bg-white', 'font-normal');
-                 activeBtn.classList.add('bg-indigo-200', 'font-bold');
+                 activeBtn.classList.add('bg-teal-200', 'font-bold');
             }
            
             
@@ -1270,17 +1178,17 @@
                 <h4 class="text-xl font-extrabold mb-3 text-gray-900">${actualLang === 'en' ? data.name_en : data.name_ne}</h4>
                 
                 <div class="mb-4 p-3 bg-gray-50 rounded-lg">
-                    <p class="font-semibold text-indigo-700 text-sm mb-1">${actualLang === 'en' ? 'I. Introduction:' : '१. परिचय:'}</p>
+                    <p class="font-semibold text-teal-700 text-sm mb-1">${actualLang === 'en' ? 'I. Introduction:' : '१. परिचय:'}</p>
                     <p class="text-sm text-gray-700">${content.intro}</p>
                 </div>
                 
                 <div class="mb-4 p-3 bg-gray-50 rounded-lg">
-                    <p class="font-semibold text-indigo-700 text-sm mb-1">${actualLang === 'en' ? 'II. Causes:' : '२. कारणहरू:'}</p>
+                    <p class="font-semibold text-teal-700 text-sm mb-1">${actualLang === 'en' ? 'II. Causes:' : '२. कारणहरू:'}</p>
                     <p class="text-sm text-gray-700">${content.causes}</p>
                 </div>
                 
                 <div class="mb-4">
-                    <p class="font-semibold text-indigo-700 text-sm mb-1">${actualLang === 'en' ? 'III. Prevention & Awareness (Formal Suggestion):' : '३. रोकथाम र सचेतना (औपचारिक सुझाव):'}</p>
+                    <p class="font-semibold text-teal-700 text-sm mb-1">${actualLang === 'en' ? 'III. Prevention & Awareness (Formal Suggestion):' : '३. रोकथाम र सचेतना (औपचारिक सुझाव):'}</p>
                     <div class="p-3 bg-green-100 rounded-lg border border-green-300 shadow-sm">
                         <p class="text-sm text-green-800 font-medium">${content.aware}</p>
                     </div>
@@ -1294,37 +1202,43 @@
         window.switchLanguage = switchLanguage;
         window.showDiseaseDetails = showDiseaseDetails;
         
-        // Function to switch between the care service tabs (awareness/pharmacy)
+        // Function to switch between the care service tabs (awareness/pharmacy/hospital)
         function switchCareTab(tab) {
             currentCareTab = tab;
             
             // Update button styling
-            document.getElementById('tab-awareness').classList.remove('bg-indigo-600', 'text-white', 'bg-gray-200', 'text-gray-700');
-            document.getElementById('tab-pharmacy').classList.remove('bg-indigo-600', 'text-white', 'bg-gray-200', 'text-gray-700');
-            
-            if (tab === 'awareness') {
-                document.getElementById('tab-awareness').classList.add('bg-indigo-600', 'text-white');
-                document.getElementById('tab-pharmacy').classList.add('bg-gray-200', 'text-gray-700');
-                
-                // Set language buttons appropriately when returning to awareness
-                switchLanguage(currentLang);
-            } else {
-                document.getElementById('tab-pharmacy').classList.add('bg-indigo-600', 'text-white');
-                document.getElementById('tab-awareness').classList.add('bg-gray-200', 'text-gray-700');
-            }
+            const tabs = ['awareness', 'pharmacy', 'hospital'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (btn) {
+                    btn.classList.remove('bg-teal-600', 'text-white', 'bg-gray-200', 'text-gray-700');
+                    if (t === tab) {
+                        btn.classList.add('bg-teal-600', 'text-white');
+                    } else {
+                        btn.classList.add('bg-gray-200', 'text-gray-700');
+                    }
+                }
+            });
             
             // Toggle content visibility
             document.getElementById('care-content-awareness').classList.toggle('hidden', tab !== 'awareness');
             document.getElementById('care-content-pharmacy').classList.toggle('hidden', tab !== 'pharmacy');
+            document.getElementById('care-content-hospital').classList.toggle('hidden', tab !== 'hospital');
             
             // If switching to pharmacy, re-run the filter to display initial list
             if (tab === 'pharmacy') {
                 filterMedicines(); 
+            } else if (tab === 'hospital') {
+                filterHospitals(); // Initialize/re-run hospital list filter
+            } else if (tab === 'awareness') {
+                // When switching back to awareness, ensure the language is correctly set and default details shown
+                showDiseaseDetails(diseaseKeys[0], currentLang); 
+                switchLanguage(currentLang);
             }
         }
         window.switchCareTab = switchCareTab; // Expose to window
 
-        // Function to search/filter the medicines (New)
+        // Function to search/filter the medicines
         function filterMedicines() {
             const searchTerm = document.getElementById('medicine-search').value.toLowerCase();
             const storeListEl = document.getElementById('pharmacy-store-list');
@@ -1375,6 +1289,63 @@
         }
         window.filterMedicines = filterMedicines; // Expose to window
 
+        // Function to search/filter the hospitals (NEW)
+        function filterHospitals() {
+            const searchTerm = document.getElementById('hospital-search').value.toLowerCase();
+            const hospitalListEl = document.getElementById('hospital-directory-list');
+            
+            if (!hospitalListEl) return;
+
+            // Filter hospitals based on search term
+            const filteredHospitals = hospitalData.filter(hospital => 
+                hospital.name.toLowerCase().includes(searchTerm) || 
+                hospital.location.toLowerCase().includes(searchTerm) ||
+                hospital.contact.includes(searchTerm) ||
+                hospital.province.toLowerCase().includes(searchTerm)
+            );
+
+            let filteredHtml = '';
+            let lastProvince = '';
+            
+            // Group and render filtered results
+            filteredHospitals.forEach(hospital => {
+                // Use a generic catch-all province name for easier visual grouping
+                const provinceDisplayName = hospital.province === "Kathmandu Valley & Bagmati" ? "Kathmandu Valley & Bagmati Province" : "Other Provinces (Koshi, Madhesh, Gandaki, Lumbini, Karnali, Sudurpashchim)";
+
+                if (provinceDisplayName !== lastProvince) {
+                    filteredHtml += `<h4 class="text-lg font-bold text-teal-700 mt-4 mb-2 sticky top-0 bg-white pt-2 border-b border-teal-200 z-10">${provinceDisplayName}</h4>`;
+                    lastProvince = provinceDisplayName;
+                }
+                
+                filteredHtml += `
+                    <div class="mb-3 p-3 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-teal-300 transition">
+                        <p class="font-semibold text-sm text-gray-800">${hospital.name}</p>
+                        <div class="flex items-center text-xs text-gray-600 mt-1">
+                            <i class="fas fa-map-marker-alt text-teal-500 mr-2 w-3 text-center"></i>
+                            <span class="truncate">${hospital.location}</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-600 mt-1">
+                            <i class="fas fa-phone-alt text-teal-500 mr-2 w-3 text-center"></i>
+                            <a href="tel:${hospital.contact.replace(/\s/g, '')}" class="text-indigo-600 hover:underline">${hospital.contact}</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+
+            if (filteredHospitals.length === 0) {
+                hospitalListEl.innerHTML = `
+                    <div class="text-center p-8 text-gray-500">
+                        <i class="fas fa-hospital-alt text-4xl mb-3"></i>
+                        <p>No hospitals found matching your search term: **"${searchTerm}"**.</p>
+                        <p class="text-xs mt-2">Try searching by name (e.g., 'TUTH'), city, or contact number.</p>
+                    </div>
+                `;
+            } else {
+                hospitalListEl.innerHTML = filteredHtml;
+            }
+        }
+        window.filterHospitals = filterHospitals; // Expose to window
 
         function updateServiceView(serviceKey, items) {
             serviceData[serviceKey] = items;
@@ -1466,7 +1437,7 @@
         }
 
         // ----------------------------------------------
-        // NEW FUNCTIONS FOR PROFILE INTERACTION START
+        // PROFILE INTERACTION START
         // ----------------------------------------------
 
         // Renders the combined Contact Details and Recent Activity view (expanded view)
@@ -1570,8 +1541,31 @@
         window.renderProfileContent = renderProfileContent; // Expose to window
         
         // ----------------------------------------------
-        // NEW FUNCTIONS FOR VISA CHECK SERVICE START
+        // VISA CHECK SERVICE START
         // ----------------------------------------------
+        
+        // Visa country data (Retained for other services)
+        const visaCountries = [
+            { name: "Australia", flagEmoji: "🇦🇺", flagIcon: "fa-globe-asia", links: [{ name: "Visa Status Check", url: "https://online.immi.gov.au/evo/firstParty?actionType=query" }] },
+            { name: "Indonesia", flagEmoji: "🇮🇩", flagIcon: "fa-passport", links: [{ name: "Visa Check", url: "https://evisa.imigrasi.go.id/web/find-data" }, { name: "Work Permit Check", url: "https://evisa.imigrasi.go.id/web/find-data" }] },
+            { name: "Albania", flagEmoji: "🇦🇱", flagIcon: "fa-globe-europe", links: [{ name: "Visa Track", url: "https://e-visa.al/track" }] },
+            { name: "Israel", flagEmoji: "🇮🇱", flagIcon: "fa-passport", links: [{ name: "Passport Detail Check", url: "https://dofe.gov.np/PassportDetail.aspx" }] },
+            { name: "Kuwait", flagEmoji: "🇰🇼", flagIcon: "fa-globe-asia", links: [{ name: "Visa Status", url: "https://rnt.moi.gov.kw/esrv/VisaStat.do?lang=eng#mobSec" }] },
+            { name: "Maldives", flagEmoji: "🇲🇻", flagIcon: "fa-umbrella-beach", links: [{ name: "Work Permit Check", url: "https://xpat.egov.mv/" }] },
+            { name: "Malta", flagEmoji: "🇲🇹", flagIcon: "fa-globe-europe", links: [{ name: "Visa Status Check", url: "https://identita.gov.mt/" }] },
+            { name: "Oman", flagEmoji: "🇴🇲", flagIcon: "fa-globe-asia", links: [{ name: "Visa Track", url: "https://evisa.rop.gov.om/en/track-your-application" }] },
+            { name: "Romania", flagEmoji: "🇷🇴", flagIcon: "fa-globe-europe", links: [{ name: "Passport Detail Check", url: "https://dofe.gov.np/PassportDetail.aspx" }] },
+            { name: "Serbia", flagEmoji: "🇷🇸", flagIcon: "fa-globe-europe", links: [{ name: "e-Visa Status", url: "https://evisa.welcometoserbia.gov.rs/" }] },
+            { name: "Republic of South Korea", flagEmoji: "🇰🇷", flagIcon: "fa-globe-asia", links: [{ name: "Visa Status Check", url: "https://www.visa.go.kr/openPage.do?MENU_ID=10207" }] },
+            { name: "Azerbaijan", flagEmoji: "🇦🇿", flagIcon: "fa-globe-asia", links: [{ name: "e-Visa Status Check", url: "https://evisa.gov.az/en/check-status" }] },
+            { name: "Bahrain", flagEmoji: "🇧🇭", flagIcon: "fa-passport", links: [{ name: "Residency Status Check", url: "https://lmra.gov.bh/en/eligibilityrc" }] },
+            { name: "Kyrgyzstan", flagEmoji: "🇰🇬", flagIcon: "fa-globe-asia", links: [{ name: "e-Visa Status Check", url: "https://www.evisa.e-gov.kg/check_status.php" }] },
+            { name: "Malaysia", flagEmoji: "🇲🇾", flagIcon: "fa-passport", links: [{ name: "e-Visa Status Check", url: "https://malaysiavisa.imi.gov.my/evisa/vlno_checkstatus.jsp" }] },
+            { name: "Poland", flagEmoji: "🇵🇱", flagIcon: "fa-globe-europe", links: [{ name: "VFS Tracking", url: "https://www.vfsvisaonline.com/Global-Passporttracking/Track/Index?q=shSA0YnE4pLF9Xzwon/x/ASnHZRMROGDyz5YljrTPrmD7weWKDzHm/9+x4kyou3T7EbygDK+7ECJT8O+dWpxGw==" }] },
+            { name: "Qatar", flagEmoji: "🇶🇦", flagIcon: "fa-globe-asia", links: [{ name: "Visa Inquiry", url: "https://portal.moi.gov.qa/wps/portal/MOIInternet/services/inquiries/visaservices/enquiryandprinting" }] },
+            { name: "Saudi Arabia", flagEmoji: "🇸🇦", flagIcon: "fa-passport", links: [{ name: "Applicant Data Check", url: "https://visa.mofa.gov.sa/VisaPerson/GetApplicantData" }] },
+            { name: "United Arab Emirates", flagEmoji: "🇦🇪", flagIcon: "fa-building", links: [{ name: "Visa Inquiry (GDRFA)", url: "https://gdrfad.gov.ae/en/unified-number-inquiry-service" }, { name: "Work Permit Check (MOHRE)", url: "https://inquiry.mohre.gov.ae/" }] },
+        ];
         
         /**
          * Renders the main list of countries for the Visa Check service.
@@ -1652,7 +1646,7 @@
         window.openCountryLinksModal = openCountryLinksModal; // Expose to window
         
         // ----------------------------------------------
-        // NEW FUNCTIONS FOR VISA CHECK SERVICE END
+        // VISA CHECK SERVICE END
         // ----------------------------------------------
 
 
@@ -1722,7 +1716,7 @@
                     <form id="driving-form" class="space-y-4 mb-8">
                         <input type="text" id="driving-pickup" placeholder="Pickup Location (GPS)" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
                         <input type="text" id="driving-dropoff" placeholder="Destination" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
-                        <select id="driving-car-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                        <select type="text" id="driving-car-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
                             <option value="Standard">Standard Car</option>
                             <option value="Carpool">Carpool (Save money)</option>
                             <option value="Premium">Premium SUV</option>
@@ -1757,37 +1751,44 @@
                     <div class="p-4 pt-2 sticky top-0 bg-white z-10 border-b border-gray-200">
                         <h3 class="text-xl font-semibold mb-3 text-gray-800">${service.name}</h3>
                         
-                        <div class="flex justify-around space-x-2">
+                        <!-- UPDATED TAB STRUCTURE FOR 3 TABS -->
+                        <div class="flex justify-between space-x-1 -mx-1">
                             <button id="tab-awareness" onclick="switchCareTab('awareness')" 
-                                class="w-full px-4 py-2 text-sm font-semibold rounded-lg transition shadow-md ${currentCareTab === 'awareness' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">
-                                <i class="fas fa-notes-medical mr-1"></i> Disease Awareness
+                                class="w-full px-2 py-2 text-xs md:text-sm font-semibold rounded-lg transition shadow-md ${currentCareTab === 'awareness' ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-700'}">
+                                <i class="fas fa-notes-medical mr-1"></i> Awareness
                             </button>
                             <button id="tab-pharmacy" onclick="switchCareTab('pharmacy')" 
-                                class="w-full px-4 py-2 text-sm font-semibold rounded-lg transition shadow-md ${currentCareTab === 'pharmacy' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">
-                                <i class="fas fa-pills mr-1"></i> Nepo Pharmacy
+                                class="w-full px-2 py-2 text-xs md:text-sm font-semibold rounded-lg transition shadow-md ${currentCareTab === 'pharmacy' ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-700'}">
+                                <i class="fas fa-pills mr-1"></i> Pharmacy
+                            </button>
+                            <button id="tab-hospital" onclick="switchCareTab('hospital')" 
+                                class="w-full px-2 py-2 text-xs md:text-sm font-semibold rounded-lg transition shadow-md ${currentCareTab === 'hospital' ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-700'}">
+                                <i class="fas fa-hospital-alt mr-1"></i> Hospitals
                             </button>
                         </div>
                     </div>
 
-                    <div class="max-h-[70vh] pb-4">
+                    <div class="max-h-[70vh] pb-4 overflow-y-auto">
+                        
+                        <!-- 1. DISEASE AWARENESS TAB CONTENT -->
                         <div id="care-content-awareness" class="flex h-[68vh] max-h-[68vh] ${currentCareTab !== 'awareness' ? 'hidden' : ''}">
                             <div class="w-2/5 border-r border-gray-200 overflow-y-auto scrollable-content p-2">
                                 <p class="text-xs text-gray-500 font-medium p-2 sticky top-0 bg-white z-20 shadow-sm">
                                     <span>Select Disease (${diseaseKeys.length})</span>
                                     <div class="flex justify-between items-center mt-2">
                                         <button id="lang-en" onclick="switchLanguage('en')" 
-                                            class="flex-1 py-1 text-xs font-semibold rounded-l-md transition ${currentLang === 'en' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">ENG</button>
+                                            class="flex-1 py-1 text-xs font-semibold rounded-l-md transition ${currentLang === 'en' ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-700'}">ENG</button>
                                         <button id="lang-ne" onclick="switchLanguage('ne')" 
-                                            class="flex-1 py-1 text-xs font-semibold rounded-r-md transition ${currentLang === 'ne' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'}">नेप</button>
+                                            class="flex-1 py-1 text-xs font-semibold rounded-r-md transition ${currentLang === 'ne' ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-700'}">नेप</button>
                                     </div>
                                 </p>
                                 <div id="disease-list-buttons" class="space-y-1 mt-2">
                                     ${diseaseKeys.map(key => {
                                         const d = nepoDiseaseData[key];
                                         // Default active state for the first button
-                                        const isActive = key === defaultDiseaseKey ? 'bg-indigo-200 font-bold' : 'bg-white font-normal';
+                                        const isActive = key === defaultDiseaseKey ? 'bg-teal-200 font-bold' : 'bg-white font-normal';
                                         return `
-                                            <button onclick="showDiseaseDetails('${key}')" class="w-full text-left p-2 rounded-lg text-sm transition hover:bg-indigo-50 active:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 ${isActive}" data-disease-key="${key}">
+                                            <button onclick="showDiseaseDetails('${key}')" class="w-full text-left p-2 rounded-lg text-sm transition hover:bg-teal-50 active:bg-teal-100 focus:outline-none focus:ring-2 focus:ring-teal-500/50 ${isActive}" data-disease-key="${key}">
                                                 <i class="fas ${d.icon} w-4 mr-2 ${d.color}"></i>
                                                 <span class="disease-name-en ${currentLang !== 'en' ? 'hidden' : ''}">${d.name_en}</span>
                                                 <span class="disease-name-ne ${currentLang !== 'ne' ? 'hidden' : ''}">${d.name_ne}</span>
@@ -1799,31 +1800,21 @@
 
                             <div class="w-3/5 overflow-y-auto scrollable-content p-4">
                                 <div id="disease-details-display">
-                                    </div>
+                                    <!-- Disease details will load here -->
+                                </div>
 
                                 <div class="mt-8 p-3 bg-red-100 border-l-4 border-red-500 text-red-800 rounded-lg text-sm font-medium">
-                                    <i class="fas fa-hospital-user mr-2"></i>
-                                    <span class="footer-en ${currentLang !== 'en' ? 'hidden' : ''}">If you experience symptoms, please visit your nearest health center immediately.</span>
-                                    <span class="footer-ne ${currentLang !== 'ne' ? 'hidden' : ''}">यदि तपाईलाई कुनै लक्षण देखिएमा, कृपया तुरुन्तै आफ्नो नजिकको स्वास्थ्य केन्द्रमा जानुहोस्।</span>
+                                    <i class="fas fa-user-doctor mr-2"></i>
+                                    <span class="footer-en ${currentLang !== 'en' ? 'hidden' : ''}">If you experience severe symptoms, please visit a hospital immediately.</span>
+                                    <span class="footer-ne ${currentLang !== 'ne' ? 'hidden' : ''}">यदि तपाईलाई कुनै कडा लक्षण देखिएमा, कृपया तुरुन्तै अस्पताल जानुहोस्।</span>
                                 </div>
                                 
-                                <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                                    <h4 class="text-md font-semibold text-gray-800 mb-2">Health & Home-Care Services (Examples)</h4>
-                                    <div class="space-y-2">
-                                        ${nepoCareExamples_full.map(item => `
-                                            <div class="flex items-center justify-between text-xs text-gray-700">
-                                                <div class="flex items-center">
-                                                    <i class="fas ${item.icon} text-sm text-teal-600 mr-2"></i>
-                                                    <span>${item.service.split(' (')[0]}</span>
-                                                </div>
-                                                <span class="font-medium">NPR ${item.cost.toLocaleString()}</span>
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                </div>
+                                <!-- REMOVED: Old Health & Home-Care Services Section -->
+
                             </div>
                         </div>
 
+                        <!-- 2. NEPO PHARMACY TAB CONTENT -->
                         <div id="care-content-pharmacy" class="p-4 ${currentCareTab !== 'pharmacy' ? 'hidden' : ''}">
                             <p class="text-sm text-gray-500 mb-3">Search real-time stock and prices across 10 partner pharmacies.</p>
                             
@@ -1831,28 +1822,51 @@
                                 <div class="relative">
                                     <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                                     <input type="text" id="medicine-search" onkeyup="filterMedicines()" placeholder="Search medicine name or category (e.g., Paracetamol, Antibiotic)" 
-                                        class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+                                        class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 text-sm">
                                 </div>
                             </div>
                             
                             <div id="pharmacy-store-list" class="space-y-4 max-h-[50vh] scrollable-content overflow-y-auto">
-                                </div>
+                                <!-- Pharmacy search results will load here -->
+                            </div>
 
                             <div class="text-center p-4 text-gray-400 text-sm mt-4">-- Prices are indicative, final cost may vary --</div>
                         </div>
+
+                        <!-- 3. HOSPITAL DIRECTORY TAB CONTENT (NEW) -->
+                        <div id="care-content-hospital" class="p-4 ${currentCareTab !== 'hospital' ? 'hidden' : ''}">
+                            <p class="text-sm text-gray-500 mb-3">A directory of ${hospitalData.length} major hospitals across Nepal.</p>
+                            
+                            <div class="mb-4 sticky top-0 bg-white pt-1 pb-2 z-20 shadow-sm">
+                                <div class="relative">
+                                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                    <input type="text" id="hospital-search" onkeyup="filterHospitals()" placeholder="Search by name, city, or contact number (e.g., TUTH, Lalitpur)" 
+                                        class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 text-sm">
+                                </div>
+                            </div>
+                            
+                            <div id="hospital-directory-list" class="space-y-1 max-h-[50vh] scrollable-content overflow-y-auto -mt-2">
+                                <!-- Hospital list will load here -->
+                            </div>
+
+                            <div class="text-center p-4 text-gray-400 text-sm mt-4">-- Contact numbers are verified, please call ahead --</div>
+                        </div>
+
                     </div>
                 `;
                 modalContentEl.innerHTML = html;
                 
                 // Initialize the display based on the current active tab
                 setTimeout(() => {
-                    // Initialize display language and show the default disease
                     if (currentCareTab === 'awareness') {
                         showDiseaseDetails(defaultDiseaseKey, currentLang); 
                         switchLanguage(currentLang); 
                     } else if (currentCareTab === 'pharmacy') {
-                         filterMedicines(); // Populate the initial pharmacy list
-                         switchCareTab('pharmacy'); 
+                         filterMedicines(); 
+                         // switchCareTab('pharmacy'); // Already set by user action/default
+                    } else if (currentCareTab === 'hospital') {
+                         filterHospitals();
+                         // switchCareTab('hospital'); // Already set by user action/default
                     }
                 }, 50); 
             } else if (serviceKey === 'news') {
@@ -2327,7 +2341,7 @@
                 <p class="ml-3"><i class="fas fa-car-side mr-1"></i> **Nepo Driving** (Ride-Hailing) | <i class="fas fa-map-marked-alt mr-1"></i> **Explore Local** (Destination Discovery)</p>
                 <hr class="my-1 border-gray-200">
                 <p class="font-semibold text-teal-600">II. Health & Wellness:</p>
-                <p class="ml-3"><i class="fas fa-hand-holding-medical mr-1"></i> **Nepo Care** (Health & Appoint. Tracking) | <i class="fas fa-hand-holding-heart mr-1"></i> **Nepo Donation** (Charitable Contributions)</p>
+                <p class="ml-3"><i class="fas fa-hand-holding-medical mr-1"></i> **Nepo Care** (Health & Hospital Directory) | <i class="fas fa-hand-holding-heart mr-1"></i> **Nepo Donation** (Charitable Contributions)</p>
                 <hr class="my-1 border-gray-200">
                 <p class="font-semibold text-amber-600">III. Finance & Commerce:</p>
                 <p class="ml-3"><i class="fas fa-wallet mr-1"></i> **My Wallet** (Digital Finance Hub) | <i class="fas fa-bag-shopping mr-1"></i> **Online Shopping** (Order Tracking)</p>
@@ -2361,3 +2375,4 @@
 
 </body>
 </html>
+
